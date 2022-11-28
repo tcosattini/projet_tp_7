@@ -42,9 +42,8 @@ INSTALLED_APPS = [
     'gestionStock',
     'gestionColis',
     'tailwind',
-    'theme'
-   
-    
+    'theme',
+    'django_browser_reload'    
     ]
 
 
@@ -56,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'projet_fil_rouge_api.urls'
