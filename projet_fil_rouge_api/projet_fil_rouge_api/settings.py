@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-m8=^m618xh#xwjy2*dld2$d+=87pz%9irse2mn1x0brofopj@1
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+TAILWIND_APP_NAME = 'theme'
 
 # Application definition
 
@@ -40,9 +40,13 @@ INSTALLED_APPS = [
     'authentification',
     'administration',
     'gestionStock',
-    'gestionColis'
-
+    'gestionColis',
+    'tailwind',
+    'theme'
+   
+    
     ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,7 +119,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
