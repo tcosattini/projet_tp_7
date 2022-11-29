@@ -6,12 +6,18 @@ services:
     container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: my_secret_password
+<<<<<<< HEAD
       MYSQL_DATABASE: fromagerie_com
       MYSQL_USER: root
       MYSQL_PASSWORD: my_secret_password
-    ports:
+=======
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+>>>>>>> 7bf1dfbd8c475d6bb24c4d9ff449c27130e33572
+    ports: 
       - "3306:3306"
-    volumes:
+    volumes: 
       - dbdata:/var/lib/mysql
 
 volumes:
