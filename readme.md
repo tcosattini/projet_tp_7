@@ -7,3 +7,5 @@ Build project with
 ```
 python3 manage.py tailwind start
 ```
+
+Change you DB config in settings.py
