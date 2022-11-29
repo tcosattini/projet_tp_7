@@ -84,8 +84,12 @@ WSGI_APPLICATION = 'projet_fil_rouge_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fromagerie_com',
+        'USER': 'thibault',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '8889',
     }
 }
 
