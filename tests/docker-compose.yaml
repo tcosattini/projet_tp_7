@@ -1,9 +1,9 @@
-version: 'init'
+version: "init"
 
 services:
-  db:
+  fromagerie_com_db:
     image: mysql:latest
-    container_name: db
+    container_name: fromagerie_com_db
     environment:
       MYSQL_ROOT_PASSWORD: my_secret_password
       MYSQL_DATABASE: fromagerie_com
