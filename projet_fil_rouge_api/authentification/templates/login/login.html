@@ -1,0 +1,15 @@
+{% block login %} {% load static %}
+
+<body>
+  <div class="login_container">
+    <div class="login_form">
+      <p>{{ message }}</p>
+      <form method="post">
+        <link rel="stylesheet" href="{% static 'login.css' %}" />
+        {{ form.as_p }} {% csrf_token %}
+        <button class="button" type="submit">S'authentifier</button>
+      </form>
+    </div>
+  </div>
+</body>
+{% endblock login %}
