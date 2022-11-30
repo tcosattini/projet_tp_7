@@ -1,14 +1,16 @@
-version: 'init'
+version: "init"
 
 services:
-  db:
+  fromagerie_com_db:
     image: mysql:latest
-    container_name: db
+    container_name: fromagerie_com_db
     environment:
       MYSQL_ROOT_PASSWORD: my_secret_password
       MYSQL_DATABASE: fromagerie_com
-      MYSQL_USER: root
-      MYSQL_PASSWORD: my_secret_password
+
+      # does not work for connection, needs checking
+      MYSQL_USER: fromagerie_com_api
+      MYSQL_PASSWORD: fromagerie_com_api_password
     ports:
       - "3306:3306"
     volumes:
