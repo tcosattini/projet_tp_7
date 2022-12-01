@@ -15,10 +15,11 @@ def getAll():
 
 def create(validateObject):
  try:   
-    newProduit =  TClient.objects.create(**validateObject.dict())
-    return {"nouveau produit":newProduit}
+    newClient =  TClient.objects.create(**validateObject.dict())
+    print(newClient)
+    return {"nouveau client":newClient}
  except:
-    return {'impossible de créer ce client'}  
+    raise HTTPException(status_code=426, detail="Impossible de créer ce client")
 
 def update(codcli,validateObject):
  try:

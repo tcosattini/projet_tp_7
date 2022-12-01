@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fromagerie.com</title>
+  </head>
+  <body>
+    <!--
+        bg-amber-50 : couleur ambre à 5% pour le fond
+        h-screen : passe la hauteur de la fenêtre à l'élement
+        xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
+        md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
+        py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
+        px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
+    -->
+    <div class="bg-amber-50 h-screen xl:py-52 xl:px-72 md:py-16 md:px-16 pt-12">
+      <!--
+            relative : donne un point d'ancrage aux balises enfant
+            bg-amber-100 : couleur ambre à 10% pour le fond
+            grid : transforme l'intérieur de l'élement en grille
+            w-full : prend la largeur entière du parent (width full)
+            h-full : prend la hauteur entière du parent (height full)
+            place-items-center : place les élements enfant au centre
+            border-4 : épaisseur de bordures à 4 pixels
+            border-black : bordures couleur noir
+            rounded : bordures arrondis
+        -->
+      <div
+        class="relative grid bg-amber-100 w-full h-full place-items-center border-4 border-black rounded min-w-full"
+      >
+        <!--
+                absolute : place l'élement sur une position absolue (détacher des autres enfants)
+                h-5 : donne une hauteur de 5 pixels à l'élement (height 5 pixels)
+                grid-cols-10 : découpe l'élément en 10 grillles
+                fixed : fixe l'élement sur sur le parent
+                -top-7 : espace l'élement à -7 pixels de son dessus
+                inset-x-5: espace l'élement à 5 pixels de sa position x (sa gauche et sa droite)
+                min-w-fit : adapte sa largeur au contenu
+                min-[370px]: permet d'attribuer un style si la largeur de l'écran est supérieur à 370 pixels
+                block : élement visible
+                hidden : élement cacher
+            -->
+        <div
+          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:block hidden"
+        >
+          <!-- 
+                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+                 -->
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Utilisateurs</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Objets</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Poids</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Emballages</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Communes</a>
+          </div>
+        </div>
+
+        <div
+          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:hidden block"
+        >
+          <!-- 
+                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+                 -->
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-full text-center"
+          >
+            <a href="">écran trop petit</a>
+          </div>
+        </div>
+
+        <!--
+                À toi de jouer 👍
+            -->
+        <div>
+          <p>Put ur table here</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
