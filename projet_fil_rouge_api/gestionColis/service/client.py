@@ -1,5 +1,6 @@
 from ..models import TClient
 from django.core import serializers
+from fastapi import HTTPException
 
 
 def getAll():
@@ -21,18 +22,19 @@ def create(validateObject):
 
 def update(codcli,validateObject):
  try:
-    # Lever exception si client non trouvé
+   findSelectedClient = TClient.objects.get(codcli=codcli)
+   selectedCommande = TClient.objects.filter(codcli=codcli).update(**validateObject.dict())
    selectedClient = TClient.objects.filter(codcli=codcli).update(**validateObject.dict())
    print(selectedClient)
    return {"client modifié avec succés"}
  except:
-    return {'impossible de modifier ce client'}
+    raise HTTPException(status_code=404, detail="Commande non trouvée")
 
 def delete(codcli):
  try:
-    # Lever exception si client non trouvé
+   findSelectedClient = TClient.objects.get(codcli=codcli)
    selectedClient = TClient.objects.filter(codcli=codcli).delete()
    print(selectedClient)
    return {"client supprimé avec succés"}
  except:
-    return {'impossible de supprimer ce client'}
+    raise HTTPException(status_code=404, detail="Commande non trouvée")

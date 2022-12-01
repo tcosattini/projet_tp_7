@@ -1,6 +1,6 @@
 from ..models import TEntcde
 from django.core import serializers
-
+from fastapi import HTTPException
 def getAll():
  try:    
     response =[]
@@ -8,28 +8,33 @@ def getAll():
     for obj in TEntcde.objects.all():
         response.append(obj)
     return {"response":response}
- except: 
-    return {'commandes non trouvées'}  
+ except:
+    raise HTTPException(status_code=404, detail="Commandes non trouvées")
+
 
 def create(validateObject):
  try:   
     newCommande =  TEntcde.objects.create(**validateObject.dict())
     return {"nouvelle commande":newCommande}
  except:
-    return {'impossible de créer cette commande'}
+    raise HTTPException(status_code=404, detail="Commandes non trouvées")
+
 
 def update(codcde,validateObject):
  try:
     # Lever exception si detail commande non trouvée
+   findSelectedCommande = TEntcde.objects.get(codcde=codcde)
    selectedCommande = TEntcde.objects.filter(codcde=codcde).update(**validateObject.dict())
-   return {"commande modifiée avec succés"}
+   findUpdatedCommande = TEntcde.objects.get(codcde=codcde)
+   return {"commande modifiée avec succés":findUpdatedCommande}
  except:
-    return {'impossible de modifier cette commande'}
+    raise HTTPException(status_code=404, detail="Commande non trouvée")
+
 
 def delete(codcde):
  try:
-    # Lever exception si client non trouvé
+   findSelectedDetailCommande = TEntcde.objects.get(codcde=codcde)
    selectedCommande = TEntcde.objects.filter(codcde=codcde).delete()
    return {"commande supprimée avec succés"}
  except:
-    return {'impossible de supprimer cette commande'}
+    raise HTTPException(status_code=404, detail="Commande non trouvée")

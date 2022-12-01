@@ -12,7 +12,7 @@ router = APIRouter(
 def getAllCommande():
    return commande.getAll()
 
-@router.post("/")
+@router.post("/",status_code=201)
 def createCommande(validateObject: Commande):
     return commande.create(validateObject)
             
@@ -29,7 +29,7 @@ def deleteCommande(codcde):
 def getAllCommande():
    return detailCommande.getAll()
 
-@router.post("/detail")
+@router.post("/detail",status_code=201)
 def createCommande(validateObject: DetailCommande):
     return detailCommande.create(validateObject)
             

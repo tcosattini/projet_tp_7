@@ -12,7 +12,7 @@ router = APIRouter(
 def getAllClient():
    return client.getAll()
 
-@router.post("/")
+@router.post("/",status_code=201)
 def createClient(validateObject: Client):
     return client.create(validateObject)
             
