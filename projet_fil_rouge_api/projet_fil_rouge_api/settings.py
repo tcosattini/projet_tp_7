@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from django.conf import settings
+import django
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projet_fil_rouge_api.settings")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -44,8 +46,10 @@ INSTALLED_APPS = [
     'gestionColis',
     'tailwind',
     'theme',
-    'django_browser_reload'
+    'django_browser_reload',
+    
     ]
+
 
 AUTH_USER_MODEL = 'authentification.TUtilisateur'
 
@@ -83,6 +87,8 @@ TEMPLATES = [
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'authentification/static')
 ]
+
+
 WSGI_APPLICATION = 'projet_fil_rouge_api.wsgi.application'
 
 
@@ -99,6 +105,8 @@ DATABASES = {
         'PORT': '8889',
     }
 }
+
+
 
 
 # Password validation
@@ -127,11 +135,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
-
-USE_TZ = True
 TAILWIND_APP_NAME = 'theme'
-DEBUG = True
+
 
 ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
