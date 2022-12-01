@@ -27,3 +27,14 @@ def index2(request):
         "Conditionnements" : data_conditionnements,
     }
     return render(request, 'page2.html', context)
+
+def ajoutConditionnement(request, nomValue, poidsValue, tarifValue):
+    ajoutConditionnement = TConditionnement(libcondit = nomValue, poidscondit = poidsValue, prixcond = tarifValue)
+    ajoutConditionnement.save()
+    return render(request, 'retour2.html', )
+
+def modificationConditionnement(request, idConditionnementValue, nomValue, poidsValue, tarifValue):
+    TConditionnement.objects.filter(idcondit = idConditionnementValue).delete()
+    ajoutConditionnement = TConditionnement(idcondit = idConditionnementValue, libcondit = nomValue, poidscondit = poidsValue, prixcond = tarifValue)
+    ajoutConditionnement.save()
+    return render(request, 'retour2.html', )

@@ -8,117 +8,117 @@
 
 <h1>Pour l'onglet "Emballages"</h1>
 
-<!-- Bouton pour ajouter une commune -->
+<!-- Bouton pour ajouter un conditionnement -->
 <div id="ajouter_conditionnement">Ajouter un emballage</div>
 
-<!-- Champs et bouton de validation pour ajouter une commune -->
+<!-- Champs et bouton de validation pour ajouter un conditionnement -->
 <div id="ajouter_conditionnement_value">
-    <p>Saisir les données de la nouvelle commune :</p>
-    <label for="nom_conditionnement">Nom de la commune</label>
+    <p>Saisir les données du nouveau emballage :</p>
+    <label for="nom_conditionnement">Nom de l'emballage</label>
     <input type="text" id="nom_conditionnement" name="nom_conditionnement" required minlength="1" size="10" onblur="getValueNom_conditionnement()">
-    <label for="poids_conditionnement">Département de la commune</label>
+    <label for="poids_conditionnement">Poids de l'emballage</label>
     <input type="number" id="poids_conditionnement" name="poids_conditionnement" required minlength="1" size="10" onblur="getValuePoids_conditionnement()">
-    <label for="tarif_conditionnement">Code postal de la commune</label>
-    <input type="text" id="tarif_conditionnement" name="tarif_conditionnement" required minlength="1" size="10" onblur="getValueTarif_conditionnement()">
+    <label for="tarif_conditionnement">Tarif de l'emballage</label>
+    <input type="number" step=".0001" id="tarif_conditionnement" name="tarif_conditionnement" required minlength="1" size="10" onblur="getValueTarif_conditionnement()">
 </div>
-<div id="ajouter_conditionnement_insertion">Valider l'ajout de la commune</div>
+<div id="ajouter_conditionnement_insertion">Valider l'ajout de l'emballage</div>
 
-<!-- Champs et bouton de validation/annulation pour modifier une commune -->
-<div id="modifier_commune_value">
+<!-- Champs et bouton de validation/annulation pour modifier un conditionnement -->
+<div id="modifier_conditionnement_value">
 </div>
 
 <script>
     //Masquer les champs et le bouton de validation
-    document.getElementById("ajouter_commune_value").style.visibility = "hidden";
-    document.getElementById("ajouter_commune_insertion").style.visibility = "hidden";
+    document.getElementById("ajouter_conditionnement_value").style.visibility = "hidden";
+    document.getElementById("ajouter_conditionnement_insertion").style.visibility = "hidden";
 
     //Fonction pour faire apparaître les champs et le bouton de validation
-    function champsAjouterCommune() {
-        document.getElementById("ajouter_commune_value").style.visibility = "visible";
-        document.getElementById("ajouter_commune_insertion").style.visibility = "visible";
+    function champsAjouterConditionnement() {
+        document.getElementById("ajouter_conditionnement_value").style.visibility = "visible";
+        document.getElementById("ajouter_conditionnement_insertion").style.visibility = "visible";
     }
 
-    //Affecter la fonction champsAjouterVille au bouton
-    document.getElementById("ajouter_commune").onclick = champsAjouterCommune;
+    //Affecter la fonction champsAjouterConditionnement au bouton
+    document.getElementById("ajouter_conditionnement").onclick = champsAjouterConditionnement;
 
     //Déclaration des variables hors des fonctions
-    let communes_commune_value = "";
-    let dep_commune_value = "";
-    let cp_commune_value = "";
+    let nom_conditionnement_value = "";
+    let poids_conditionnement_value = "";
+    let tarif_conditionnement_value = "";
 
-    //Affectation de la valeur du nom de la commune
-    function getValueCommunes_commune() {
-        communes_commune_value = document.getElementById("communes_commune").value;
+    //Affectation de la valeur du nom du conditionnement
+    function getValueNom_conditionnement() {
+        nom_conditionnement_value = document.getElementById("nom_conditionnement").value;
     }
-    //Affection de la valeur du département de la commune
-    function getValueDep_commune() {
-        dep_commune_value = document.getElementById("dep_commune").value;
+    //Affection de la valeur du poids du conditionnement
+    function getValuePoids_conditionnement() {
+        poids_conditionnement_value = document.getElementById("poids_conditionnement").value;
     }
-    //Affectation de la valeur du code postal de la commune
-    function getValueCp_commune() {
-        cp_commune_value = document.getElementById("cp_commune").value;
+    //Affectation de la valeur du tarif du conditionnement
+    function getValueTarif_conditionnement() {
+        tarif_conditionnement_value = document.getElementById("tarif_conditionnement").value;
     }
 
-    //Affecter la fonction insertVille au bouton
-    document.getElementById("ajouter_commune_insertion").onclick = insertionCommune;
+    //Affecter la fonction insertConditionnement au bouton
+    document.getElementById("ajouter_conditionnement_insertion").onclick = insertionConditionnement;
 
-    //Fonction pour insérer la commune dans la base de données
-    function insertionCommune() {
-        document.location.href="/administration/ajoutCommune/"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
+    //Fonction pour insérer le conditionnement dans la base de données
+    function insertionConditionnement() {
+        document.location.href="/administration/ajoutConditionnement/"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
     }
 
     //Déclaration des variables hors des fonctions
-    let communes_commune_modifier_value = "";
-    let dep_commune_modifier_value = "";
-    let cp_commune_modifier_value = "";
+    let nom_conditionnement_modifier_value = "";
+    let poids_conditionnement_modifier_value = "";
+    let tarif_conditionnement_modifier_value = "";
 
-    let ancienne_id_commune = "Null";
+    let ancienne_id_conditionnement = "Null";
 
-    //Fonction pour faire apparaître les champs pour modifier une commune
-    function champsModifierLigneCommune(id_commune) {
-        if (ancienne_id_commune != "Null") {
-            document.getElementById("boutton_modifier_"+ancienne_id_commune).innerHTML = "Modifier cette ligne";
+    //Fonction pour faire apparaître les champs pour modifier un conditionnement
+    function champsModifierLigneConditionnement(id_conditionnement) {
+        if (ancienne_id_conditionnement != "Null") {
+            document.getElementById("boutton_modifier_"+ancienne_id_conditionnement).innerHTML = "Modifier cette ligne";
         }
-        document.getElementById("boutton_modifier_"+id_commune).innerHTML = "En cours de modification";
-        communes_commune_modifier_value = "";
-        dep_commune_modifier_value = "";
-        cp_commune_modifier_value = "";
-        document.getElementById("modifier_commune_value").innerHTML = ""
-        document.getElementById("modifier_commune_value").innerHTML += `
-        <p>Saisir les nouvelles données de la commune `+id_commune+` :</p>
-        <label>Nom de la commune</label>
-        <input type="text" id="communes_commune_modifier" name="communes_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCommunes_commune()">
-        <label>Département de la commune</label>
-        <input type="number" id="dep_commune_modifier" name="dep_commune_modifier" required minlength="1" size="10" onblur="getValueModifierDep_commune()">
-        <label>Code postal de la commune</label>
-        <input type="text" id="cp_commune_modifier" name="cp_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCp_commune()"></div>
-        <div id="modifier_commune_insertion" onclick="modifierLigneCommune(`+id_commune+`)">Valider la modification de la commune</div>
-        <div onclick="supprimerChampsModifierLigneCommune(`+id_commune+`)">Annuler la modification de la commune</div>
+        document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "En cours de modification";
+        nom_conditionnement_modifier_value = "";
+        poids_conditionnement_modifier_value = "";
+        tarif_conditionnement_modifier_value = "";
+        document.getElementById("modifier_conditionnement_value").innerHTML = ""
+        document.getElementById("modifier_conditionnement_value").innerHTML += `
+        <p>Saisir les nouvelles données de l'emballage `+id_conditionnement+` :</p>
+        <label>Nom de l'emballage</label>
+        <input type="text" id="nom_conditionnement_modifier" name="nom_conditionnement_modifier" required minlength="1" size="10" onblur="getValueModifierNom_conditionnement()">
+        <label>Poids de l'emballage</label>
+        <input type="number" id="poids_conditionnement_modifier" name="poids_conditionnement_modifier" required minlength="1" size="10" onblur="getValueModifierPoids_conditionnement()">
+        <label>Tarif de l'emballage</label>
+        <input type="number" step=".0001" id="tarif_conditionnement_modifier" name="tarif_conditionnement_modifier" required minlength="1" size="10" onblur="getValueModifierTarif_conditionnement()"></div>
+        <div id="modifier_conditionnement_insertion" onclick="modifierLigneConditionnement(`+id_conditionnement+`)">Valider la modification de l'emballage</div>
+        <div onclick="supprimerChampsModifierLigneConditionnement(`+id_conditionnement+`)">Annuler la modification de l'emballage</div>
         `;
-        ancienne_id_commune = id_commune;
+        ancienne_id_conditionnement = id_conditionnement;
     }
 
-    function supprimerChampsModifierLigneCommune(id_commune) {
-        document.getElementById("boutton_modifier_"+id_commune).innerHTML = "Modifier cette ligne";
-        document.getElementById("modifier_commune_value").innerHTML = "";
+    function supprimerChampsModifierLigneConditionnement(id_conditionnement) {
+        document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "Modifier cette ligne";
+        document.getElementById("modifier_conditionnement_value").innerHTML = "";
     }
 
-    //Affectation de la valeur du nom de la commune
-    function getValueModifierCommunes_commune() {
-        communes_commune_modifier_value = document.getElementById("communes_commune_modifier").value;
+    //Affectation de la valeur du nom du conditionnement
+    function getValueModifierNom_conditionnement() {
+        nom_conditionnement_modifier_value = document.getElementById("nom_conditionnement_modifier").value;
     }
-    //Affection de la valeur du département de la commune
-    function getValueModifierDep_commune() {
-        dep_commune_modifier_value = document.getElementById("dep_commune_modifier").value;
+    //Affection de la valeur du poids du conditionnement
+    function getValueModifierPoids_conditionnement() {
+        poids_conditionnement_modifier_value = document.getElementById("poids_conditionnement_modifier").value;
     }
-    //Affectation de la valeur du code postal de la commune
-    function getValueModifierCp_commune() {
-        cp_commune_modifier_value = document.getElementById("cp_commune_modifier").value;
+    //Affectation de la valeur du tarif du conditionnement
+    function getValueModifierTarif_conditionnement() {
+        tarif_conditionnement_modifier_value = document.getElementById("tarif_conditionnement_modifier").value;
     }
 
-    //Fonction pour modifier la ligne d'une commune
-    function modifierLigneCommune(id_commune) {
-        document.location.href="/administration/modificationCommune/"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
+    //Fonction pour modifier la ligne d'un conditionnement
+    function modifierLigneConditionnement(id_conditionnement) {
+        document.location.href="/administration/modificationConditionnement/"+id_conditionnement+"_"+nom_conditionnement_modifier_value+"_"+poids_conditionnement_modifier_value+"_"+tarif_conditionnement_modifier_value
     }
 
 
@@ -138,7 +138,7 @@
             <td style="border: 2px solid green;">{{conditionnement.poidscondit}}</td>
             <td style="border: 2px solid green;">{{conditionnement.prixcond}}</td>
             <td style="border: 2px solid green;">{{conditionnement.idcondit}}</td>
-            <td style="border: 2px solid green;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="">Modifier cette ligne</div></td>
+            <td style="border: 2px solid green;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
         </tr>
         <tr id="id_commune_modifier_{{conditionnement.idcondit}}">
         </tr>

@@ -10,4 +10,6 @@ urlpatterns = [
     path('page2.html', views.index2, name='index2'),
     re_path(r'^ajoutCommune/(?P<communesValue>[a-zA-Z ]+)_(?P<depValue>[0-9]+)_(?P<cpValue>[a-zA-Z0-9 ]+)$', views.ajoutCommune, name='ajoutCommune'),
     re_path(r'^modificationCommune/(?P<idCommuneValue>[0-9]+)_(?P<communesValue>[a-zA-Z ]+)_(?P<depValue>[0-9]+)_(?P<cpValue>[a-zA-Z0-9 ]+)$', views.modificationCommune, name='modificationCommune'),
+    re_path(r'^ajoutConditionnement/(?P<nomValue>[a-zA-Z0-9 ]+)_(?P<poidsValue>[0-9]+)_(?P<tarifValue>[0-9.]+)$', views.ajoutConditionnement, name='ajoutConditionnement'),
+    re_path(r'^modificationConditionnement/(?P<idConditionnementValue>[0-9]+)_(?P<nomValue>[a-zA-Z0-9 ]+)_(?P<poidsValue>[0-9]+)_(?P<tarifValue>[0-9.]+)$', views.modificationConditionnement, name='modificationConditionnement'),
 ]
