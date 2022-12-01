@@ -9,37 +9,31 @@
 <h1>Pour l'onglet "Communes"</h1>
 
 <!-- Bouton pour ajouter une commune -->
-<div id="ajouter_commune">Ajouter une commune</div>
+<div id="ajouter_commune" onclick="champsAjouterCommune()">Ajouter une commune</div>
 
 <!-- Champs et bouton de validation pour ajouter une commune -->
 <div id="ajouter_commune_value">
-    <p>Saisir les données de la nouvelle commune :</p>
-    <label for="communes_commune">Nom de la commune</label>
-    <input type="text" id="communes_commune" name="communes_commune" required minlength="1" size="10" onblur="getValueCommunes_commune()">
-    <label for="dep_commune">Département de la commune</label>
-    <input type="number" id="dep_commune" name="dep_commune" required minlength="1" size="10" onblur="getValueDep_commune()">
-    <label for="cp_commune">Code postal de la commune</label>
-    <input type="text" id="cp_commune" name="cp_commune" required minlength="1" size="10" onblur="getValueCp_commune()">
 </div>
-<div id="ajouter_commune_insertion">Valider l'ajout de la commune</div>
 
 <!-- Champs et bouton de validation/annulation pour modifier une commune -->
 <div id="modifier_commune_value">
 </div>
 
 <script>
-    //Masquer les champs et le bouton de validation
-    document.getElementById("ajouter_commune_value").style.visibility = "hidden";
-    document.getElementById("ajouter_commune_insertion").style.visibility = "hidden";
-
-    //Fonction pour faire apparaître les champs et le bouton de validation
+    //Ajouter le champs d'insertion
     function champsAjouterCommune() {
-        document.getElementById("ajouter_commune_value").style.visibility = "visible";
-        document.getElementById("ajouter_commune_insertion").style.visibility = "visible";
+        document.getElementById("ajouter_commune_value").innerHTML = `
+        <p>Saisir les données de la nouvelle commune :</p>
+        <label for="communes_commune">Nom de la commune</label>
+        <input type="text" id="communes_commune" name="communes_commune" required minlength="1" size="10" onblur="getValueCommunes_commune()">
+        <label for="dep_commune">Département de la commune</label>
+        <input type="number" id="dep_commune" name="dep_commune" required minlength="1" size="10" onblur="getValueDep_commune()">
+        <label for="cp_commune">Code postal de la commune</label>
+        <input type="text" id="cp_commune" name="cp_commune" required minlength="1" size="10" onblur="getValueCp_commune()">
+        <div id="ajouter_commune_insertion" onclick="insertionCommune()">Valider l'ajout de la commune</div>
+        <div id="annuler_commune_insertion" onclick="annulerInsertionCommune()">Annuler l'ajout de la commune</div>
+    `;
     }
-
-    //Affecter la fonction champsAjouterVille au bouton
-    document.getElementById("ajouter_commune").onclick = champsAjouterCommune;
 
     //Déclaration des variables hors des fonctions
     let communes_commune_value = "";
@@ -59,12 +53,14 @@
         cp_commune_value = document.getElementById("cp_commune").value;
     }
 
-    //Affecter la fonction insertVille au bouton
-    document.getElementById("ajouter_commune_insertion").onclick = insertionCommune;
-
     //Fonction pour insérer la commune dans la base de données
     function insertionCommune() {
         document.location.href="/administration/ajoutCommune/"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
+    }
+
+    //Fonction pour annuler l'insertion la commune dans la base de données
+    function annulerInsertionCommune() {
+        document.getElementById("ajouter_commune_value").innerHTML = "";
     }
 
     //Déclaration des variables hors des fonctions

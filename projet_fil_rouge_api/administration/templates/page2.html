@@ -9,37 +9,31 @@
 <h1>Pour l'onglet "Emballages"</h1>
 
 <!-- Bouton pour ajouter un conditionnement -->
-<div id="ajouter_conditionnement">Ajouter un emballage</div>
+<div id="ajouter_conditionnement" onclick="champsAjouterConditionnement()">Ajouter un emballage</div>
 
 <!-- Champs et bouton de validation pour ajouter un conditionnement -->
 <div id="ajouter_conditionnement_value">
-    <p>Saisir les données du nouveau emballage :</p>
-    <label for="nom_conditionnement">Nom de l'emballage</label>
-    <input type="text" id="nom_conditionnement" name="nom_conditionnement" required minlength="1" size="10" onblur="getValueNom_conditionnement()">
-    <label for="poids_conditionnement">Poids de l'emballage</label>
-    <input type="number" id="poids_conditionnement" name="poids_conditionnement" required minlength="1" size="10" onblur="getValuePoids_conditionnement()">
-    <label for="tarif_conditionnement">Tarif de l'emballage</label>
-    <input type="number" step=".0001" id="tarif_conditionnement" name="tarif_conditionnement" required minlength="1" size="10" onblur="getValueTarif_conditionnement()">
 </div>
-<div id="ajouter_conditionnement_insertion">Valider l'ajout de l'emballage</div>
 
 <!-- Champs et bouton de validation/annulation pour modifier un conditionnement -->
 <div id="modifier_conditionnement_value">
 </div>
 
 <script>
-    //Masquer les champs et le bouton de validation
-    document.getElementById("ajouter_conditionnement_value").style.visibility = "hidden";
-    document.getElementById("ajouter_conditionnement_insertion").style.visibility = "hidden";
-
     //Fonction pour faire apparaître les champs et le bouton de validation
     function champsAjouterConditionnement() {
-        document.getElementById("ajouter_conditionnement_value").style.visibility = "visible";
-        document.getElementById("ajouter_conditionnement_insertion").style.visibility = "visible";
+        document.getElementById("ajouter_conditionnement_value").innerHTML = `
+        <p>Saisir les données du nouveau emballage :</p>
+        <label for="nom_conditionnement">Nom de l'emballage</label>
+        <input type="text" id="nom_conditionnement" name="nom_conditionnement" required minlength="1" size="10" onblur="getValueNom_conditionnement()">
+        <label for="poids_conditionnement">Poids de l'emballage</label>
+        <input type="number" id="poids_conditionnement" name="poids_conditionnement" required minlength="1" size="10" onblur="getValuePoids_conditionnement()">
+        <label for="tarif_conditionnement">Tarif de l'emballage</label>
+        <input type="number" step=".0001" id="tarif_conditionnement" name="tarif_conditionnement" required minlength="1" size="10" onblur="getValueTarif_conditionnement()">
+        <div id="ajouter_conditionnement_insertion" onclick="insertionConditionnement()">Valider l'ajout de l'emballage</div>
+        <div id="annuler_conditionnement_insertion" onclick="annulerInsertionConditionnement()">Annuler l'ajout de l'emballage</div>
+        `;
     }
-
-    //Affecter la fonction champsAjouterConditionnement au bouton
-    document.getElementById("ajouter_conditionnement").onclick = champsAjouterConditionnement;
 
     //Déclaration des variables hors des fonctions
     let nom_conditionnement_value = "";
@@ -59,12 +53,14 @@
         tarif_conditionnement_value = document.getElementById("tarif_conditionnement").value;
     }
 
-    //Affecter la fonction insertConditionnement au bouton
-    document.getElementById("ajouter_conditionnement_insertion").onclick = insertionConditionnement;
-
     //Fonction pour insérer le conditionnement dans la base de données
     function insertionConditionnement() {
         document.location.href="/administration/ajoutConditionnement/"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
+    }
+
+    //Fonction pour annnuler l'insertion du conditionnement dans la base de données
+    function annulerInsertionConditionnement() {
+        document.getElementById("ajouter_conditionnement_value").innerHTML = "";
     }
 
     //Déclaration des variables hors des fonctions
@@ -139,8 +135,6 @@
             <td style="border: 2px solid green;">{{conditionnement.prixcond}}</td>
             <td style="border: 2px solid green;">{{conditionnement.idcondit}}</td>
             <td style="border: 2px solid green;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
-        </tr>
-        <tr id="id_commune_modifier_{{conditionnement.idcondit}}">
         </tr>
         {% endfor %}
     </tbody>
