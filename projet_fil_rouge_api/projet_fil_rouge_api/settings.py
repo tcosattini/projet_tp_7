@@ -14,6 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = BASE_DIR / '/projet_fil_rouge_api'
+API_DIR = PROJECT_DIR / '/projet_fil_rouge_api'
 
 
 # Quick-start development settings - unsuitable for production
@@ -64,7 +66,9 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

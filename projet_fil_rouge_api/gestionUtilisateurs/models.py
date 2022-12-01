@@ -14,7 +14,8 @@ class TUtilisateur(models.Model):
     prenom_utilisateur = models.CharField(max_length=50, blank=True, null=True)
     couleur_fond_utilisateur = models.IntegerField(blank=True, null=True)
     date_cde_utilisateur = models.DateTimeField(blank=True, null=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(blank=True, null=True, default=True)
+    is_superuser = models.BooleanField(blank=True, null=True, default=False)
     code_role = models.ForeignKey(TRole, models.DO_NOTHING, db_column='code_role', blank=True, null=True)
 
     class Meta:

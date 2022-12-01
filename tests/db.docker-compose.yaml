@@ -1,3 +1,7 @@
+# to use open terminal in this directory :
+# start command : docker compose -f db.docker-compose.yaml up -d
+# stop command : docker compose -f db.docker-compose.yaml down
+
 version: "init"
 
 services:
@@ -14,7 +18,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - dbdata:/var/lib/mysql
+      - dbdata:/var/lib/mysql # replace with databases location counterpart in windows
 
 volumes:
   dbdata:
