@@ -22,7 +22,7 @@
     </div>
     <div class="flex action">
       <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>modifier</a>
-      <form action={% url 'utilisateur.list' %} method="POST">
+      <form action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST">
         {% csrf_token %}
         <input type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</input>
       </form>
