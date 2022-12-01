@@ -1,4 +1,4 @@
-from .service import produit
+from ..service import produit
 from fastapi import FastAPI, APIRouter
 from gestionStock.schema import *
 

@@ -1,6 +1,6 @@
 from django.core import serializers
 from ..models import TObjet
-from django.core import serializers
+
 
 def getAll():
  try: 
