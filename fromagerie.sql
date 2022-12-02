@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 28, 2022 at 02:58 PM
+-- Generation Time: Dec 01, 2022 at 02:27 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -13,8 +13,280 @@ SET time_zone = "+00:00";
 --
 -- Database: `fromagerie_com`
 --
-CREATE DATABASE IF NOT EXISTS `fromagerie_com` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `fromagerie_com`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_group`
+--
+
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint(20) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_permission`
+--
+
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
+(1, 'Can add log entry', 1, 'add_logentry'),
+(2, 'Can change log entry', 1, 'change_logentry'),
+(3, 'Can delete log entry', 1, 'delete_logentry'),
+(4, 'Can view log entry', 1, 'view_logentry'),
+(5, 'Can add permission', 2, 'add_permission'),
+(6, 'Can change permission', 2, 'change_permission'),
+(7, 'Can delete permission', 2, 'delete_permission'),
+(8, 'Can view permission', 2, 'view_permission'),
+(9, 'Can add group', 3, 'add_group'),
+(10, 'Can change group', 3, 'change_group'),
+(11, 'Can delete group', 3, 'delete_group'),
+(12, 'Can view group', 3, 'view_group'),
+(13, 'Can add content type', 4, 'add_contenttype'),
+(14, 'Can change content type', 4, 'change_contenttype'),
+(15, 'Can delete content type', 4, 'delete_contenttype'),
+(16, 'Can view content type', 4, 'view_contenttype'),
+(17, 'Can add session', 5, 'add_session'),
+(18, 'Can change session', 5, 'change_session'),
+(19, 'Can delete session', 5, 'delete_session'),
+(20, 'Can view session', 5, 'view_session'),
+(21, 'Can add t utilisateur', 6, 'add_tutilisateur'),
+(22, 'Can change t utilisateur', 6, 'change_tutilisateur'),
+(23, 'Can delete t utilisateur', 6, 'delete_tutilisateur'),
+(24, 'Can view t utilisateur', 6, 'view_tutilisateur'),
+(25, 'Can add auth group', 7, 'add_authgroup'),
+(26, 'Can change auth group', 7, 'change_authgroup'),
+(27, 'Can delete auth group', 7, 'delete_authgroup'),
+(28, 'Can view auth group', 7, 'view_authgroup'),
+(29, 'Can add auth group permissions', 8, 'add_authgrouppermissions'),
+(30, 'Can change auth group permissions', 8, 'change_authgrouppermissions'),
+(31, 'Can delete auth group permissions', 8, 'delete_authgrouppermissions'),
+(32, 'Can view auth group permissions', 8, 'view_authgrouppermissions'),
+(33, 'Can add auth permission', 9, 'add_authpermission'),
+(34, 'Can change auth permission', 9, 'change_authpermission'),
+(35, 'Can delete auth permission', 9, 'delete_authpermission'),
+(36, 'Can view auth permission', 9, 'view_authpermission'),
+(37, 'Can add auth user groups', 10, 'add_authusergroups'),
+(38, 'Can change auth user groups', 10, 'change_authusergroups'),
+(39, 'Can delete auth user groups', 10, 'delete_authusergroups'),
+(40, 'Can view auth user groups', 10, 'view_authusergroups'),
+(41, 'Can add auth user user permissions', 11, 'add_authuseruserpermissions'),
+(42, 'Can change auth user user permissions', 11, 'change_authuseruserpermissions'),
+(43, 'Can delete auth user user permissions', 11, 'delete_authuseruserpermissions'),
+(44, 'Can view auth user user permissions', 11, 'view_authuseruserpermissions'),
+(45, 'Can add django admin log', 12, 'add_djangoadminlog'),
+(46, 'Can change django admin log', 12, 'change_djangoadminlog'),
+(47, 'Can delete django admin log', 12, 'delete_djangoadminlog'),
+(48, 'Can view django admin log', 12, 'view_djangoadminlog'),
+(49, 'Can add django content type', 13, 'add_djangocontenttype'),
+(50, 'Can change django content type', 13, 'change_djangocontenttype'),
+(51, 'Can delete django content type', 13, 'delete_djangocontenttype'),
+(52, 'Can view django content type', 13, 'view_djangocontenttype'),
+(53, 'Can add django migrations', 14, 'add_djangomigrations'),
+(54, 'Can change django migrations', 14, 'change_djangomigrations'),
+(55, 'Can delete django migrations', 14, 'delete_djangomigrations'),
+(56, 'Can view django migrations', 14, 'view_djangomigrations'),
+(57, 'Can add django session', 15, 'add_djangosession'),
+(58, 'Can change django session', 15, 'change_djangosession'),
+(59, 'Can delete django session', 15, 'delete_djangosession'),
+(60, 'Can view django session', 15, 'view_djangosession'),
+(61, 'Can add t client', 16, 'add_tclient'),
+(62, 'Can change t client', 16, 'change_tclient'),
+(63, 'Can delete t client', 16, 'delete_tclient'),
+(64, 'Can view t client', 16, 'view_tclient'),
+(65, 'Can add t communes', 17, 'add_tcommunes'),
+(66, 'Can change t communes', 17, 'change_tcommunes'),
+(67, 'Can delete t communes', 17, 'delete_tcommunes'),
+(68, 'Can view t communes', 17, 'view_tcommunes'),
+(69, 'Can add t conditionnement', 18, 'add_tconditionnement'),
+(70, 'Can change t conditionnement', 18, 'change_tconditionnement'),
+(71, 'Can delete t conditionnement', 18, 'delete_tconditionnement'),
+(72, 'Can view t conditionnement', 18, 'view_tconditionnement'),
+(73, 'Can add t dept', 19, 'add_tdept'),
+(74, 'Can change t dept', 19, 'change_tdept'),
+(75, 'Can delete t dept', 19, 'delete_tdept'),
+(76, 'Can view t dept', 19, 'view_tdept'),
+(77, 'Can add t dtlcode', 20, 'add_tdtlcode'),
+(78, 'Can change t dtlcode', 20, 'change_tdtlcode'),
+(79, 'Can delete t dtlcode', 20, 'delete_tdtlcode'),
+(80, 'Can view t dtlcode', 20, 'view_tdtlcode'),
+(81, 'Can add t enseigne', 21, 'add_tenseigne'),
+(82, 'Can change t enseigne', 21, 'change_tenseigne'),
+(83, 'Can delete t enseigne', 21, 'delete_tenseigne'),
+(84, 'Can view t enseigne', 21, 'view_tenseigne'),
+(85, 'Can add t entcde', 22, 'add_tentcde'),
+(86, 'Can change t entcde', 22, 'change_tentcde'),
+(87, 'Can delete t entcde', 22, 'delete_tentcde'),
+(88, 'Can view t entcde', 22, 'view_tentcde'),
+(89, 'Can add t objet', 23, 'add_tobjet'),
+(90, 'Can change t objet', 23, 'change_tobjet'),
+(91, 'Can delete t objet', 23, 'delete_tobjet'),
+(92, 'Can view t objet', 23, 'view_tobjet'),
+(93, 'Can add t poids', 24, 'add_tpoids'),
+(94, 'Can change t poids', 24, 'change_tpoids'),
+(95, 'Can delete t poids', 24, 'delete_tpoids'),
+(96, 'Can view t poids', 24, 'view_tpoids'),
+(97, 'Can add t poidsv', 25, 'add_tpoidsv'),
+(98, 'Can change t poidsv', 25, 'change_tpoidsv'),
+(99, 'Can delete t poidsv', 25, 'delete_tpoidsv'),
+(100, 'Can view t poidsv', 25, 'view_tpoidsv'),
+(101, 'Can add t rel cond', 26, 'add_trelcond'),
+(102, 'Can change t rel cond', 26, 'change_trelcond'),
+(103, 'Can delete t rel cond', 26, 'delete_trelcond'),
+(104, 'Can view t rel cond', 26, 'view_trelcond'),
+(105, 'Can add t role', 27, 'add_trole'),
+(106, 'Can change t role', 27, 'change_trole'),
+(107, 'Can delete t role', 27, 'delete_trole'),
+(108, 'Can view t role', 27, 'view_trole');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) UNSIGNED NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_content_type`
+--
+
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
+(1, 'admin', 'logentry'),
+(3, 'auth', 'group'),
+(2, 'auth', 'permission'),
+(7, 'authentification', 'authgroup'),
+(8, 'authentification', 'authgrouppermissions'),
+(9, 'authentification', 'authpermission'),
+(10, 'authentification', 'authusergroups'),
+(11, 'authentification', 'authuseruserpermissions'),
+(12, 'authentification', 'djangoadminlog'),
+(13, 'authentification', 'djangocontenttype'),
+(14, 'authentification', 'djangomigrations'),
+(15, 'authentification', 'djangosession'),
+(16, 'authentification', 'tclient'),
+(17, 'authentification', 'tcommunes'),
+(18, 'authentification', 'tconditionnement'),
+(19, 'authentification', 'tdept'),
+(20, 'authentification', 'tdtlcode'),
+(21, 'authentification', 'tenseigne'),
+(22, 'authentification', 'tentcde'),
+(23, 'authentification', 'tobjet'),
+(24, 'authentification', 'tpoids'),
+(25, 'authentification', 'tpoidsv'),
+(26, 'authentification', 'trelcond'),
+(27, 'authentification', 'trole'),
+(6, 'authentification', 'tutilisateur'),
+(4, 'contenttypes', 'contenttype'),
+(5, 'sessions', 'session');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_migrations`
+--
+
+CREATE TABLE `django_migrations` (
+  `id` bigint(20) NOT NULL,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
+(1, 'contenttypes', '0001_initial', '2022-11-30 09:50:23.742738'),
+(2, 'authentification', '0001_initial', '2022-11-30 09:50:23.748864'),
+(3, 'admin', '0001_initial', '2022-11-30 09:50:23.824751'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2022-11-30 09:50:23.827608'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2022-11-30 09:50:23.830695'),
+(6, 'contenttypes', '0002_remove_content_type_name', '2022-11-30 09:50:23.900691'),
+(7, 'auth', '0001_initial', '2022-11-30 09:50:24.133985'),
+(8, 'auth', '0002_alter_permission_name_max_length', '2022-11-30 09:50:24.169947'),
+(9, 'auth', '0003_alter_user_email_max_length', '2022-11-30 09:50:24.174611'),
+(10, 'auth', '0004_alter_user_username_opts', '2022-11-30 09:50:24.190044'),
+(11, 'auth', '0005_alter_user_last_login_null', '2022-11-30 09:50:24.195794'),
+(12, 'auth', '0006_require_contenttypes_0002', '2022-11-30 09:50:24.197742'),
+(13, 'auth', '0007_alter_validators_add_error_messages', '2022-11-30 09:50:24.202711'),
+(14, 'auth', '0008_alter_user_username_max_length', '2022-11-30 09:50:24.207974'),
+(15, 'auth', '0009_alter_user_last_name_max_length', '2022-11-30 09:50:24.214906'),
+(16, 'auth', '0010_alter_group_name_max_length', '2022-11-30 09:50:24.260760'),
+(17, 'auth', '0011_update_proxy_permissions', '2022-11-30 09:50:24.268529'),
+(18, 'auth', '0012_alter_user_first_name_max_length', '2022-11-30 09:50:24.273495'),
+(19, 'gestionStock', '0001_initial', '2022-11-30 09:50:24.302196'),
+(20, 'gestionStock', '0002_delete_musician', '2022-11-30 09:50:24.312249'),
+(21, 'sessions', '0001_initial', '2022-11-30 09:50:24.368124'),
+(22, 'authentification', '0002_authgroup_authgrouppermissions_authpermission_and_more', '2022-11-30 09:54:50.815112'),
+(23, 'auth', '0013_remove_user_date_joined_remove_user_email_and_more', '2022-11-30 09:59:17.757408'),
+(24, 'auth', '0014_user_date_joined_user_email_user_first_name_and_more', '2022-11-30 10:00:10.205841');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_session`
+--
+
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('eask93oktm4066tlvpv8e8gs0ix39j8d', '.eJxVjEEOwiAQRe_C2hCGDjq4dO8ZyAxQqRpISrsy3l2bdKHb_977LxV4XUpYe57DlNRZgTr8bsLxkesG0p3rrenY6jJPojdF77Tra0v5edndv4PCvXxrQgvokzF4ckDRAoixnnAwMlI-MjsY0CM4HrKMwCjkLVsix-AtGvX-AJ9aNjs:1p0MME:jjqgigP8mtmoHcQFT9a2aeTLujSHqbs8nMY7irAGJAU', '2022-12-14 12:38:34.043433');
 
 
 -- --------------------------------------------------------
