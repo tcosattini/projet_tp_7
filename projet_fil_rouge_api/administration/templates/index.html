@@ -16,6 +16,10 @@
         py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
         px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
     -->
+    <a class="flex justify-end pt-5 pr-5 bg-amber-50" href="{% url 'logout' %}"
+      >Logout</a
+    >
+
     <div class="bg-amber-50 h-screen xl:py-52 xl:px-72 md:py-16 md:px-16 pt-12">
       <!--
             relative : donne un point d'ancrage aux balises enfant
@@ -28,6 +32,7 @@
             border-black : bordures couleur noir
             rounded : bordures arrondis
         -->
+
       <div
         class="relative grid bg-amber-100 w-full h-full place-items-center border-4 border-black rounded min-w-full"
       >
@@ -43,6 +48,7 @@
                 block : élement visible
                 hidden : élement cacher
             -->
+
         <div
           class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:block hidden"
         >

@@ -24,7 +24,6 @@ def updateCommande(validateObject: Commande,codcde):
 def deleteCommande(codcde):
     return commande.delete(codcde)
 
-
 @router.get("/detail")
 def getAllCommande():
    return detailCommande.getAll()

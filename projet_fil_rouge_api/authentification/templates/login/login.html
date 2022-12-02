@@ -2,8 +2,10 @@
 <body>
   <div class="login_container">
     <div class="login_form">
-      <p>{{ message }}</p>
       <form method="post">
+        <div class="error_container">
+          <p>{{ message }}</p>
+        </div>
         <link rel="stylesheet" href="{% static 'login.css' %}" />
         {{ form.as_p }} {% csrf_token %}
         <button class="button" type="submit">S'authentifier</button>
