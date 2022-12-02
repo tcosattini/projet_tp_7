@@ -16,7 +16,8 @@ from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projet_fil_rouge_api.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+                      "projet_fil_rouge_api.settings")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -44,11 +45,11 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
+    'gestionUtilisateurs',
     'tailwind',
     'theme',
-    'django_browser_reload',
-    
-    ]
+    'django_browser_reload'
+]
 
 
 AUTH_USER_MODEL = 'authentification.TUtilisateur'
@@ -70,7 +71,9 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,7 +88,7 @@ TEMPLATES = [
 
 
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, 'authentification/static')
+    os.path.join(BASE_DIR, 'authentification/static')
 ]
 
 
