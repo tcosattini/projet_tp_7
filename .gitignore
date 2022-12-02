@@ -1,0 +1,7 @@
+projet_fil_rouge_api/administration/__pycache__/
+projet_fil_rouge_api/authentification/__pycache__/
+projet_fil_rouge_api/gestionColis/__pycache__/
+projet_fil_rouge_api/gestionStock/__pycache__/
+projet_fil_rouge_api/projet_fil_rouge_api/__pycache__/
+projet_fil_rouge_api/theme/__pycache__/
+migration/*
