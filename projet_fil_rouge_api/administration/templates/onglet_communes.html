@@ -67,7 +67,7 @@
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletObjets/">Objets</a>
+            <a href="/home/ongletObjets/1">Objets</a>
           </div>
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
@@ -77,12 +77,12 @@
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletEmballages/">Emballages</a>
+            <a href="/home/ongletEmballages/1">Emballages</a>
           </div>
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletCommunes/">Communes</a>
+            <a href="/home/ongletCommunes/1">Communes</a>
           </div>
         </div>
 
@@ -150,7 +150,7 @@
 
     //Fonction pour insérer la commune dans la base de données
     function insertionCommune() {
-        document.location.href="/home/ajoutCommune/"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
+        document.location.href="/home/ajoutCommune/"+{{Index}}+"_"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
     }
 
     //Fonction pour annuler l'insertion la commune dans la base de données
@@ -209,9 +209,22 @@
 
     //Fonction pour modifier la ligne d'une commune
     function modifierLigneCommune(id_commune) {
-        document.location.href="/home/modificationCommune/"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
+        document.location.href="/home/modificationCommune/"+{{Index}}+"_"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
     }
 
+    //Passer à la page suivante
+    function pageSuivante(index) {
+      if (index != {{Index_max}}) {
+        document.location.href="/home/ongletCommunes/"+(index+1);
+      }
+    }
+
+    //Passer à la page précedente
+    function pagePrecendente(index) {
+      if (index != 1) {
+        document.location.href="/home/ongletCommunes/"+(index-1);
+      }
+    }
 
 </script>
 
@@ -236,6 +249,8 @@
         {% endfor %}
     </tbody>
 </table>
+<div onclick="pageSuivante({{Index}})">Page suivante</div>
+<div onclick="pagePrecendente({{Index}})">Page précédente</div>
         </div>
       </div>
 

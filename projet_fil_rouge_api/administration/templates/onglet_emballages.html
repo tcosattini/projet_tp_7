@@ -67,7 +67,7 @@
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletObjets/">Objets</a>
+            <a href="/home/ongletObjets/1">Objets</a>
           </div>
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
@@ -77,12 +77,12 @@
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletEmballages/">Emballages</a>
+            <a href="/home/ongletEmballages/1">Emballages</a>
           </div>
           <div
             class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
           >
-            <a href="/home/ongletCommunes/">Communes</a>
+            <a href="/home/ongletCommunes/1">Communes</a>
           </div>
         </div>
 
@@ -150,7 +150,7 @@
 
     //Fonction pour insérer le conditionnement dans la base de données
     function insertionConditionnement() {
-        document.location.href="/home/ajoutConditionnement/"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
+        document.location.href="/home/ajoutConditionnement/"+{{Index}}+"_"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
     }
 
     //Fonction pour annnuler l'insertion du conditionnement dans la base de données
@@ -209,9 +209,22 @@
 
     //Fonction pour modifier la ligne d'un conditionnement
     function modifierLigneConditionnement(id_conditionnement) {
-        document.location.href="/home/modificationConditionnement/"+id_conditionnement+"_"+nom_conditionnement_modifier_value+"_"+poids_conditionnement_modifier_value+"_"+tarif_conditionnement_modifier_value
+        document.location.href="/home/modificationConditionnement/"+{{Index}}+"_"+id_conditionnement+"_"+nom_conditionnement_modifier_value+"_"+poids_conditionnement_modifier_value+"_"+tarif_conditionnement_modifier_value
     }
 
+    //Passer à la page suivante
+    function pageSuivante(index) {
+      if (index != {{Index_max}}) {
+        document.location.href="/home/ongletEmballages/"+(index+1);
+      }
+    }
+
+    //Passer à la page précedente
+    function pagePrecendente(index) {
+      if (index != 1) {
+        document.location.href="/home/ongletEmballages/"+(index-1);
+      }
+    }
 
 </script>
 
@@ -234,6 +247,8 @@
         {% endfor %}
     </tbody>
 </table>
+<div onclick="pageSuivante({{Index}})">Page suivante</div>
+<div onclick="pagePrecendente({{Index}})">Page précédente</div>
         </div>
       </div>
 
