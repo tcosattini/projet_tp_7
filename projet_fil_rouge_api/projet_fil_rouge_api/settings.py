@@ -67,7 +67,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
+            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
