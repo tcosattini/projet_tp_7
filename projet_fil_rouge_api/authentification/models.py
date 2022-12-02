@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,AbstractBaseUser
 from django.contrib.auth.models import UserManager
  
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -220,8 +218,8 @@ class TRole(models.Model):
         db_table = 't_role'
 
 
+
 class TUtilisateur(AbstractBaseUser,models.Model):
-   
     code_utilisateur = models.AutoField(primary_key=True)
     nom_utilisateur = models.CharField(max_length=50, blank=True, null=True)
     prenom_utilisateur = models.CharField(max_length=50, blank=True, null=True)
@@ -236,6 +234,7 @@ class TUtilisateur(AbstractBaseUser,models.Model):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
     objects = UserManager()
+
     class Meta:
         managed = False
         db_table = 't_utilisateur'
