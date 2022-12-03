@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .models import *
 
 # @login_required
@@ -81,11 +82,15 @@ def modificationConditionnement(request, idConditionnementValue, nomValue, poids
 
 # Onglet "Emballages" --- Madani ---
 
-def ongletCommunes(request):
+def ongletCommunes(request, page: int, amount: int):
     data_communes = TCommunes.objects.all()
+    paginator = Paginator(data_communes, amount)
     context = {
-        "Communes": data_communes,
+        "Communes": paginator.get_page(page).object_list,
+        "page": page,
+        "amount": amount,
     }
+
     return render(request, 'onglet_communes.html', context)
 
 

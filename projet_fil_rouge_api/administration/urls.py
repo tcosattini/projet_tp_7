@@ -20,7 +20,8 @@ urlpatterns = [
             views.modificationConditionnement, name='modificationConditionnement'),
 
     # Onglet "Communes" --- Madani
-    path("ongletCommunes/", views.ongletCommunes, name='ongletCommunes'),
+    path("ongletCommunes/<int:page>/<int:amount>",
+         views.ongletCommunes, name='ongletCommunes'),
     re_path(r'^ajoutCommune/(?P<communesValue>[a-zA-Z ]+)_(?P<depValue>[0-9]+)_(?P<cpValue>[a-zA-Z0-9 ]+)$',
             views.ajoutCommune, name='ajoutCommune'),
     re_path(r'^modificationCommune/(?P<idCommuneValue>[0-9]+)_(?P<communesValue>[a-zA-Z ]*)_(?P<depValue>[0-9]*)_(?P<cpValue>[a-zA-Z0-9 ]*)$',
