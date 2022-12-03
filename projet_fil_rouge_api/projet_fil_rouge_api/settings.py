@@ -16,8 +16,10 @@ from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE",
                       "projet_fil_rouge_api.settings")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -48,7 +50,7 @@ INSTALLED_APPS = [
     'gestionUtilisateurs',
     'tailwind',
     'theme',
-    'django_browser_reload'
+    'django_browser_reload',
 ]
 
 
