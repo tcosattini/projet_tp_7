@@ -1,123 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fromagerie.com</title>
-  </head>
-  <body>
-    <!--
-        bg-amber-50 : couleur ambre à 5% pour le fond
-        h-screen : passe la hauteur de la fenêtre à l'élement
-        xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
-        md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
-        py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
-        px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
-    -->
+{% extends 'home.html' %}{% load static %}
 
-    <a class="flex justify-end pt-5 pr-5 bg-amber-50" href="{% url 'logout' %}"
-      >Logout</a
-    >
+{% block title %}<title>Gestion des Objets</title>{% endblock %}
+{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
-    <div class="bg-amber-50 h-screen xl:py-52 xl:px-72 md:py-16 md:px-16 pt-12">
-      <!--
+{% block onglet %}
+<div class="w-full">
+  <!-- Bouton pour ajouter un objet -->
+  <div id="ajouter_objet" class="w-full" onclick="champsAjouterObjet()">Ajouter un objet</div>
 
-            relative : donne un point d'ancrage aux balises enfant
-            bg-amber-100 : couleur ambre à 10% pour le fond
-            grid : transforme l'intérieur de l'élement en grille
-            w-full : prend la largeur entière du parent (width full)
-            h-full : prend la hauteur entière du parent (height full)
-            place-items-center : place les élements enfant au centre
-            border-4 : épaisseur de bordures à 4 pixels
-            border-black : bordures couleur noir
-            rounded : bordures arrondis
-        -->
+  <!-- Champs et bouton de validation pour ajouter un objet -->
+  <div id="ajouter_objet_value" class="w-full"></div>
 
-      <div
-        class="relative grid bg-amber-100 w-full h-full place-items-center border-4 border-black rounded min-w-full"
-      >
-        <!--
+  <!-- Champs et bouton de validation/annulation pour modifier un objet -->
+  <div id="modifier_objet_value" class="w-full"></div>
 
-                absolute : place l'élement sur une position absolue (détacher des autres enfants)
-                h-5 : donne une hauteur de 5 pixels à l'élement (height 5 pixels)
-                grid-cols-10 : découpe l'élément en 10 grillles
-                fixed : fixe l'élement sur sur le parent
-                -top-7 : espace l'élement à -7 pixels de son dessus
-                inset-x-5: espace l'élement à 5 pixels de sa position x (sa gauche et sa droite)
-                min-w-fit : adapte sa largeur au contenu
-                min-[370px]: permet d'attribuer un style si la largeur de l'écran est supérieur à 370 pixels
-                block : élement visible
-                hidden : élement cacher
-            -->
-
-
-        <div
-          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:block hidden"
-        >
-          <!-- 
-                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
-                 -->
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
-          >
-            <a href="">Utilisateurs</a>
-          </div>
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
-          >
-            <a href="/home/ongletObjets/">Objets</a>
-          </div>
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
-          >
-            <a href="">Poids</a>
-          </div>
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
-          >
-            <a href="/home/ongletEmballages/">Emballages</a>
-          </div>
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
-          >
-            <a href="/home/ongletCommunes/">Communes</a>
-          </div>
-        </div>
-
-        <div
-          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:hidden block"
-        >
-          <!-- 
-                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
-                 -->
-          <div
-            class="bg-amber-100 border-4 border-b-0 border-black rounded w-full text-center"
-          >
-            <a href="">écran trop petit</a>
-          </div>
-        </div>
-
-        <!--
-                À toi de jouer 👍
-            -->
-        <div>
-          <!-- Bouton pour ajouter un objet -->
-<div id="ajouter_objet" onclick="champsAjouterObjet()">Ajouter un objet</div>
-
-<!-- Champs et bouton de validation pour ajouter un objet -->
-<div id="ajouter_objet_value">
-</div>
-
-<!-- Champs et bouton de validation/annulation pour modifier un objet -->
-<div id="modifier_objet_value">
-</div>
-
-<script>
+  <script>
     //Fonction pour faire apparaître les champs et le bouton de validation
     function champsAjouterObjet() {
-        document.getElementById("ajouter_objet_value").innerHTML = `
+      document.getElementById("ajouter_objet_value").innerHTML = `
         <p>Saisir les données du nouveau objet :</p>
         <label>Nom de l'objet</label>
         <input type="text" id="designation_objet" required minlength="1" size="10" onblur="getValueDesignation_objet()">
@@ -132,8 +32,8 @@
         <label>Points de l'objet</label>
         <input type="number" id="points_objet" required minlength="1" size="10" onblur="getValuePoints_objet()">
         <div id="ajouter_objet_insertion" onclick="insertionObjet()">Valider l'ajout de l'objet</div>
-        <div id="annuler_objet_insertion" onclick="annulerInsertionObjet()">Annuler l'ajout de l'objet</div>
-        `;
+        <div id="annuler_objet_insertion" onclick="annulerInsertionObjet()">Annuler l'ajout de l'objet</div> 
+      `;
     }
 
     //Déclaration des variables hors des fonctions
@@ -146,37 +46,52 @@
 
     //Affectation de la valeur de la désignation de l'objet
     function getValueDesignation_objet() {
-        designation_objet_value = document.getElementById("designation_objet").value;
+      designation_objet_value = document.getElementById("designation_objet").value;
     }
     //Affection de la valeur du poids de l'objet
     function getValuePoids_objet() {
-        poids_objet_value = document.getElementById("poids_objet").value;
+      poids_objet_value = document.getElementById("poids_objet").value;
     }
     //Affectation de la valeur de l'importance IMP de l'objet
     function getValueIMP_objet() {
-        imp_objet_value = document.getElementById("imp_objet").value;
+      imp_objet_value = document.getElementById("imp_objet").value;
     }
     //Affectation de la valeur du publicitaire de l'objet
     function getValuePublicitaire_objet() {
-        publicitaire_objet_value = document.getElementById("publicitaire_objet").value;
+      publicitaire_objet_value =
+        document.getElementById("publicitaire_objet").value;
     }
     //Affectation de la valeur du conditionnement de l'objet
     function getValueConditionnement_objet() {
-        conditionnement_objet_value = document.getElementById("conditionnement_objet").value;
+      conditionnement_objet_value = document.getElementById(
+        "conditionnement_objet"
+      ).value;
     }
     //Affectation de la valeur des points de l'objet
     function getValuePoints_objet() {
-        points_objet_value = document.getElementById("points_objet").value;
+      points_objet_value = document.getElementById("points_objet").value;
     }
 
     //Fonction pour insérer le objet dans la base de données
     function insertionObjet() {
-        document.location.href="/home/ajoutObjet/"+designation_objet_value+"_"+poids_objet_value+"_"+imp_objet_value+"_"+publicitaire_objet_value+"_"+conditionnement_objet_value+"_"+points_objet_value
+      document.location.href =
+        "/home/ajoutObjet/" +
+        designation_objet_value +
+        "_" +
+        poids_objet_value +
+        "_" +
+        imp_objet_value +
+        "_" +
+        publicitaire_objet_value +
+        "_" +
+        conditionnement_objet_value +
+        "_" +
+        points_objet_value;
     }
 
     //Fonction pour insérer le objet dans la base de données
     function annulerInsertionObjet() {
-        document.getElementById("ajouter_objet_value").innerHTML = "";
+      document.getElementById("ajouter_objet_value").innerHTML = "";
     }
 
     //Déclaration des variables hors des fonctions
@@ -191,20 +106,24 @@
 
     //Fonction pour faire apparaître les champs pour modifier un objet
     function champsModifierLigneObjet(id_objet) {
-        if (ancienne_id_objet != "Null") {
-            document.getElementById("boutton_modifier_"+ancienne_id_objet).innerHTML = "Modifier cette ligne";
-        }
-        document.getElementById("boutton_modifier_"+id_objet).innerHTML = "En cours de modification";
-        designation_objet_modifier_value = "";
-        poids_objet_modifier_value = "";
-        imp_objet_modifier_value = "";
-        publicitaire_objet_modifier_value = "";
-        conditionnement_objet_modifier_value = "";
-        points_objet_modifier_value = "";
-        document.getElementById("modifier_objet_value").innerHTML = ""
-        document.getElementById("modifier_objet_value").innerHTML += `
-        <p>Saisir les nouvelles données de l'objet `+id_objet+` :</p>
-
+      if (ancienne_id_objet != "Null") {
+        document.getElementById("boutton_modifier_" + ancienne_id_objet).innerHTML =
+          "Modifier cette ligne";
+      }
+      document.getElementById("boutton_modifier_" + id_objet).innerHTML =
+        "En cours de modification";
+      designation_objet_modifier_value = "";
+      poids_objet_modifier_value = "";
+      imp_objet_modifier_value = "";
+      publicitaire_objet_modifier_value = "";
+      conditionnement_objet_modifier_value = "";
+      points_objet_modifier_value = "";
+      document.getElementById("modifier_objet_value").innerHTML = "";
+      document.getElementById("modifier_objet_value").innerHTML +=
+        `
+        <p>Saisir les nouvelles données de l'objet ` +
+        id_objet +
+        ` :</p>
         <label>Nom de l'objet</label>
         <input type="text" id="designation_objet_modifier" required minlength="1" size="10" onblur="getValueModifierDesignation_objet()">
         <label>Poids de l'objet</label>
@@ -217,117 +136,143 @@
         <input type="number" id="conditionnement_objet_modifier" required minlength="1" size="10" onblur="getValueModifierConditionnement_objet()">
         <label>Points de l'objet</label>
         <input type="number" id="points_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPoints_objet()">
-        
-        <div id="modifier_objet_insertion" onclick="modifierLigneObjet(`+id_objet+`)">Valider la modification de l'objet</div>
-        <div onclick="supprimerChampsModifierLigneObjet(`+id_objet+`)">Annuler la modification de l'objet</div>
-        `;
-        ancienne_id_objet = id_objet;
+        <div id="modifier_objet_insertion" onclick="modifierLigneObjet(` +
+        id_objet +
+        `)">Valider la modification de l'objet</div>
+        <div onclick="supprimerChampsModifierLigneObjet(` +
+        id_objet +
+        `)">Annuler la modification de l'objet</div>
+      `;
+      ancienne_id_objet = id_objet;
     }
 
     function supprimerChampsModifierLigneObjet(id_objet) {
-        document.getElementById("boutton_modifier_"+id_objet).innerHTML = "Modifier cette ligne";
-        document.getElementById("modifier_objet_value").innerHTML = "";
+      document.getElementById("boutton_modifier_" + id_objet).innerHTML =
+        "Modifier cette ligne";
+      document.getElementById("modifier_objet_value").innerHTML = "";
     }
 
     //Affectation de la valeur de la désignation de l'objet
     function getValueModifierDesignation_objet() {
-        designation_objet_modifier_value = document.getElementById("designation_objet_modifier").value;
+      designation_objet_modifier_value = document.getElementById(
+        "designation_objet_modifier"
+      ).value;
     }
     //Affection de la valeur du poids de l'objet
     function getValueModifierPoids_objet() {
-        poids_objet_modifier_value = document.getElementById("poids_objet_modifier").value;
+      poids_objet_modifier_value = document.getElementById(
+        "poids_objet_modifier"
+      ).value;
     }
     //Affectation de la valeur de l'importance IMP de l'objet
     function getValueModifierIMP_objet() {
-        imp_objet_modifier_value = document.getElementById("imp_objet_modifier").value;
+      imp_objet_modifier_value =
+        document.getElementById("imp_objet_modifier").value;
     }
     //Affectation de la valeur du publicitaire de l'objet
     function getValueModifierPublicitaire_objet() {
-        publicitaire_objet_modifier_value = document.getElementById("publicitaire_objet_modifier").value;
+      publicitaire_objet_modifier_value = document.getElementById(
+        "publicitaire_objet_modifier"
+      ).value;
     }
     //Affectation de la valeur du conditionnement de l'objet
     function getValueModifierConditionnement_objet() {
-        conditionnement_objet_modifier_value = document.getElementById("conditionnement_objet_modifier").value;
+      conditionnement_objet_modifier_value = document.getElementById(
+        "conditionnement_objet_modifier"
+      ).value;
     }
     //Affectation de la valeur des points de l'objet
     function getValueModifierPoints_objet() {
-        points_objet_modifier_value = document.getElementById("points_objet_modifier").value;
+      points_objet_modifier_value = document.getElementById(
+        "points_objet_modifier"
+      ).value;
     }
 
     //Fonction pour modifier la ligne d'un objet
     function modifierLigneObjet(id_objet) {
-        document.location.href="/home/modificationObjet/"+id_objet+"_"+designation_objet_modifier_value+"_"+poids_objet_modifier_value+"_"+imp_objet_modifier_value+"_"+publicitaire_objet_modifier_value+"_"+conditionnement_objet_modifier_value+"_"+points_objet_modifier_value
+      document.location.href =
+        "/home/modificationObjet/" +
+        id_objet +
+        "_" +
+        designation_objet_modifier_value +
+        "_" +
+        poids_objet_modifier_value +
+        "_" +
+        imp_objet_modifier_value +
+        "_" +
+        publicitaire_objet_modifier_value +
+        "_" +
+        conditionnement_objet_modifier_value +
+        "_" +
+        points_objet_modifier_value;
     }
 
     //Fonction pour vérifier le status de l'objet
     function verifierStatus(id_objet, statusValue) {
-        if (statusValue == 1) {
-            document.getElementById("action_active_"+id_objet).innerHTML = `
-            <div id="boutton_desactiver_`+id_objet+`" onclick="DesactiverObjet(`+id_objet+`)">Désactiver</div>
-            `;
-        }
-        else if (statusValue == 0) {
-            document.getElementById("action_active_"+id_objet).innerHTML = `
-            <div id="boutton_activer_`+id_objet+`" onclick="ActiverObjet(`+id_objet+`)">Activer</div>
-            `;
-        }
+      if (statusValue == 1) {
+        document.getElementById("action_active_" + id_objet).innerHTML = `
+          <div id="boutton_desactiver_${id_objet}" onclick="DesactiverObjet(${id_objet})">Désactiver</div>
+        `;
+      } else if (statusValue == 0) {
+        document.getElementById("action_active_" + id_objet).innerHTML = `
+          <div id="boutton_activer_${id_objet}" onclick="ActiverObjet(${id_objet})">Activer</div>
+        `;
+      }
     }
 
     //Fonction pour activer un objet
     function ActiverObjet(id_objet) {
-        document.location.href="/home/statusObjet/"+id_objet+"_"+"1";
+      document.location.href = "/home/statusObjet/" + id_objet + "_" + "1";
     }
 
     //Fonction pour désactiver un objet
     function DesactiverObjet(id_objet) {
-        document.location.href="/home/statusObjet/"+id_objet+"_"+"0";
+      document.location.href = "/home/statusObjet/" + id_objet + "_" + "0";
     }
+  </script>
 
-
-</script>
-
-<table style="border: 5px solid purple;">
-    <tbody>
-        <tr style="border: 5px solid purple;">
-            <td style="border: 3px solid purple;">ID</td>
-            <td style="border: 3px solid purple;">Désignation</td>
-            <td style="border: 3px solid purple;">Modèle</td>
-            <td style="border: 3px solid purple;">Prix Unitaire</td>
-            <td style="border: 3px solid purple;">Poids</td>
-            <td style="border: 3px solid purple;">Ordre IMP</td>
-            <td style="border: 3px solid purple;">Publicitaire</td>
-            <td style="border: 3px solid purple;">Conditionnement</td>
-            <td style="border: 3px solid purple;">Etat</td>
-            <td style="border: 3px solid purple;">Points</td>
-            <td style="border: 3px solid purple;">Action</td>
-        </tr>
-        {% for objet in Objets %}
-        <tr style="border: 5px solid purple;">
-            <td style="border: 2px solid green;">{{objet.codobj}}</td>
-            <td style="border: 2px solid green;">{{objet.libobj}}</td>
-            <td style="border: 2px solid green;">?</td>
-            <td style="border: 2px solid green;">?</td>
-            <td style="border: 2px solid green;">{{objet.poidsobj}}</td>
-            <td style="border: 2px solid green;">{{objet.o_imp}}</td>
-            <td style="border: 2px solid green;">{{objet.puobj}}</td>
-            <td style="border: 2px solid green;">{{objet.idcondit}}</td>
-            <td style="border: 2px solid green;">{{objet.is_active}}</td>
-            <td style="border: 2px solid green;">{{objet.points}}</td>
-            <td style="border: 2px solid green;">
-                <div id="boutton_modifier_{{objet.codobj}}" onclick="champsModifierLigneObjet({{objet.codobj}})">Modifier cette ligne</div>
-                <div id="action_active_{{objet.codobj}}"></div>
-                <script>
-                    verifierStatus({{objet.codobj}},{{objet.is_active}})
-                </script>
-            </td>
-        </tr>
-        {% endfor %}
+  <table class="w-full" style="border: 5px solid purple">
+    <tbody class="w-full">
+      <tr class="w-full" style="border: 5px solid purple">
+        <td style="border: 3px solid purple">ID</td>
+        <td style="border: 3px solid purple">Désignation</td>
+        <td style="border: 3px solid purple">Modèle</td>
+        <td style="border: 3px solid purple">Prix Unitaire</td>
+        <td style="border: 3px solid purple">Poids</td>
+        <td style="border: 3px solid purple">Ordre IMP</td>
+        <td style="border: 3px solid purple">Publicitaire</td>
+        <td style="border: 3px solid purple">Conditionnement</td>
+        <td style="border: 3px solid purple">Etat</td>
+        <td style="border: 3px solid purple">Points</td>
+        <td style="border: 3px solid purple">Action</td>
+      </tr>
+      {% for objet in Objets %}
+      <tr class="w-full" style="border: 5px solid purple">
+        <td style="border: 2px solid green">{{objet.codobj}}</td>
+        <td style="border: 2px solid green">{{objet.libobj}}</td>
+        <td style="border: 2px solid green">?</td>
+        <td style="border: 2px solid green">?</td>
+        <td style="border: 2px solid green">{{objet.poidsobj}}</td>
+        <td style="border: 2px solid green">{{objet.o_imp}}</td>
+        <td style="border: 2px solid green">{{objet.puobj}}</td>
+        <td style="border: 2px solid green">{{objet.idcondit}}</td>
+        <td style="border: 2px solid green">{{objet.is_active}}</td>
+        <td style="border: 2px solid green">{{objet.points}}</td>
+        <td style="border: 2px solid green">
+          <div
+            id="boutton_modifier_{{objet.codobj}}"
+            onclick="champsModifierLigneObjet({{objet.codobj}})"
+          >
+            Modifier cette ligne
+          </div>
+          <div id="action_active_{{objet.codobj}}"></div>
+          <script>
+            verifierStatus({{objet.codobj}},{{objet.is_active}})
+          </script>
+        </td>
+      </tr>
+      {% endfor %}
     </tbody>
-</table>
-
-        </div>
-      </div>
-
-    </div>
-  </body>
-</html>
+  </table>
+</div>
+{% endblock %}

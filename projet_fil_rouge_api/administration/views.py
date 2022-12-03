@@ -6,7 +6,7 @@ from .models import *
 
 
 def home(request):
-    return render(request, template_name='index.html')
+    return render(request, template_name='home.html')
 
 
 # Onglet "Objets" --- Madani ---

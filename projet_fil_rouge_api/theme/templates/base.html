@@ -9,13 +9,13 @@
     {% block styles %}{% endblock %}
     {% block title %}{% endblock %}
 	</head>
-
-	<body class="font-serif leading-normal tracking-normal">
-		<div class="container h-screen">
-			{% block content %}{% endblock %}
+  
+  <body class="w-screen h-full min-h-screen font-serif leading-normal tracking-normal">
+    <div class="w-screen h-full min-h-screen">
+      {% block content %}{% endblock %}
 		</div>
 	</body>
+  
+  {% block scripts %}{% endblock %}
 
-  {%block scripts %}{% endblock %}
-
-</html>
+  </html>
