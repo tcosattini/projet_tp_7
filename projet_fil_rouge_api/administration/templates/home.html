@@ -4,21 +4,21 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block content %}
-<div class="fixed flex justify-between w-screen px-5 pt-5 bg-amber-50">
+<div class="fixed z-10 flex justify-between w-screen p-5 bg-amber-50">
   <a href="{% url 'home' %}">Home</a>
-  <!--
-    
-    bg-amber-50 : couleur ambre à 5% pour le fond
-    h-screen : passe la hauteur de la fenêtre à l'élement
-    xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
-    md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
-    py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
-    px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
-  -->
   <a href="{% url 'logout' %}">Logout</a>
 </div>
 
-<div class="w-screen h-full min-h-screen pt-12 bg-amber-50 xl:py-52 xl:px-72 md:py-16 md:px-16">
+<!--
+  
+  bg-amber-50 : couleur ambre à 5% pour le fond
+  h-screen : passe la hauteur de la fenêtre à l'élement
+  xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
+  md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
+  py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
+  px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
+-->
+<div class="relative w-screen min-h-screen p-24 bg-amber-50 xl:p-52 md:p-32">
   
   <!--
     relative : donne un point d'ancrage aux balises enfant
@@ -31,7 +31,7 @@
     border-black : bordures couleur noir
     rounded : bordures arrondis
   -->
-  <div class="relative w-full h-full min-w-full min-h-full border-4 border-black rounded bg-amber-100 place-items-center">
+  <div class="relative w-full h-auto min-h-full border-4 border-black rounded bg-amber-100">
     
     <!--
       absolute : place l'élement sur une position absolue (détacher des autres enfants)
@@ -45,43 +45,46 @@
       block : élement visible
       hidden : élement cacher
     -->
-    <div class="absolute w-full h-5 -top-7 md:inset-x-5 min-w-fit min-[370px]:block hidden">
+    <div class="absolute hidden h-fit w-fit -top-7 md:inset-x-5 min-w-fit min-[720px]:block">
       
       <!-- 
       border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
       -->
-      <div class="float-left border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
         <a href={% url 'utilisateur.home' %}>Utilisateurs</a>
       </div>
-      <div class="float-left border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
         <a href={% url 'ongletObjets' %}>Objets</a>
       </div>
-      <div class="float-left border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
         <a href={% url 'home' %}>Poids</a>
       </div>
-      <div class="float-left border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
         <a href={% url 'ongletEmballages' %}>Emballages</a>
       </div>
-      <div class="float-left border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
         <a href={% url 'ongletCommunes' %}>Communes</a>
       </div>
     </div>
-    <div class="absolute w-full h-5 -top-7 md:inset-x-5 min-w-fit min-[370px]:hidden block">
+    <div class="absolute block h-fit w-fit -top-7 md:inset-x-5 min-w-fit min-[720px]:hidden">
 
       <!-- 
       border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
       -->
-      <div class="w-full text-center border-4 border-b-0 border-black rounded bg-amber-100">
+      <div class="text-center border-4 border-b-0 border-black rounded w-fit bg-amber-100">
         <a href="">écran trop petit</a>
       </div>
     </div>
 
-    <div class="relative w-full h-full">
+    <!--*
+      TODO: fix ignored height 
+    -->
+    <div class="relative w-full h-auto min-h-full">
 
       <!--
-      À toi de jouer 👍
+        À toi de jouer 👍
       -->
-      {% block onglet %}<p>Put ur table here</p>{% endblock onglet %}
+      {% block onglet %}<p>Put ur table here</p>{% endblock %}
     </div>
   </div>
 </div>

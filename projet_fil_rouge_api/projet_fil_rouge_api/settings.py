@@ -140,7 +140,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'authentification/static'
 ]

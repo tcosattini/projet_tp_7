@@ -1,16 +1,23 @@
-{% block login %} {% load static %}
-<body>
-  <div class="login_container">
-    <div class="login_form">
-      <form method="post">
-        <div class="error_container">
-          <p>{{ message }}</p>
-        </div>
-        <link rel="stylesheet" href="{% static 'login.css' %}" />
-        {{ form.as_p }} {% csrf_token %}
-        <button class="button" type="submit">S'authentifier</button>
-      </form>
-    </div>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}<link type="text/css" rel="stylesheet" href={% static 'login.css' %} />{% endblock %}
+{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
+{% block title %}<title>Authentification</title>{% endblock %}
+
+{% comment %} {% block login %} {% load static %} <body>{% endcomment %}
+{% block content %}
+<div class="min-h-screen login_container">
+  <div class="login_form">
+    <form method="post">
+      <div class="error_container">
+        <p>{{ message }}</p>
+      </div>
+      {% comment %} <link type="text/css" rel="stylesheet" href="{% static 'login.css' %}" /> {% endcomment %}
+      {{ form.as_p }} {% csrf_token %}
+      <button class="button" type="submit">S'authentifier</button>
+    </form>
   </div>
-</body>
-{% endblock login %}
+</div>
+{% endblock content %}
+{% comment %}</body> {% endblock %} {% endcomment %}

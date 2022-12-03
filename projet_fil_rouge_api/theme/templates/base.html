@@ -1,21 +1,19 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    <meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% tailwind_css %}
-    {% block styles %}{% endblock %}
-    {% block title %}{% endblock %}
-	</head>
-  
-  <body class="w-screen h-full min-h-screen font-serif leading-normal tracking-normal">
-    <div class="w-screen h-full min-h-screen">
-      {% block content %}{% endblock %}
-		</div>
-	</body>
-  
-  {% block scripts %}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% tailwind_css %}
+  {% block styles %}{% endblock %}
+  {% block title %}{% endblock %}
+</head>
 
-  </html>
+<body class="w-screen min-h-screen font-sans leading-normal tracking-normal">
+  {% block content %}{% endblock %}
+</body>
+
+{% block scripts %}{% endblock %}
+
+</html>
