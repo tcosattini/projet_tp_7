@@ -1,6 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
-<form action={% url 'utilisateur.save' %} method="PÖST">
+{% load static %}
+
+{% block styles %}<link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
+{% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
+
+{% block content %}
+
+<form action={% url 'utilisateur.save' %} method="POST">
   {% csrf_token %} {{utilisateur}}
   <button type="submit">submit</button>
 </form>
