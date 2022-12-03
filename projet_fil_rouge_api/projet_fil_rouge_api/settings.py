@@ -142,8 +142,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'authentification/static',
-    # BASE_DIR / 'gestionUtilisateurs/static'
+    BASE_DIR / 'authentification/static'
 ]
 
 LOGIN_URL = '/'
