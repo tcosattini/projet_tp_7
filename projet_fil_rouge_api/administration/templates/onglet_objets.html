@@ -1,7 +1,6 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Objets</title>{% endblock %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
 <div class="w-full">
@@ -13,7 +12,7 @@
 
   <!-- Champs et bouton de validation/annulation pour modifier un objet -->
   <div id="modifier_objet_value" class="w-full"></div>
-
+  
   <script>
     //Fonction pour faire apparaître les champs et le bouton de validation
     function champsAjouterObjet() {
@@ -230,7 +229,7 @@
       document.location.href = "/home/statusObjet/" + id_objet + "_" + "0";
     }
   </script>
-
+  
   <table class="w-full" style="border: 5px solid purple">
     <tbody class="w-full">
       <tr class="w-full" style="border: 5px solid purple">

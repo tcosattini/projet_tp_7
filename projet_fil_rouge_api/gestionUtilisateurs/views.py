@@ -9,6 +9,7 @@ def add(request):
 
 
 def list(request):
+
     return render(
         request,
         template_name='liste_utilisateurs.html',
@@ -34,7 +35,14 @@ def change(request, id: int):
 
 def save(request):
 
-    return list(request)
+    if request.POST:
+        pass
+
+    form = None
+    return render(
+        request,
+        template_name='liste_utilisateurs.html',
+        context={'utilisateurs': models.TUtilisateur.objects.all()})
 
 
 def home(request):

@@ -74,7 +74,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
+            BASE_DIR / 'gestionUtilisateurs/templates',
+            BASE_DIR / 'authentification/templates',
+            BASE_DIR / 'administration/templates',
+
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -141,8 +144,12 @@ ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'theme/static/prod/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'authentification/static'
+    BASE_DIR / 'authentification/static',
+    BASE_DIR / 'administration/static',
+    BASE_DIR / 'gestionUtilisateurs/static',
+
 ]
 
 LOGIN_URL = '/'

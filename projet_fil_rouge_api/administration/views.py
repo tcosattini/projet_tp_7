@@ -85,10 +85,13 @@ def modificationConditionnement(request, idConditionnementValue, nomValue, poids
 def ongletCommunes(request, page: int, amount: int):
     data_communes = TCommunes.objects.all()
     paginator = Paginator(data_communes, amount)
+    communes = paginator.get_page(page)
     context = {
-        "Communes": paginator.get_page(page).object_list,
+        "Communes": communes.object_list,
         "page": page,
         "amount": amount,
+        "not_first_page": communes.has_previous(),
+        "not_last_page": communes.has_next(),
     }
 
     return render(request, 'onglet_communes.html', context)

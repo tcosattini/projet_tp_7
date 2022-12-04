@@ -1,7 +1,6 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Communes</title>{% endblock %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
 <div class="w-full">
@@ -139,10 +138,10 @@
   </table>
   <div class="flex items-center justify-center w-full h-5 p-5" style="border: 5px solid purple;">
     <button class="mr-auto" >
-      {% if page > 1 %}<a href="{% url 'ongletCommunes' page|add:"-1" amount %}">previous</a>{% endif %}
+      {% if not_first_page %}<a href="{% url 'ongletCommunes' page|add:"-1" amount %}">previous</a>{% endif %}
     </button>
     <button>
-      {% if Communes|length >= amount %}<a href="{% url 'ongletCommunes' page|add:"1" amount %}">next</a>{% endif %}
+      {% if not_last_page %}<a href="{% url 'ongletCommunes' page|add:"1" amount %}">next</a>{% endif %}
     </button>
   </div>
 </div>

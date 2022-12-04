@@ -1,37 +1,61 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<table class="w-full ">
-  <tbody class="w-full ">
-    <thead class="w-full">
-      <td>ID</td>
-      <td>Nom Complet</td>
-      <td>Nom de Famille</td>
-      <td>Rôles</td>
-      <td>Actions</td>
-    </thead>
-    {% for utilisateur in utilisateurs %}
-    <tr class="w-full">
-      <td>{{utilisateur.code_utilisateur}}</td>
-      <td>{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
-      <td>{{utilisateur.nom_utilisateur}}</td>
-      <td>
-        {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
-        <p>{{utilisateur.code_role.lib_role}}</p>
-      </td>
-      <td>
-        <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
-          <button>modifier</button>
-        </a>
-        <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
-          <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="w-full">
+  <table class="w-full ">
+    <tbody class="w-full ">
+      <thead class="w-full">
+        <td>ID</td>
+        <td>Nom Complet</td>
+        <td>Nom de Famille</td>
+        <td>Rôles</td>
+        <td>Actions</td>
+      </thead>
+      {% for utilisateur in utilisateurs %}
+      <tr class="w-full">
+        <td>{{utilisateur.code_utilisateur}}</td>
+        <td>{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+        <td>{{utilisateur.nom_utilisateur}}</td>
+        <td>
+          {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
+          <p>{{utilisateur.code_role.lib_role}}</p>
+        </td>
+        <td>
+          <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
+            <button onclick="showChangeForm(event, {{utlisateur|escapejs}})">modifier</button>
+          </a>
+          <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
+            <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div id="dynamic-view">
+    <div id="new-utilisateur" class="flex items-center justify-end w-full h-5 p-3">
+      <button class="h-fit w-fit" onclick="showAddForm(event)">Ajouter un Utilisateur</button>
+    </div>
+    <div id="add-utilisateur" class="flex items-center justify-start w-full p-3" hidden=>
+      <form id="add-form" action={% url 'utilisateur.save' %} class="w-full" method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <button id="submit-add" type="submit">Submit</button>
+        <button id="reset-add" type="reset">Reset</button>
+        <button id="cancel-add" type="cancel" onclick="cancelForm(event)">Cancel</button>
+      </form>
+    </div>
+    <div id="change-utilisateur" class="flex items-center justify-start w-full p-3" hidden={{changing}}>
+      {% comment %} <form id="change-form" action={% url 'utilisateur.change' utilisateur.code_utilisateur %} class="w-full" method="POST">
+        {% csrf_token %} {{form.as_p}}
+        <button id="submit-change" type="submit">Submit</button>
+        <button id="reset-change" type="reset">Reset</button>
+        <button id="cancel-change" type="cancel" onclick="cancelForm(event)">Cancel</button>
+      </form> {% endcomment %}
+    </div>
+  </div>
+</div>
+
+<script type="module" src={% static 'js/liste_utilisateurs.js' %}></script>
 {% endblock %}
