@@ -18,7 +18,7 @@
   py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
   px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
 -->
-<div class="relative w-screen min-h-screen p-24 bg-amber-50 xl:p-52 md:p-32">
+<div class="grid w-screen min-h-screen p-24 bg-amber-50 xl:p-52 md:p-32">
   
   <!--
     relative : donne un point d'ancrage aux balises enfant
@@ -31,7 +31,7 @@
     border-black : bordures couleur noir
     rounded : bordures arrondis
   -->
-  <div class="relative w-full h-auto min-h-full border-4 border-black rounded bg-amber-100">
+  <div class="relative w-full min-h-full border-4 border-black rounded h-fit bg-amber-100">
     
     <!--
       absolute : place l'élement sur une position absolue (détacher des autres enfants)
@@ -71,7 +71,7 @@
       <!-- 
       border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
       -->
-      <div class="text-center border-4 border-b-0 border-black rounded w-fit bg-amber-100">
+      <div class="text-center border-4 border-b-0 border-black rounded h-fit w-fit bg-amber-100">
         <a href="">écran trop petit</a>
       </div>
     </div>
@@ -79,12 +79,12 @@
     <!--*
       TODO: fix ignored height 
     -->
-    <div class="relative w-full h-auto min-h-full">
+    <div class="flex items-center justify-center w-full min-h-full h-fit">
 
       <!--
         À toi de jouer 👍
       -->
-      {% block onglet %}<p>Put ur table here</p>{% endblock %}
+      {% block onglet %}<p class="flex items-center justify-center w-full min-h-full h-fit">Put ur table here</p>{% endblock %}
     </div>
   </div>
 </div>
