@@ -9,15 +9,16 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from django.conf import settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TEMPLATE_DIRS = (
-  '/home/django/myproject/templates',
-)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+                      "projet_fil_rouge_api.settings")
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,6 +35,7 @@ TAILWIND_APP_NAME = 'theme'
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,10 +47,14 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
+    'gestionUtilisateurs',
     'tailwind',
     'theme',
-    'django_browser_reload'
-    ]
+    'django_browser_reload',
+]
+
+
+AUTH_USER_MODEL = 'authentification.TUtilisateur'
 
 
 MIDDLEWARE = [
@@ -67,7 +73,9 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +87,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'projet_fil_rouge_api.wsgi.application'
 
@@ -124,18 +133,19 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
-
-USE_TZ = True
 TAILWIND_APP_NAME = 'theme'
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
+
+ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'authentification/static'
+]
+
+LOGIN_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

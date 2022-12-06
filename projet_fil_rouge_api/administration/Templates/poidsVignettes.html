@@ -1,4 +1,11 @@
-<a href="/pagePoids/1">Gestion des poids</a>
+{% extends 'home.html' %}{% load static %}
+
+{% block title %}<title>Gestion des Poids</title>{% endblock %}
+{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
+
+{% block onglet %}
+
+<a href="/home/pagePoids/1">Gestion des poids</a>
 
 <div>
     {% for poids in Poids %}
@@ -37,7 +44,7 @@
 
     //Fonction pour insérer le poids dans la base de données
     function insertionPoids() {
-        document.location.href="/ajoutPoidsVignettes/"+{{Index}}+"_"+valmin_poids_value+"_"+valtimbre_poids_value
+        document.location.href="/home/ajoutPoidsVignettes/"+{{Index}}+"_"+valmin_poids_value+"_"+valtimbre_poids_value
     }
 
     //Fonction pour annnuler l'insertion du poids dans la base de données
@@ -101,19 +108,20 @@
     function modifierPoids(idpoids) {
         getValueModifierValmin_poids()
         getValueModifierValtimbre_poids()
-        document.location.href="/modifierPoidsVignettes/"+{{Index}}+"_"+idpoids+"_"+valmin_poids_modifier_value+"_"+valtimbre_poids_modifier_value
+        document.location.href="/home/modifierPoidsVignettes/"+{{Index}}+"_"+idpoids+"_"+valmin_poids_modifier_value+"_"+valtimbre_poids_modifier_value
     }
 
     function pageSuivante(index) {
         if (index != {{Index_max}}) {
-          document.location.href="/pagePoidsVignettes/"+(index+1);
+          document.location.href="/home/pagePoidsVignettes/"+(index+1);
         }
       }
   
       function pagePrecendente(index) {
         if (index != 1) {
-          document.location.href="/pagePoidsVignettes/"+(index-1);
+          document.location.href="/home/pagePoidsVignettes/"+(index-1);
         }
       }
 
 </script>
+{% endblock %}

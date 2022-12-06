@@ -1,0 +1,37 @@
+{% extends 'home.html' %}{% load static %}
+
+{% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
+{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
+
+{% block onglet %}
+<table class="w-full ">
+  <tbody class="w-full ">
+    <thead class="w-full">
+      <td>ID</td>
+      <td>Nom Complet</td>
+      <td>Nom de Famille</td>
+      <td>Rôles</td>
+      <td>Actions</td>
+    </thead>
+    {% for utilisateur in utilisateurs %}
+    <tr class="w-full">
+      <td>{{utilisateur.code_utilisateur}}</td>
+      <td>{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+      <td>{{utilisateur.nom_utilisateur}}</td>
+      <td>
+        {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
+        <p>{{utilisateur.code_role.lib_role}}</p>
+      </td>
+      <td>
+        <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
+          <button>modifier</button>
+        </a>
+        <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
+          <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
