@@ -38,7 +38,7 @@
     <div id="new-utilisateur" class="flex items-center justify-end w-full h-5 p-3">
       <button class="h-fit w-fit" onclick="showAddForm(event)">Ajouter un Utilisateur</button>
     </div>
-    <div id="add-utilisateur" class="flex items-center justify-start w-full p-3" hidden=>
+    <div id="add-utilisateur" class="flex items-center justify-start w-full p-3" hidden>
       <form id="add-form" action={% url 'utilisateur.save' %} class="w-full" method="POST">
         {% csrf_token %} {{form.as_p}}
         <button id="submit-add" type="submit">Submit</button>
@@ -46,16 +46,32 @@
         <button id="cancel-add" type="cancel" onclick="cancelForm(event)">Cancel</button>
       </form>
     </div>
-    <div id="change-utilisateur" class="flex items-center justify-start w-full p-3" hidden={{changing}}>
-      {% comment %} <form id="change-form" action={% url 'utilisateur.change' utilisateur.code_utilisateur %} class="w-full" method="POST">
-        {% csrf_token %} {{form.as_p}}
-        <button id="submit-change" type="submit">Submit</button>
-        <button id="reset-change" type="reset">Reset</button>
-        <button id="cancel-change" type="cancel" onclick="cancelForm(event)">Cancel</button>
-      </form> {% endcomment %}
-    </div>
   </div>
 </div>
 
-<script type="module" src={% static 'js/liste_utilisateurs.js' %}></script>
+<script>
+  "use strict";
+
+  let currentForm = null;
+  const addFormState = false;
+
+  const showAddForm = (e) => {
+    e.preventDefault();
+    currentForm = document.getElementById("add-form");
+    currentForm.hidden = false;
+  };
+  
+  const showChangeForm = (e,utilisateur) => {
+    e.preventDefault();
+    console.log({ utilisateur });
+    currentForm = document.getElementById("change-form");
+    currentForm.hidden = false;
+  };
+
+  const cancelForm = (e) => {
+    e.preventDefault();
+    e.target.hidden = true;
+    currentForm = null;
+  };
+</script>
 {% endblock %}
