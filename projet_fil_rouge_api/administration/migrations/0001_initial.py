@@ -228,7 +228,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TPoids',
             fields=[
-                ('valmin', models.FloatField(primary_key=True, serialize=False)),
+                ('idpoids', models.AutoField(primary_key=True, serialize=False)),
+                ('valmin', models.FloatField(blank=True, null=True)),
                 ('valtimbre', models.FloatField(blank=True, null=True)),
             ],
             options={

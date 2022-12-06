@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -41,6 +40,45 @@ class AuthPermission(models.Model):
         unique_together = (('content_type', 'codename'),)
 
 
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -48,7 +86,7 @@ class DjangoAdminLog(models.Model):
     action_flag = models.PositiveSmallIntegerField()
     change_message = models.TextField()
     content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey('TUtilisateur', models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -196,7 +234,6 @@ class TObjet(models.Model):
     idcondit = models.IntegerField(blank=True, null=True)
     points = models.IntegerField(blank=True, null=True)
     o_ordre_aff = models.IntegerField(blank=True, null=True)
-    is_active = models.IntegerField()
 
     class Meta:
         managed = False
@@ -204,8 +241,7 @@ class TObjet(models.Model):
 
 
 class TPoids(models.Model):
-    idpoids = models.AutoField(primary_key=True)
-    valmin = models.FloatField(blank=True, null=True)
+    valmin = models.FloatField(primary_key=True)
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -214,8 +250,7 @@ class TPoids(models.Model):
 
 
 class TPoidsv(models.Model):
-    idpoids = models.AutoField(primary_key=True)
-    valmin = models.FloatField(blank=True, null=True)
+    valmin = models.FloatField(primary_key=True)
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -251,10 +286,6 @@ class TUtilisateur(models.Model):
     couleur_fond_utilisateur = models.IntegerField(blank=True, null=True)
     date_cde_utilisateur = models.DateTimeField(blank=True, null=True)
     code_role = models.ForeignKey(TRole, models.DO_NOTHING, db_column='code_role', blank=True, null=True)
-    last_login = models.DateField(blank=True, null=True)
-    username = models.CharField(max_length=15)
-    password = models.CharField(max_length=255)
-    is_superuser = models.IntegerField()
 
     class Meta:
         managed = False
