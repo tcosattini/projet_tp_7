@@ -15,6 +15,10 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+TEMPLATE_DIRS = (
+  '/home/django/myproject/templates',
+)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -43,7 +47,7 @@ INSTALLED_APPS = [
     'gestionColis',
     'tailwind',
     'theme',
-    'django_browser_reload'    
+    'django_browser_reload'
     ]
 
 
@@ -86,10 +90,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fromagerie_com',
-        'USER': 'thibault',
-        'PASSWORD': 'password',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '8889',
+        'PORT': '3306',
     }
 }
 

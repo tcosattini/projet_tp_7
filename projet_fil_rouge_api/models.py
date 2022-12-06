@@ -241,8 +241,7 @@ class TObjet(models.Model):
 
 
 class TPoids(models.Model):
-    idpoids = models.AutoField(primary_key=True)
-    valmin = models.FloatField(blank=True, null=True)
+    valmin = models.FloatField(primary_key=True)
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -251,8 +250,7 @@ class TPoids(models.Model):
 
 
 class TPoidsv(models.Model):
-    idpoids = models.AutoField(primary_key=True)
-    valmin = models.FloatField(blank=True, null=True)
+    valmin = models.FloatField(primary_key=True)
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
