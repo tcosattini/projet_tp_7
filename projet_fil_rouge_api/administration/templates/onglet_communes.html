@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fromagerie.com</title>
+  </head>
+  <body>
+    <!--
+        bg-amber-50 : couleur ambre à 5% pour le fond
+        h-screen : passe la hauteur de la fenêtre à l'élement
+        xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
+        md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
+        py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
+        px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
+    -->
+
+    <a class="flex justify-end pt-5 pr-5 bg-amber-50" href="{% url 'logout' %}"
+      >Logout</a
+    >
+
+    <div class="bg-amber-50 h-screen xl:py-52 xl:px-72 md:py-16 md:px-16 pt-12">
+      <!--
+
+            relative : donne un point d'ancrage aux balises enfant
+            bg-amber-100 : couleur ambre à 10% pour le fond
+            grid : transforme l'intérieur de l'élement en grille
+            w-full : prend la largeur entière du parent (width full)
+            h-full : prend la hauteur entière du parent (height full)
+            place-items-center : place les élements enfant au centre
+            border-4 : épaisseur de bordures à 4 pixels
+            border-black : bordures couleur noir
+            rounded : bordures arrondis
+        -->
+
+      <div
+        class="relative grid bg-amber-100 w-full h-full place-items-center border-4 border-black rounded min-w-full"
+      >
+        <!--
+
+                absolute : place l'élement sur une position absolue (détacher des autres enfants)
+                h-5 : donne une hauteur de 5 pixels à l'élement (height 5 pixels)
+                grid-cols-10 : découpe l'élément en 10 grillles
+                fixed : fixe l'élement sur sur le parent
+                -top-7 : espace l'élement à -7 pixels de son dessus
+                inset-x-5: espace l'élement à 5 pixels de sa position x (sa gauche et sa droite)
+                min-w-fit : adapte sa largeur au contenu
+                min-[370px]: permet d'attribuer un style si la largeur de l'écran est supérieur à 370 pixels
+                block : élement visible
+                hidden : élement cacher
+            -->
+
+
+        <div
+          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:block hidden"
+        >
+          <!-- 
+                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+                 -->
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Utilisateurs</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="/home/ongletObjets/1">Objets</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="">Poids</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="/home/ongletEmballages/1">Emballages</a>
+          </div>
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-fit float-left"
+          >
+            <a href="/home/ongletCommunes/1">Communes</a>
+          </div>
+        </div>
+
+        <div
+          class="absolute w-full h-5 fixed -top-7 md:inset-x-5 min-w-fit min-[370px]:hidden block"
+        >
+          <!-- 
+                    border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+                 -->
+          <div
+            class="bg-amber-100 border-4 border-b-0 border-black rounded w-full text-center"
+          >
+            <a href="">écran trop petit</a>
+          </div>
+        </div>
+
+        <!--
+                À toi de jouer 👍
+            -->
+        <div>
+          <!-- Bouton pour ajouter une commune -->
+<div id="ajouter_commune" onclick="champsAjouterCommune()">Ajouter une commune</div>
+
+<!-- Champs et bouton de validation pour ajouter une commune -->
+<div id="ajouter_commune_value">
+</div>
+
+<!-- Champs et bouton de validation/annulation pour modifier une commune -->
+<div id="modifier_commune_value">
+</div>
+
+<script>
+    //Ajouter le champs d'insertion
+    function champsAjouterCommune() {
+        document.getElementById("ajouter_commune_value").innerHTML = `
+        <p>Saisir les données de la nouvelle commune :</p>
+        <label for="communes_commune">Nom de la commune</label>
+        <input type="text" id="communes_commune" name="communes_commune" required minlength="1" size="10" onblur="getValueCommunes_commune()">
+        <label for="dep_commune">Département de la commune</label>
+        <input type="number" id="dep_commune" name="dep_commune" required minlength="1" size="10" onblur="getValueDep_commune()">
+        <label for="cp_commune">Code postal de la commune</label>
+        <input type="text" id="cp_commune" name="cp_commune" required minlength="1" size="10" onblur="getValueCp_commune()">
+        <div id="ajouter_commune_insertion" onclick="insertionCommune()">Valider l'ajout de la commune</div>
+        <div id="annuler_commune_insertion" onclick="annulerInsertionCommune()">Annuler l'ajout de la commune</div>
+    `;
+    }
+
+    //Déclaration des variables hors des fonctions
+    let communes_commune_value = "";
+    let dep_commune_value = "";
+    let cp_commune_value = "";
+
+    //Affectation de la valeur du nom de la commune
+    function getValueCommunes_commune() {
+        communes_commune_value = document.getElementById("communes_commune").value;
+    }
+    //Affection de la valeur du département de la commune
+    function getValueDep_commune() {
+        dep_commune_value = document.getElementById("dep_commune").value;
+    }
+    //Affectation de la valeur du code postal de la commune
+    function getValueCp_commune() {
+        cp_commune_value = document.getElementById("cp_commune").value;
+    }
+
+    //Fonction pour insérer la commune dans la base de données
+    function insertionCommune() {
+        document.location.href="/home/ajoutCommune/"+{{Index}}+"_"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
+    }
+
+    //Fonction pour annuler l'insertion la commune dans la base de données
+    function annulerInsertionCommune() {
+        document.getElementById("ajouter_commune_value").innerHTML = "";
+    }
+
+    //Déclaration des variables hors des fonctions
+    let communes_commune_modifier_value = "";
+    let dep_commune_modifier_value = "";
+    let cp_commune_modifier_value = "";
+
+    let ancienne_id_commune = "Null";
+
+    //Fonction pour faire apparaître les champs pour modifier une commune
+    function champsModifierLigneCommune(id_commune) {
+        if (ancienne_id_commune != "Null") {
+            document.getElementById("boutton_modifier_"+ancienne_id_commune).innerHTML = "Modifier cette ligne";
+        }
+        document.getElementById("boutton_modifier_"+id_commune).innerHTML = "En cours de modification";
+        communes_commune_modifier_value = "";
+        dep_commune_modifier_value = "";
+        cp_commune_modifier_value = "";
+        document.getElementById("modifier_commune_value").innerHTML = ""
+        document.getElementById("modifier_commune_value").innerHTML += `
+        <p>Saisir les nouvelles données de la commune `+id_commune+` :</p>
+        <label>Nom de la commune</label>
+        <input type="text" id="communes_commune_modifier" name="communes_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCommunes_commune()">
+        <label>Département de la commune</label>
+        <input type="number" id="dep_commune_modifier" name="dep_commune_modifier" required minlength="1" size="10" onblur="getValueModifierDep_commune()">
+        <label>Code postal de la commune</label>
+        <input type="text" id="cp_commune_modifier" name="cp_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCp_commune()"></div>
+        <div id="modifier_commune_insertion" onclick="modifierLigneCommune(`+id_commune+`)">Valider la modification de la commune</div>
+        <div onclick="supprimerChampsModifierLigneCommune(`+id_commune+`)">Annuler la modification de la commune</div>
+        `;
+        ancienne_id_commune = id_commune;
+    }
+
+    function supprimerChampsModifierLigneCommune(id_commune) {
+        document.getElementById("boutton_modifier_"+id_commune).innerHTML = "Modifier cette ligne";
+        document.getElementById("modifier_commune_value").innerHTML = "";
+    }
+
+    //Affectation de la valeur du nom de la commune
+    function getValueModifierCommunes_commune() {
+        communes_commune_modifier_value = document.getElementById("communes_commune_modifier").value;
+    }
+    //Affection de la valeur du département de la commune
+    function getValueModifierDep_commune() {
+        dep_commune_modifier_value = document.getElementById("dep_commune_modifier").value;
+    }
+    //Affectation de la valeur du code postal de la commune
+    function getValueModifierCp_commune() {
+        cp_commune_modifier_value = document.getElementById("cp_commune_modifier").value;
+    }
+
+    //Fonction pour modifier la ligne d'une commune
+    function modifierLigneCommune(id_commune) {
+        document.location.href="/home/modificationCommune/"+{{Index}}+"_"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
+    }
+
+    //Passer à la page suivante
+    function pageSuivante(index) {
+      if (index != {{Index_max}}) {
+        document.location.href="/home/ongletCommunes/"+(index+1);
+      }
+    }
+
+    //Passer à la page précedente
+    function pagePrecendente(index) {
+      if (index != 1) {
+        document.location.href="/home/ongletCommunes/"+(index-1);
+      }
+    }
+
+</script>
+
+<table style="border: 5px solid purple;">
+    <tbody>
+        <tr style="border: 5px solid purple;">
+            <td style="border: 3px solid purple;">Communes</td>
+            <td style="border: 3px solid purple;">Département</td>
+            <td style="border: 3px solid purple;">Code postal</td>
+            <td style="border: 3px solid purple;">ID</td>
+        </tr>
+        {% for commune in Communes %}
+        <tr style="border: 5px solid purple;">
+            <td style="border: 2px solid green;">{{commune.communes}}</td>
+            <td style="border: 2px solid green;">{{commune.dep}}</td>
+            <td style="border: 2px solid green;">{{commune.cp}}</td>
+            <td style="border: 2px solid green;">{{commune.id_commune}}</td>
+            <td style="border: 2px solid green;"><div id="boutton_modifier_{{commune.id_commune}}" onclick="champsModifierLigneCommune({{commune.id_commune}})">Modifier cette ligne</div></td>
+        </tr>
+        <tr id="id_commune_modifier_{{commune.id_commune}}">
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div onclick="pageSuivante({{Index}})">Page suivante</div>
+<div onclick="pagePrecendente({{Index}})">Page précédente</div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
