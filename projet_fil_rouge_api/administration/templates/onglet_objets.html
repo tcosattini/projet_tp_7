@@ -4,10 +4,9 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<div class="w-full">
-
-          <!-- Bouton pour ajouter un objet -->
-          <div id="ajouter_objet" onclick="champsAjouterObjet()">Ajouter un objet</div>
+<div class="flex flex-col w-full">
+  <div id="ajouter_conditionnement" class="flex justify-end w-full" onclick="champsAjouterConditionnement()">Ajouter un objet</div>
+<div class="flex flex-col items-center w-full">
 
           <!-- Champs et bouton de validation pour ajouter un objet -->
           <div id="ajouter_objet_value">
@@ -202,34 +201,34 @@
           
           </script>
           
-          <table style="border: 5px solid purple;">
+          <table style="border: 5px solid black;">
               <tbody>
-                  <tr style="border: 5px solid purple;">
-                      <td style="border: 3px solid purple;">ID</td>
-                      <td style="border: 3px solid purple;">Désignation</td>
-                      <td style="border: 3px solid purple;">Modèle</td>
-                      <td style="border: 3px solid purple;">Prix Unitaire</td>
-                      <td style="border: 3px solid purple;">Poids</td>
-                      <td style="border: 3px solid purple;">Ordre IMP</td>
-                      <td style="border: 3px solid purple;">Publicitaire</td>
-                      <td style="border: 3px solid purple;">Conditionnement</td>
-                      <td style="border: 3px solid purple;">Etat</td>
-                      <td style="border: 3px solid purple;">Points</td>
-                      <td style="border: 3px solid purple;">Action</td>
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 3px solid black;">ID</td>
+                      <td style="border: 3px solid black;">Désignation</td>
+                      <td style="border: 3px solid black;">Modèle</td>
+                      <td style="border: 3px solid black;">Prix Unitaire</td>
+                      <td style="border: 3px solid black;">Poids</td>
+                      <td style="border: 3px solid black;">Ordre IMP</td>
+                      <td style="border: 3px solid black;">Publicitaire</td>
+                      <td style="border: 3px solid black;">Conditionnement</td>
+                      <td style="border: 3px solid black;">Etat</td>
+                      <td style="border: 3px solid black;">Points</td>
+                      <td style="border: 3px solid black;">Action</td>
                   </tr>
                   {% for objet in Objets %}
-                  <tr style="border: 5px solid purple;">
-                      <td style="border: 2px solid green;">{{objet.codobj}}</td>
-                      <td style="border: 2px solid green;">{{objet.libobj}}</td>
-                      <td style="border: 2px solid green;">?</td>
-                      <td style="border: 2px solid green;">?</td>
-                      <td style="border: 2px solid green;">{{objet.poidsobj}}</td>
-                      <td style="border: 2px solid green;">{{objet.o_imp}}</td>
-                      <td style="border: 2px solid green;">{{objet.puobj}}</td>
-                      <td style="border: 2px solid green;">{{objet.idcondit}}</td>
-                      <td style="border: 2px solid green;">{{objet.is_active}}</td>
-                      <td style="border: 2px solid green;">{{objet.points}}</td>
-                      <td style="border: 2px solid green;">
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 2px solid black;">{{objet.codobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.libobj}}</td>
+                      <td style="border: 2px solid black;">?</td>
+                      <td style="border: 2px solid black;">?</td>
+                      <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.o_imp}}</td>
+                      <td style="border: 2px solid black;">{{objet.puobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.idcondit}}</td>
+                      <td style="border: 2px solid black;">{{objet.is_active}}</td>
+                      <td style="border: 2px solid black;">{{objet.points}}</td>
+                      <td style="border: 2px solid black;">
                           <div id="boutton_modifier_{{objet.codobj}}" onclick="champsModifierLigneObjet({{objet.codobj}})">Modifier cette ligne</div>
                           <div id="action_active_{{objet.codobj}}"></div>
                           <script>
@@ -239,8 +238,10 @@
                   </tr>
                   {% endfor %}
               </tbody>
-          </table>
-          <div onclick="pageSuivante({{Index}})">Page suivante</div>
-          <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+          </table>          
+          <div class="flex justify-center w-full">
+            <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+            <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+          </div>
 
 {% endblock %}

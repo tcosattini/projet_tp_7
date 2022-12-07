@@ -1,28 +1,31 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
+{% block styles %}
+ <link rel="stylesheet" type="text/css" href={% static 'css/liste_utilisateurs.css' %}>
+{% endblock styles %}
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
-{% block onglet %}
-<table class="w-full ">
-  <tbody class="w-full ">
-    <thead class="w-full">
-      <td>ID</td>
-      <td>Nom Complet</td>
-      <td>Nom de Famille</td>
-      <td>Rôles</td>
-      <td>Actions</td>
-    </thead>
+{% block onglet %}  
+<table class="w-fit" style="border: 5px solid black;">
+  <tbody class="w-full" style="border: 5px solid black;">
+    <tr class="w-full" style="border: 5px solid black;">
+      <td style="border: 5px solid black;">ID</td>
+      <td style="border: 5px solid black;">Nom Complet</td>
+      <td style="border: 5px solid black;">Nom de Famille</td>
+      <td style="border: 5px solid black;">Rôles</td>
+      <td style="border: 5px solid black;">Actions</td>
+    </tr>
     {% for utilisateur in utilisateurs %}
-    <tr class="w-full">
-      <td>{{utilisateur.code_utilisateur}}</td>
-      <td>{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
-      <td>{{utilisateur.nom_utilisateur}}</td>
-      <td>
+    <tr class="w-full" style="border: 5px solid black;">
+      <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
+      <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+      <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
+      <td style="border: 5px solid black;">
         {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
         <p>{{utilisateur.code_role.lib_role}}</p>
       </td>
-      <td>
+      <td style="border: 5px solid black;">
         <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
           <button>modifier</button>
         </a>

@@ -4,10 +4,11 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<div class="w-full">
+<div class="flex flex-col w-full">
+  <div id="ajouter_conditionnement" class="flex justify-end w-full" onclick="champsAjouterConditionnement()">Ajouter un emballage</div>
+<div class="flex flex-col items-center w-full">
 
 <!-- Bouton pour ajouter un conditionnement -->
-<div id="ajouter_conditionnement" onclick="champsAjouterConditionnement()">Ajouter un emballage</div>
 
 <!-- Champs et bouton de validation pour ajouter un conditionnement -->
 <div id="ajouter_conditionnement_value">
@@ -131,25 +132,30 @@
 
 </script>
 
-<table style="border: 5px solid purple;">
+<table class="w-fit" style="border: 5px solid black;">
     <tbody>
-        <tr style="border: 5px solid purple;">
-            <td style="border: 3px solid purple;">Nom</td>
-            <td style="border: 3px solid purple;">Poids</td>
-            <td style="border: 3px solid purple;">Tarif</td>
-            <td style="border: 3px solid purple;">ID</td>
+        <tr style="border: 5px solid black;">
+            <td style="border: 3px solid black;">Nom</td>
+            <td style="border: 3px solid black;">Poids</td>
+            <td style="border: 3px solid black;">Tarif</td>
+            <td style="border: 3px solid black;">ID</td>
         </tr>
         {% for conditionnement in Conditionnements %}
-        <tr style="border: 5px solid purple;">
-            <td style="border: 2px solid green;">{{conditionnement.libcondit}}</td>
-            <td style="border: 2px solid green;">{{conditionnement.poidscondit}}</td>
-            <td style="border: 2px solid green;">{{conditionnement.prixcond}}</td>
-            <td style="border: 2px solid green;">{{conditionnement.idcondit}}</td>
-            <td style="border: 2px solid green;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
+        <tr style="border: 5px solid black;">
+            <td style="border: 2px solid black;">{{conditionnement.libcondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.poidscondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.prixcond}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.idcondit}}</td>
+            <td style="border: 2px solid black;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
         </tr>
         {% endfor %}
+        
     </tbody>
+
 </table>
-<div onclick="pageSuivante({{Index}})">Page suivante</div>
-<div onclick="pagePrecendente({{Index}})">Page précédente</div>
+<div class="flex justify-center w-full">
+  <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+  <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+</div>
+</div>
 {% endblock %}

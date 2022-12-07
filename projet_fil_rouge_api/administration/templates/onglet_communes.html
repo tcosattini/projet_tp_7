@@ -4,11 +4,9 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<div class="w-full">
-
-          <!-- Bouton pour ajouter une commune -->
-          <div id="ajouter_commune" onclick="champsAjouterCommune()">Ajouter une commune</div>
-
+<div class="flex flex-col w-full">
+  <div id="ajouter_conditionnement" class="flex justify-end w-full" onclick="champsAjouterConditionnement()">Ajouter une commune</div>
+<div class="flex flex-col items-center w-full">
           <!-- Champs et bouton de validation pour ajouter une commune -->
           <div id="ajouter_commune_value">
           </div>
@@ -131,29 +129,29 @@
           
           </script>
           
-          <table style="border: 5px solid purple;">
+          <table style="border: 5px solid black;">
               <tbody>
-                  <tr style="border: 5px solid purple;">
-                      <td style="border: 3px solid purple;">Communes</td>
-                      <td style="border: 3px solid purple;">Département</td>
-                      <td style="border: 3px solid purple;">Code postal</td>
-                      <td style="border: 3px solid purple;">ID</td>
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 3px solid black;">Communes</td>
+                      <td style="border: 3px solid black;">Département</td>
+                      <td style="border: 3px solid black;">Code postal</td>
+                      <td style="border: 3px solid black;">ID</td>
                   </tr>
                   {% for commune in Communes %}
-                  <tr style="border: 5px solid purple;">
-                      <td style="border: 2px solid green;">{{commune.communes}}</td>
-                      <td style="border: 2px solid green;">{{commune.dep}}</td>
-                      <td style="border: 2px solid green;">{{commune.cp}}</td>
-                      <td style="border: 2px solid green;">{{commune.id_commune}}</td>
-                      <td style="border: 2px solid green;"><div id="boutton_modifier_{{commune.id_commune}}" onclick="champsModifierLigneCommune({{commune.id_commune}})">Modifier cette ligne</div></td>
-                  </tr>
-                  <tr id="id_commune_modifier_{{commune.id_commune}}">
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 2px solid black;">{{commune.communes}}</td>
+                      <td style="border: 2px solid black;">{{commune.dep}}</td>
+                      <td style="border: 2px solid black;">{{commune.cp}}</td>
+                      <td style="border: 2px solid black;">{{commune.id_commune}}</td>
+                      <td style="border: 2px solid black;"><div id="boutton_modifier_{{commune.id_commune}}" onclick="champsModifierLigneCommune({{commune.id_commune}})">Modifier cette ligne</div></td>
                   </tr>
                   {% endfor %}
               </tbody>
           </table>
-          <div onclick="pageSuivante({{Index}})">Page suivante</div>
-          <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+          <div class="flex justify-center w-full">
+            <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+            <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+          </div>
 
 </div>
 {% endblock %}
