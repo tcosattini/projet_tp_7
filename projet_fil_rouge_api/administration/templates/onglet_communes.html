@@ -5,145 +5,155 @@
 
 {% block onglet %}
 <div class="w-full">
+
           <!-- Bouton pour ajouter une commune -->
-  <div class="w-full" id="ajouter_commune" onclick="champsAjouterCommune()">Ajouter une commune</div>
+          <div id="ajouter_commune" onclick="champsAjouterCommune()">Ajouter une commune</div>
 
-  <!-- Champs et bouton de validation pour ajouter une commune -->
-  <div class="w-full" id="ajouter_commune_value"></div>
-
-  <!-- Champs et bouton de validation/annulation pour modifier une commune -->
-  <div class="w-full" id="modifier_commune_value"></div>
-
-  <script>
-    //Ajouter le champs d'insertion
-    function champsAjouterCommune() {
-      document.getElementById("ajouter_commune_value").innerHTML = `
-        <p>Saisir les données de la nouvelle commune :</p>
-        <label for="communes_commune">Nom de la commune</label>
-        <input type="text" id="communes_commune" name="communes_commune" required minlength="1" size="10" onblur="getValueCommunes_commune()">
-        <label for="dep_commune">Département de la commune</label>
-        <input type="number" id="dep_commune" name="dep_commune" required minlength="1" size="10" onblur="getValueDep_commune()">
-        <label for="cp_commune">Code postal de la commune</label>
-        <input type="text" id="cp_commune" name="cp_commune" required minlength="1" size="10" onblur="getValueCp_commune()">
-        <div id="ajouter_commune_insertion" onclick="insertionCommune()">Valider l'ajout de la commune</div>
-        <div id="annuler_commune_insertion" onclick="annulerInsertionCommune()">Annuler l'ajout de la commune</div>
-      `;
-    }
-
-    //Déclaration des variables hors des fonctions
-    let communes_commune_value = "";
-    let dep_commune_value = "";
-    let cp_commune_value = "";
-
-    //Affectation de la valeur du nom de la commune
-    function getValueCommunes_commune() {
-      communes_commune_value = document.getElementById("communes_commune").value;
-    }
-    //Affection de la valeur du département de la commune
-    function getValueDep_commune() {
-      dep_commune_value = document.getElementById("dep_commune").value;
-    }
-    //Affectation de la valeur du code postal de la commune
-    function getValueCp_commune() {
-      cp_commune_value = document.getElementById("cp_commune").value;
-    }
-
-    //Fonction pour insérer la commune dans la base de données
-    function insertionCommune() {
-      document.location.href="/home/ajoutCommune/"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
-    }
-
-    //Fonction pour annuler l'insertion la commune dans la base de données
-    function annulerInsertionCommune() {
-      document.getElementById("ajouter_commune_value").innerHTML = "";
-    }
-
-    //Déclaration des variables hors des fonctions
-    let communes_commune_modifier_value = "";
-    let dep_commune_modifier_value = "";
-    let cp_commune_modifier_value = "";
-
-    let ancienne_id_commune = "Null";
-
-    //Fonction pour faire apparaître les champs pour modifier une commune
-    function champsModifierLigneCommune(id_commune) {
-      if (ancienne_id_commune != "Null") {
-        document.getElementById("boutton_modifier_"+ancienne_id_commune).innerHTML = "Modifier cette ligne";
-      }
-      document.getElementById("boutton_modifier_"+id_commune).innerHTML = "En cours de modification";
-      communes_commune_modifier_value = "";
-      dep_commune_modifier_value = "";
-      cp_commune_modifier_value = "";
-      document.getElementById("modifier_commune_value").innerHTML = ""
-      document.getElementById("modifier_commune_value").innerHTML += `
-        <p>Saisir les nouvelles données de la commune `+id_commune+` :</p>
-        <label>Nom de la commune</label>
-        <input type="text" id="communes_commune_modifier" name="communes_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCommunes_commune()">
-        <label>Département de la commune</label>
-        <input type="number" id="dep_commune_modifier" name="dep_commune_modifier" required minlength="1" size="10" onblur="getValueModifierDep_commune()">
-        <label>Code postal de la commune</label>
-        <input type="text" id="cp_commune_modifier" name="cp_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCp_commune()"></div>
-        <div id="modifier_commune_insertion" onclick="modifierLigneCommune(`+id_commune+`)">Valider la modification de la commune</div>
-        <div onclick="supprimerChampsModifierLigneCommune(`+id_commune+`)">Annuler la modification de la commune</div>
-      `;
-      ancienne_id_commune = id_commune;
-    }
-
-    function supprimerChampsModifierLigneCommune(id_commune) {
-      document.getElementById("boutton_modifier_"+id_commune).innerHTML = "Modifier cette ligne";
-      document.getElementById("modifier_commune_value").innerHTML = "";
-    }
-
-    //Affectation de la valeur du nom de la commune
-    function getValueModifierCommunes_commune() {
-      communes_commune_modifier_value = document.getElementById("communes_commune_modifier").value;
-    }
-    //Affection de la valeur du département de la commune
-    function getValueModifierDep_commune() {
-      dep_commune_modifier_value = document.getElementById("dep_commune_modifier").value;
-    }
-    //Affectation de la valeur du code postal de la commune
-    function getValueModifierCp_commune() {
-      cp_commune_modifier_value = document.getElementById("cp_commune_modifier").value;
-    }
-
-    //Fonction pour modifier la ligne d'une commune
-    function modifierLigneCommune(id_commune) {
-      document.location.href="/home/modificationCommune/"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
-    }
-  </script>
-
-  <table class="w-full" style="border: 5px solid purple;">
-    <tbody class="w-full">
-      <tr class="w-full" style="border: 5px solid purple;">
-        <td style="border: 3px solid purple;">Communes</td>
-        <td style="border: 3px solid purple;">Département</td>
-        <td style="border: 3px solid purple;">Code postal</td>
-        <td style="border: 3px solid purple;">ID</td>
-      </tr>
-      {% for commune in Communes %}
-      <tr class="w-full" style="border: 5px solid purple;">
-        <td style="border: 2px solid green;">{{commune.communes}}</td>
-        <td style="border: 2px solid green;">{{commune.dep}}</td>
-        <td style="border: 2px solid green;">{{commune.cp}}</td>
-        <td style="border: 2px solid green;">{{commune.id_commune}}</td>
-        <td style="border: 2px solid green;">
-          <div id="boutton_modifier_{{commune.id_commune}}" onclick="champsModifierLigneCommune({{commune.id_commune}})">
-            Modifier cette ligne
+          <!-- Champs et bouton de validation pour ajouter une commune -->
+          <div id="ajouter_commune_value">
           </div>
-        </td>
-      </tr>
-      {% comment %} <tr id="id_commune_modifier_{{commune.id_commune}}"></tr> {% endcomment %}
-      {% endfor %}
-    </tbody>
-  </table>
-  <div class="flex items-center justify-center w-full h-5 p-5" style="border: 5px solid purple;">
-    <button class="mr-auto" >
-      {% if page > 1 %}<a href="{% url 'ongletCommunes' page|add:"-1" amount %}">previous</a>{% endif %}
-    </button>
-    <button>
-      {% if Communes|length >= amount %}<a href="{% url 'ongletCommunes' page|add:"1" amount %}">next</a>{% endif %}
-    </button>
-  </div>
+          
+          <!-- Champs et bouton de validation/annulation pour modifier une commune -->
+          <div id="modifier_commune_value">
+          </div>
+          
+          <script>
+              //Ajouter le champs d'insertion
+              function champsAjouterCommune() {
+                  document.getElementById("ajouter_commune_value").innerHTML = `
+                  <p>Saisir les données de la nouvelle commune :</p>
+                  <label for="communes_commune">Nom de la commune</label>
+                  <input type="text" id="communes_commune" name="communes_commune" required minlength="1" size="10" onblur="getValueCommunes_commune()">
+                  <label for="dep_commune">Département de la commune</label>
+                  <input type="number" id="dep_commune" name="dep_commune" required minlength="1" size="10" onblur="getValueDep_commune()">
+                  <label for="cp_commune">Code postal de la commune</label>
+                  <input type="text" id="cp_commune" name="cp_commune" required minlength="1" size="10" onblur="getValueCp_commune()">
+                  <div id="ajouter_commune_insertion" onclick="insertionCommune()">Valider l'ajout de la commune</div>
+                  <div id="annuler_commune_insertion" onclick="annulerInsertionCommune()">Annuler l'ajout de la commune</div>
+              `;
+              }
+          
+              //Déclaration des variables hors des fonctions
+              let communes_commune_value = "";
+              let dep_commune_value = "";
+              let cp_commune_value = "";
+          
+              //Affectation de la valeur du nom de la commune
+              function getValueCommunes_commune() {
+                  communes_commune_value = document.getElementById("communes_commune").value;
+              }
+              //Affection de la valeur du département de la commune
+              function getValueDep_commune() {
+                  dep_commune_value = document.getElementById("dep_commune").value;
+              }
+              //Affectation de la valeur du code postal de la commune
+              function getValueCp_commune() {
+                  cp_commune_value = document.getElementById("cp_commune").value;
+              }
+          
+              //Fonction pour insérer la commune dans la base de données
+              function insertionCommune() {
+                  document.location.href="/home/ajoutCommune/"+{{Index}}+"_"+communes_commune_value+"_"+dep_commune_value+"_"+cp_commune_value
+              }
+          
+              //Fonction pour annuler l'insertion la commune dans la base de données
+              function annulerInsertionCommune() {
+                  document.getElementById("ajouter_commune_value").innerHTML = "";
+              }
+          
+              //Déclaration des variables hors des fonctions
+              let communes_commune_modifier_value = "";
+              let dep_commune_modifier_value = "";
+              let cp_commune_modifier_value = "";
+          
+              let ancienne_id_commune = "Null";
+          
+              //Fonction pour faire apparaître les champs pour modifier une commune
+              function champsModifierLigneCommune(id_commune) {
+                  if (ancienne_id_commune != "Null") {
+                      document.getElementById("boutton_modifier_"+ancienne_id_commune).innerHTML = "Modifier cette ligne";
+                  }
+                  document.getElementById("boutton_modifier_"+id_commune).innerHTML = "En cours de modification";
+                  communes_commune_modifier_value = "";
+                  dep_commune_modifier_value = "";
+                  cp_commune_modifier_value = "";
+                  document.getElementById("modifier_commune_value").innerHTML = ""
+                  document.getElementById("modifier_commune_value").innerHTML += `
+                  <p>Saisir les nouvelles données de la commune `+id_commune+` :</p>
+                  <label>Nom de la commune</label>
+                  <input type="text" id="communes_commune_modifier" name="communes_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCommunes_commune()">
+                  <label>Département de la commune</label>
+                  <input type="number" id="dep_commune_modifier" name="dep_commune_modifier" required minlength="1" size="10" onblur="getValueModifierDep_commune()">
+                  <label>Code postal de la commune</label>
+                  <input type="text" id="cp_commune_modifier" name="cp_commune_modifier" required minlength="1" size="10" onblur="getValueModifierCp_commune()"></div>
+                  <div id="modifier_commune_insertion" onclick="modifierLigneCommune(`+id_commune+`)">Valider la modification de la commune</div>
+                  <div onclick="supprimerChampsModifierLigneCommune(`+id_commune+`)">Annuler la modification de la commune</div>
+                  `;
+                  ancienne_id_commune = id_commune;
+              }
+          
+              function supprimerChampsModifierLigneCommune(id_commune) {
+                  document.getElementById("boutton_modifier_"+id_commune).innerHTML = "Modifier cette ligne";
+                  document.getElementById("modifier_commune_value").innerHTML = "";
+              }
+          
+              //Affectation de la valeur du nom de la commune
+              function getValueModifierCommunes_commune() {
+                  communes_commune_modifier_value = document.getElementById("communes_commune_modifier").value;
+              }
+              //Affection de la valeur du département de la commune
+              function getValueModifierDep_commune() {
+                  dep_commune_modifier_value = document.getElementById("dep_commune_modifier").value;
+              }
+              //Affectation de la valeur du code postal de la commune
+              function getValueModifierCp_commune() {
+                  cp_commune_modifier_value = document.getElementById("cp_commune_modifier").value;
+              }
+          
+              //Fonction pour modifier la ligne d'une commune
+              function modifierLigneCommune(id_commune) {
+                  document.location.href="/home/modificationCommune/"+{{Index}}+"_"+id_commune+"_"+communes_commune_modifier_value+"_"+dep_commune_modifier_value+"_"+cp_commune_modifier_value
+              }
+          
+              //Passer à la page suivante
+              function pageSuivante(index) {
+                if (index != {{Index_max}}) {
+                  document.location.href="/home/ongletCommunes/"+(index+1);
+                }
+              }
+          
+              //Passer à la page précedente
+              function pagePrecendente(index) {
+                if (index != 1) {
+                  document.location.href="/home/ongletCommunes/"+(index-1);
+                }
+              }
+          
+          </script>
+          
+          <table style="border: 5px solid purple;">
+              <tbody>
+                  <tr style="border: 5px solid purple;">
+                      <td style="border: 3px solid purple;">Communes</td>
+                      <td style="border: 3px solid purple;">Département</td>
+                      <td style="border: 3px solid purple;">Code postal</td>
+                      <td style="border: 3px solid purple;">ID</td>
+                  </tr>
+                  {% for commune in Communes %}
+                  <tr style="border: 5px solid purple;">
+                      <td style="border: 2px solid green;">{{commune.communes}}</td>
+                      <td style="border: 2px solid green;">{{commune.dep}}</td>
+                      <td style="border: 2px solid green;">{{commune.cp}}</td>
+                      <td style="border: 2px solid green;">{{commune.id_commune}}</td>
+                      <td style="border: 2px solid green;"><div id="boutton_modifier_{{commune.id_commune}}" onclick="champsModifierLigneCommune({{commune.id_commune}})">Modifier cette ligne</div></td>
+                  </tr>
+                  <tr id="id_commune_modifier_{{commune.id_commune}}">
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          <div onclick="pageSuivante({{Index}})">Page suivante</div>
+          <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+
 </div>
 {% endblock %}
