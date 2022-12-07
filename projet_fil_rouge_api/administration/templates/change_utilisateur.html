@@ -1,0 +1,10 @@
+{% extends 'home.html' %}{% load static %}
+
+{% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
+{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
+
+{% block onglet %}
+<form action={% url 'utilisateur.save' %} method="POST">
+  {% csrf_token %}{{form.as_p}}
+</form>
+{% endblock %}
