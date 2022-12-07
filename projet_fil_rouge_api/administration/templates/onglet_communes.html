@@ -129,7 +129,7 @@
           
           </script>
           
-          <table style="border: 5px solid black;">
+          <table  style="border: 5px solid black;">
               <tbody>
                   <tr style="border: 5px solid black;">
                       <td style="border: 3px solid black;">Communes</td>
@@ -148,9 +148,49 @@
                   {% endfor %}
               </tbody>
           </table>
+
           <div class="flex justify-center w-full">
             <div onclick="pagePrecendente({{Index}})">Page précédente</div>
             <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+          </div>
+
+          <script>
+            function Impression() {
+            var a = window.open('Gestion des communes', 'Gestion des communes', '');
+            a.document.write('<html><body>');
+            impression = `
+            <h1>Gestion des communes</h1>
+            </br>
+            <h2>Table des communes de la page {{Index}} :</h2>
+            <table  style="border: 5px solid black;">
+              <tbody>
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 3px solid black;">Communes</td>
+                      <td style="border: 3px solid black;">Département</td>
+                      <td style="border: 3px solid black;">Code postal</td>
+                      <td style="border: 3px solid black;">ID</td>
+                  </tr>
+                  {% for commune in Communes %}
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 2px solid black;">{{commune.communes}}</td>
+                      <td style="border: 2px solid black;">{{commune.dep}}</td>
+                      <td style="border: 2px solid black;">{{commune.cp}}</td>
+                      <td style="border: 2px solid black;">{{commune.id_commune}}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            `
+            a.document.write(impression);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+            }
+          </script>
+          
+          </br>
+          <div class="flex w-full">
+            <div onclick="Impression()">Imprimer</div>
           </div>
 
 </div>
