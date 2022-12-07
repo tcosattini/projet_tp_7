@@ -113,16 +113,6 @@ def modificationCommune(request, idx, idCommuneValue, communesValue, depValue, c
         TCommunes.objects.filter(id_commune = idCommuneValue).update(cp = cpValue)
     return HttpResponseRedirect("/home/ongletCommunes/"+idx)
 
-# Create your views here.
-
-'''def index(request):
-    data_poids = TPoids.objects.all()
-    context = {
-        "Poids": data_poids,
-    }
-    return render(request, 'index.html', context)'''
-
-
 def pagePoids(request, idx):
     idx = int(idx)
     t_min = (idx-1)*10
@@ -140,14 +130,14 @@ def pagePoids(request, idx):
 def ajoutPoids(request, idx, valmin, valtimbre):
     ajoutPoids = TPoids(valmin = valmin, valtimbre = valtimbre)
     ajoutPoids.save()
-    return HttpResponseRedirect("/pagePoids/"+idx)
+    return HttpResponseRedirect("/home/pagePoids/"+idx)
 
 def modifierPoids(request, idx, id, valmin, valtimbre):
     if (valmin != ""):
-        TPoidsv.objects.filter(idpoids=id).update(valmin=valmin)
+        TPoids.objects.filter(idpoids=id).update(valmin=valmin)
     if (valtimbre != ""):
-        TPoidsv.objects.filter(idpoids=id).update(valtimbre=valtimbre)
-    return HttpResponseRedirect("/pagePoids/"+idx)
+        TPoids.objects.filter(idpoids=id).update(valtimbre=valtimbre)
+    return HttpResponseRedirect("/home/pagePoids/"+idx)
 
 def pagePoidsVignettes(request, idx):
     idx = int(idx)
@@ -166,11 +156,11 @@ def pagePoidsVignettes(request, idx):
 def ajoutPoidsVignettes(request, idx, valmin, valtimbre):
     ajoutPoids = TPoidsv(valmin = valmin, valtimbre = valtimbre)
     ajoutPoids.save()
-    return HttpResponseRedirect("/pagePoidsVignettes/"+idx)
+    return HttpResponseRedirect("/home/pagePoidsVignettes/"+idx)
 
 def modifierPoidsVignettes(request, idx, id, valmin, valtimbre):
     if (valmin != ""):
         TPoidsv.objects.filter(idpoids=id).update(valmin=valmin)
     if (valtimbre != ""):
         TPoidsv.objects.filter(idpoids=id).update(valtimbre=valtimbre)
-    return HttpResponseRedirect("/pagePoidsVignettes/"+idx)
+    return HttpResponseRedirect("/home/pagePoidsVignettes/"+idx)
