@@ -238,10 +238,62 @@
                   </tr>
                   {% endfor %}
               </tbody>
-          </table>          
+          </table>
+
           <div class="flex justify-center w-full">
             <div onclick="pagePrecendente({{Index}})">Page précédente</div>
             <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
           </div>
+          
+          <script>
+            function Impression() {
+            var a = window.open('Gestion des objets', 'Gestion des objets', '');
+            a.document.write('<html><body>');
+            impression = `
+            <h1>Gestion des objets</h1>
+            </br>
+            <h2>Table des communes de la page {{Index}} :</h2>
+            <table style="border: 5px solid black;">
+              <tbody>
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 3px solid black;">ID</td>
+                      <td style="border: 3px solid black;">Désignation</td>
+                      <td style="border: 3px solid black;">Modèle</td>
+                      <td style="border: 3px solid black;">Prix Unitaire</td>
+                      <td style="border: 3px solid black;">Poids</td>
+                      <td style="border: 3px solid black;">Ordre IMP</td>
+                      <td style="border: 3px solid black;">Publicitaire</td>
+                      <td style="border: 3px solid black;">Conditionnement</td>
+                      <td style="border: 3px solid black;">Etat</td>
+                      <td style="border: 3px solid black;">Points</td>
+                  </tr>
+                  {% for objet in Objets %}
+                  <tr style="border: 5px solid black;">
+                      <td style="border: 2px solid black;">{{objet.codobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.libobj}}</td>
+                      <td style="border: 2px solid black;">?</td>
+                      <td style="border: 2px solid black;">?</td>
+                      <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.o_imp}}</td>
+                      <td style="border: 2px solid black;">{{objet.puobj}}</td>
+                      <td style="border: 2px solid black;">{{objet.idcondit}}</td>
+                      <td style="border: 2px solid black;">{{objet.is_active}}</td>
+                      <td style="border: 2px solid black;">{{objet.points}}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            `
+            a.document.write(impression);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+            }
+          </script>
+          
+          </br>
+          <div class="flex w-full">
+            <div onclick="Impression()">Imprimer</div>
+          </div>  
 
 {% endblock %}

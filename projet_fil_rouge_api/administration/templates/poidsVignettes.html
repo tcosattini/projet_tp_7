@@ -124,5 +124,29 @@
         }
 
   </script>
+
+<script>
+    function Impression() {
+    var a = window.open('Gestion des poids des vignettes', 'Gestion des poids des vignettes', '');
+    a.document.write('<html><body>');
+    impression = `
+    <h1>Gestion des poids des vignettes</h1>
+    </br>
+    <h2>Table des communes de la page {{Index}} :</h2>
+    
+    `
+    a.document.write(impression);
+    a.document.write('</body></html>');
+    a.document.close();
+    a.print();
+    }
+  </script>
+  
+  </br>
+  <div class="flex w-full">
+    <div onclick="Impression()">Imprimer</div>
+  </div>
+
+
 </div>
 {% endblock %}
