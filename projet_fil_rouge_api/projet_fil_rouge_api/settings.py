@@ -135,6 +135,9 @@ TIME_ZONE = 'UTC'
 
 TAILWIND_APP_NAME = 'theme'
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
@@ -151,5 +154,3 @@ LOGIN_URL = '/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-NPM_BIN_PATH = '/home/riwan/.nvm/versions/node/v18.12.1/bin/npm'
