@@ -146,8 +146,23 @@
     impression = `
     <h1>Gestion des poids des vignettes</h1>
     </br>
-    <h2>Table des communes de la page {{Index}} :</h2>
-    
+    <h2>Table des poids des vignettes de la page {{Index}} :</h2>
+    <table class="w-fit" style="border: 5 px solid black;">
+        <tbody>
+            <tr style="border: 5px solid black;">
+                <td style="border: 3px solid black;">ID</td>
+                <td style="border: 3px solid black;">Valeur</td>
+                <td style="border: 3px solid black;">Valeur timbre</td>
+            </tr>
+            {% for poids in Poids %}
+            <tr style="border: 5px solid black;">
+                <td style="border: 2px solid black;">{{poids.idpoids}}</td>
+                <td style="border: 2px solid black;">{{poids.valmin}}</td>
+                <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     `
     a.document.write(impression);
     a.document.write('</body></html>');
