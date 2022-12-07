@@ -4,29 +4,38 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
+<div class="flex flex-col w-full">
+    <div id="ajouter_poids" class="flex justify-end w-full" onclick="champsAjouterPoids()">Ajouter un poids</div>
+<div class="flex flex-col items-center w-full">
 <div class="w-fit">
-  <a href="/home/pagePoidsVignettes/1">Gestion des poids des vignettes</a>
+    <a href="/home/pagePoidsVignettes/1">Gestion des poids des vignettes</a>
 
-  <div>
-      {% for poids in Poids %}
+    <div id="ajouter_poids_value"></div>
+    <div id="modifier_poids_value"></div>
 
-          {{poids.valmin}}
-          {{poids.valtimbre}}
-          <button type="button" id="boutton_modifier_{{poids.idpoids}}" onclick="champsModifierPoids({{poids.idpoids}})">Modifier</button>
-          <br>
+    <table class="w-fit" style="border: 5 px solid black;">
+        <tbody>
+            <tr style="border: 5px solid black;">
+                <td style="border: 3px solid black;">ID</td>
+                <td style="border: 3px solid black;">Valeur</td>
+                <td style="border: 3px solid black;">Valeur timbre</td>
+            </tr>
+            {% for poids in Poids %}
+            <tr style="border: 5px solid black;">
+                <td style="border: 2px solid black;">{{poids.idpoids}}</td>
+                <td style="border: 2px solid black;">{{poids.valmin}}</td>
+                <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
+                <td style="border: 2px solid black;"><div id="boutton_modifier_{{poids.idpoids}}" onclick="champsModifierPoids({{poids.idpoids}})">Modifier</div></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-      {% endfor %}
-  </div>
-
-  <div onclick="pageSuivante({{Index}})">Page suivante</div>
-  <div onclick="pagePrecendente({{Index}})">Page précédente</div>
-
-  <div id="ajouter_poids" onclick="champsAjouterPoids()">Ajouter un poids</div>
-  <div id="ajouter_poids_value">
-
-  <div id="modifier_poids_value">
-
-  </div>
+    <div class="flex justify-center w-full">
+        <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+        <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+    </div>
+</div>
 
 
   <script type="text/javascript">
