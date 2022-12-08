@@ -4,6 +4,12 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
 
+    # Onglet Utilisateurs
+    path('add/', views.add, name='utilisateur.add'),
+    path('list/', views.list, name='utilisateur.list'),
+    path("toggle/<int:id>", views.toggle_active, name='utilisateur.toggle'),
+    path('change/<int:id>', views.change, name='utilisateur.change'),
+
     # Onglet "Objets" --- Madani
     re_path(r'^ongletObjets/(?P<idx>[0-9]+)$',
             views.ongletObjets, name='ongletObjets'),
