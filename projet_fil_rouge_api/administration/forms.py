@@ -1,6 +1,6 @@
 from dataclasses import field
 from django import forms
-from .models import TRole, TUtilisateur
+from authentification.models import TUtilisateur
 
 
 class TUtilisateurForm(forms.ModelForm):

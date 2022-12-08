@@ -145,8 +145,6 @@ STATIC_ROOT = BASE_DIR / 'theme/static/prod/'
 STATICFILES_DIRS = [
     BASE_DIR / 'authentification/static',
     BASE_DIR / 'administration/static',
-    BASE_DIR / 'gestionUtilisateurs/static',
-
 ]
 
 LOGIN_URL = '/'

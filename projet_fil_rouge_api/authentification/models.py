@@ -124,6 +124,31 @@ class TDept(models.Model):
         db_table = 't_dept'
 
 
+class TObjet(models.Model):
+    codobj = models.AutoField(primary_key=True)
+    libobj = models.CharField(max_length=50, blank=True, null=True)
+    # Field name made lowercase.
+    tailleobj = models.CharField(
+        db_column='Tailleobj', max_length=50, blank=True, null=True)
+    puobj = models.DecimalField(
+        max_digits=19, decimal_places=4, blank=True, null=True)
+    # Field name made lowercase.
+    poidsobj = models.DecimalField(
+        db_column='Poidsobj', max_digits=19, decimal_places=4, blank=True, null=True)
+    indispobj = models.IntegerField(blank=True, null=True)
+    o_imp = models.IntegerField(blank=True, null=True)
+    o_aff = models.IntegerField(blank=True, null=True)
+    o_cartp = models.IntegerField(blank=True, null=True)
+    idcondit = models.IntegerField(blank=True, null=True)
+    points = models.IntegerField(blank=True, null=True)
+    o_ordre_aff = models.IntegerField(blank=True, null=True)
+    is_active = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 't_objet'
+
+
 class TDtlcode(models.Model):
     codcde = models.IntegerField(blank=True, null=True)
     codobj = models.ForeignKey(
@@ -174,30 +199,6 @@ class TEntcde(models.Model):
     class Meta:
         managed = False
         db_table = 't_entcde'
-
-
-class TObjet(models.Model):
-    codobj = models.AutoField(primary_key=True)
-    libobj = models.CharField(max_length=50, blank=True, null=True)
-    # Field name made lowercase.
-    tailleobj = models.CharField(
-        db_column='Tailleobj', max_length=50, blank=True, null=True)
-    puobj = models.DecimalField(
-        max_digits=19, decimal_places=4, blank=True, null=True)
-    # Field name made lowercase.
-    poidsobj = models.DecimalField(
-        db_column='Poidsobj', max_digits=19, decimal_places=4, blank=True, null=True)
-    indispobj = models.IntegerField(blank=True, null=True)
-    o_imp = models.IntegerField(blank=True, null=True)
-    o_aff = models.IntegerField(blank=True, null=True)
-    o_cartp = models.IntegerField(blank=True, null=True)
-    idcondit = models.IntegerField(blank=True, null=True)
-    points = models.IntegerField(blank=True, null=True)
-    o_ordre_aff = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 't_objet'
 
 
 class TPoids(models.Model):
@@ -252,9 +253,8 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(unique=True, max_length=150)
     password = models.CharField(max_length=128)
-    is_superuser = models.BooleanField(blank=True, null=True, default=False)
-    is_active = models.BooleanField(blank=True, null=True, default=True)
-    last_login = models.DateField()
+    is_superuser = models.BooleanField()
+    is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
     objects = UserManager()

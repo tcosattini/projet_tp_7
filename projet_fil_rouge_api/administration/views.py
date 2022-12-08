@@ -1,8 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-from .models import *
+from authentification.models import *
 from .forms import *
 import math
 # @login_required
@@ -223,10 +222,11 @@ def add(request):
 def change(request, id: int):
 
     if request.POST:
-        TUtilisateurForm(request.POST, TUtilisateur.objects.get(pk=id)).save()
+        TUtilisateurForm(request.POST, instance=TUtilisateur.objects.get(
+            pk=id)).save(commit=True)
         return list(request)
     else:
-        form = TUtilisateurForm(TUtilisateur.objects.get(pk=id))
+        form = TUtilisateurForm(instance=TUtilisateur.objects.get(pk=id))
 
     return render(
         request,
