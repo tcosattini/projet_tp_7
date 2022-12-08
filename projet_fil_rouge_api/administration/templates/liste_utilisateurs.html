@@ -41,6 +41,50 @@
       </tbody>
     </table>
   </div>
+
+  <script>
+    function Impression() {
+    var a = window.open('Gestion des utilisateurs', 'Gestion des utilisateurs', '');
+    a.document.write('<html><body>');
+    impression = `
+    <h1>Gestion des utilisateurs</h1>
+    </br>
+    <h2>Table des utilisateurs de la page {{Index}} :</h2>
+    <table class="w-fit" style="border: 5px solid black;">
+      <tbody class="w-full" style="border: 5px solid black;">
+        <tr class="w-full" style="border: 5px solid black;">
+          <td style="border: 5px solid black;">ID</td>
+          <td style="border: 5px solid black;">Nom Complet</td>
+          <td style="border: 5px solid black;">Nom de Famille</td>
+          <td style="border: 5px solid black;">Rôles</td>
+        </tr>
+        {% for utilisateur in utilisateurs %}
+        <tr class="w-full" style="border: 5px solid black;">
+          <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
+          <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+          <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
+          <td style="border: 5px solid black;">
+            {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
+            <p>{{utilisateur.code_role.lib_role}}</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    `
+    a.document.write(impression);
+    a.document.write('</body></html>');
+    a.print();
+    a.close();
+    }
+  </script>
+  
+  </br>
+  <div class="flex w-full">
+    <div onclick="Impression()">Imprimer</div>
+  </div>
+
+
 </div>
   
 {% endblock %}
