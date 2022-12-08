@@ -1,90 +1,82 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Utilisateurs</title>{% endblock %}
-{% block styles %}
- <link rel="stylesheet" type="text/css" href={% static 'css/liste_utilisateurs.css' %}>
-{% endblock styles %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %} 
-<div class="flex flex-col w-full">
-  <div id="ajouter_conditionnement" class="flex justify-end w-full" ><a href={% url 'utilisateur.add' %}>Ajouter un Utilisateur</a></div>
-  <div class="flex flex-col items-center w-full">
-    <table class="w-fit" style="border: 5px solid black;">
-      <tbody class="w-full" style="border: 5px solid black;">
-        <tr class="w-full" style="border: 5px solid black;">
-          <td style="border: 5px solid black;">ID</td>
-          <td style="border: 5px solid black;">Nom Complet</td>
-          <td style="border: 5px solid black;">Nom de Famille</td>
-          <td style="border: 5px solid black;">Rôles</td>
-          <td style="border: 5px solid black;">Actions</td>
-        </tr>
-        {% for utilisateur in utilisateurs %}
-        <tr class="w-full" style="border: 5px solid black;">
-          <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
-          <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
-          <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
-          <td style="border: 5px solid black;">
-            {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
-            <p>{{utilisateur.code_role.lib_role}}</p>
-          </td>
-          <td style="border: 5px solid black;">
-            <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
-              <button>modifier</button>
-            </a>
-            <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
-              <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+<div class="flex flex-col items-center w-full h-full min-h-full p-2">
+  <div class="flex justify-end w-full" ><a href={% url 'utilisateur.add' %}>Ajouter un Utilisateur</a></div>
+  <div class="flex justify-center p-2 my-auto w-fit">
+    <div class="flex flex-col h-full min-h-full m-2 w-fit">
+      <table class="w-fit" style="border: 5px solid black;">
+        <tbody class="w-full" style="border: 5px solid black;">
+          <tr class="w-full" style="border: 5px solid black;">
+            <td style="border: 5px solid black;">ID</td>
+            <td style="border: 5px solid black;">Nom Complet</td>
+            <td style="border: 5px solid black;">Nom de Famille</td>
+            <td style="border: 5px solid black;">Rôles</td>
+            <td style="border: 5px solid black;">Actions</td>
+          </tr>
+          {% for utilisateur in utilisateurs %}
+          <tr class="w-full" style="border: 5px solid black;">
+            <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
+            <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+            <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
+            <td style="border: 5px solid black;">
+              {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
+              <p>{{utilisateur.code_role.lib_role}}</p>
+            </td>
+            <td style="border: 5px solid black;">
+              <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
+                <button>modifier</button>
+              </a>
+              <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
+                <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <script>
-    function Impression() {
-    var a = window.open('Gestion des utilisateurs', 'Gestion des utilisateurs', '');
-    a.document.write('<html><body>');
-    impression = `
-    <h1>Gestion des utilisateurs</h1>
-    </br>
-    <h2>Table des utilisateurs de la page {{Index}} :</h2>
-    <table class="w-fit" style="border: 5px solid black;">
-      <tbody class="w-full" style="border: 5px solid black;">
-        <tr class="w-full" style="border: 5px solid black;">
-          <td style="border: 5px solid black;">ID</td>
-          <td style="border: 5px solid black;">Nom Complet</td>
-          <td style="border: 5px solid black;">Nom de Famille</td>
-          <td style="border: 5px solid black;">Rôles</td>
-        </tr>
-        {% for utilisateur in utilisateurs %}
-        <tr class="w-full" style="border: 5px solid black;">
-          <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
-          <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
-          <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
-          <td style="border: 5px solid black;">
-            {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
-            <p>{{utilisateur.code_role.lib_role}}</p>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    `
-    a.document.write(impression);
-    a.document.write('</body></html>');
-    a.print();
-    a.close();
-    }
-  </script>
-  
-  </br>
   <div class="flex w-full">
+    <script>
+      function Impression() {
+      var a = window.open('Gestion des utilisateurs', 'Gestion des utilisateurs', '');
+      a.document.write('<html><body>');
+      impression = `
+      <h1>Gestion des utilisateurs</h1>
+      </br>
+      <h2>Table des utilisateurs de la page {{Index}} :</h2>
+      <table class="w-fit" style="border: 5px solid black;">
+        <tbody class="w-full" style="border: 5px solid black;">
+          <tr class="w-full" style="border: 5px solid black;">
+            <td style="border: 5px solid black;">ID</td>
+            <td style="border: 5px solid black;">Nom Complet</td>
+            <td style="border: 5px solid black;">Nom de Famille</td>
+            <td style="border: 5px solid black;">Rôles</td>
+          </tr>
+          {% for utilisateur in utilisateurs %}
+          <tr class="w-full" style="border: 5px solid black;">
+            <td style="border: 5px solid black;">{{utilisateur.code_utilisateur}}</td>
+            <td style="border: 5px solid black;">{{utilisateur.prenom_utilisateur}} {{utilisateur.nom_utilisateur}}</td>
+            <td style="border: 5px solid black;">{{utilisateur.nom_utilisateur}}</td>
+            <td style="border: 5px solid black;">
+              {% if utilisateur.is_superuser %}<p>Admin</p>{% endif %}
+              <p>{{utilisateur.code_role.lib_role}}</p>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      `
+      a.document.write(impression);
+      a.document.write('</body></html>');
+      a.print();
+      a.close();
+      }
+    </script>
     <div onclick="Impression()">Imprimer</div>
   </div>
-
-
 </div>
-  
 {% endblock %}

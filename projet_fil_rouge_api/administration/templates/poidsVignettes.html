@@ -1,181 +1,170 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Poids</title>{% endblock %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<div class="flex flex-col w-full">
-    <div id="ajouter_poids" class="flex justify-end w-full" onclick="champsAjouterPoids()">Ajouter un poids</div>
-<div class="flex flex-col items-center w-full">
-<div class="w-fit">
-    <a href="/home/pagePoids/1">Gestion des poids</a>
-
-    <div id="ajouter_poids_value"></div>
-    <div id="modifier_poids_value"></div>
-
-    <table class="w-fit" style="border: 5 px solid black;">
-        <tbody>
-            <tr style="border: 5px solid black;">
-                <td style="border: 3px solid black;">ID</td>
-                <td style="border: 3px solid black;">Valeur</td>
-                <td style="border: 3px solid black;">Valeur timbre</td>
-            </tr>
-            {% for poids in Poids %}
-            <tr style="border: 5px solid black;">
-                <td style="border: 2px solid black;">{{poids.idpoids}}</td>
-                <td style="border: 2px solid black;">{{poids.valmin}}</td>
-                <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
-                <td style="border: 2px solid black;"><div id="boutton_modifier_{{poids.idpoids}}" onclick="champsModifierPoids({{poids.idpoids}})">Modifier</div></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-    <div class="flex justify-center w-full">
-        <div onclick="pagePrecendente({{Index}})">Page précédente</div>
-        <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+<div class="flex flex-col items-center w-full h-full min-h-full p-2">
+  <div class="flex justify-between w-full">  
+    <div><a href="/home/pagePoids/1">Gestion des poids</a></div>
+    <div id="ajouter_poids" class="ml-auto" onclick="champsAjouterPoids()">Ajouter un poids</div>
+  </div>
+  <div class="flex justify-center p-2 my-auto w-fit">
+    <div class="sticky flex flex-col h-fit w-fit" id="ajouter_poids_value"></div>
+    <div class="sticky flex flex-col h-fit w-fit" id="modifier_poids_value"></div>
+    <div class="flex flex-col h-full min-h-full m-2 w-fit">
+      <table style="border: 5 px solid black;">
+          <tbody>
+              <tr style="border: 5px solid black;">
+                  <td style="border: 3px solid black;">ID</td>
+                  <td style="border: 3px solid black;">Valeur</td>
+                  <td style="border: 3px solid black;">Valeur timbre</td>
+              </tr>
+              {% for poids in Poids %}
+              <tr style="border: 5px solid black;">
+                  <td style="border: 2px solid black;">{{poids.idpoids}}</td>
+                  <td style="border: 2px solid black;">{{poids.valmin}}</td>
+                  <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
+                  <td style="border: 2px solid black;"><div id="boutton_modifier_{{poids.idpoids}}" onclick="champsModifierPoids({{poids.idpoids}})">Modifier</div></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      
+      <div class="flex w-full">
+          <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+          <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+      </div>
+      <script type="text/javascript">
+      
+          let valmin_poids_value = "";
+          let valtimbre_poids_value = "";
+      
+          function getValueValmin_poids() {
+              valmin_poids_value = document.getElementById("valmin_poids").value;
+          }
+          //Affectation de la valeur du tarif du poids
+          function getValueValtimbre_poids() {
+              valtimbre_poids_value = document.getElementById("valtimbre_poids").value;
+          }
+      
+          //Fonction pour insérer le poids dans la base de données
+          function insertionPoids() {
+              document.location.href="/home/ajoutPoidsVignettes/"+{{Index}}+"_"+valmin_poids_value+"_"+valtimbre_poids_value
+          }
+      
+          //Fonction pour annnuler l'insertion du poids dans la base de données
+          function annulerInsertionPoids() {
+              document.getElementById("ajouter_poids_value").innerHTML = "";
+          }
+      
+          function champsAjouterPoids() {
+              document.getElementById("ajouter_poids_value").innerHTML = `
+              <p>Saisir les données du nouveau poids :</p>
+              <label for="valmin_poids">Valeur du poids</label>
+              <input type="float" id="valmin_poids" name="valmin_poids" required minlength="1" size="10" onblur="getValueValmin_poids()">
+              <label for="valtimbre_poids">Valeur du timbre</label>
+              <input type="float" id="valtimbre_poids" name="valtimbre_poids" required minlength="1" size="10" onblur="getValueValtimbre_poids()">
+              <div id="ajouter_poids_insertion" onclick="insertionPoids()">Valider l'ajout du poids</div>
+              <div id="annuler_poids_insertion" onclick="annulerInsertionPoids()">Annuler l'ajout du poids</div>
+              `;
+          }
+      
+          //Modification
+      
+          let valmin_poids_modifier_value = "";
+          let valtimbre_poids_modifier_value = "";
+      
+          let ancien_idpoids = "Null";
+      
+          function getValueModifierValmin_poids() {
+              valmin_poids_modifier_value = document.getElementById("valmin_poids_modifier").value;
+          }
+      
+          function getValueModifierValtimbre_poids() {
+              valtimbre_poids_modifier_value = document.getElementById("valtimbre_poids_modifier").value;
+          }
+      
+      
+          function champsModifierPoids(idpoids) {
+              if (ancien_idpoids != "Null") {
+                  document.getElementById("boutton_modifier_"+ancien_idpoids).innerHTML = "Modifier";
+              }
+              document.getElementById("boutton_modifier_"+idpoids).innerHTML = "En cours de modification";
+              valmin_poids_modifier_value = "";
+              valtimbre_poids_modifier_value = "";
+              document.getElementById("modifier_poids_value").innerHTML = ""
+              document.getElementById("modifier_poids_value").innerHTML += `
+              <p>Saisir les nouvelles données du poids `+idpoids+` :</p>
+              <label>Valeur</label>
+              <input type="float" id="valmin_poids_modifier" name="valmin_poids_modifier" required minlength="1" onblur="getValueModifierValmin_poids()">
+              <label>Valeur du timbre</label>
+              <input type="float" id="valtimbre_poids_modifier" name="valtimbre_poids_modifier" required minlength="1" onblur="getValueModifierValtimbre_poids()">
+              <div id="modifier_poids_insertion" onclick="modifierPoids(`+idpoids+`)">Valider la modification du poids</div>
+              <div onclick="supprimerChampsModifierPoids(`+idpoids+`)">Annuler la modification du poids</div>
+              `;
+              ancien_idpoids = idpoids;
+          }
+      
+          function supprimerChampsModifierPoids(idpoids) {
+              document.getElementById("boutton_modifier_"+idpoids).innerHTML = "Modifier";
+              document.getElementById("modifier_poids_value").innerHTML = "";
+          }
+      
+          function modifierPoids(idpoids) {
+              getValueModifierValmin_poids()
+              getValueModifierValtimbre_poids()
+              document.location.href="/home/modifierPoidsVignettes/"+{{Index}}+"_"+idpoids+"_"+valmin_poids_modifier_value+"_"+valtimbre_poids_modifier_value
+          }
+      
+          function pageSuivante(index) {
+              if (index != {{Index_max}}) {
+                document.location.href="/home/pagePoidsVignettes/"+(index+1);
+              }
+            }
+        
+            function pagePrecendente(index) {
+              if (index != 1) {
+                document.location.href="/home/pagePoidsVignettes/"+(index-1);
+              }
+            }
+      
+      </script>
     </div>
-</div>
-  
-
-  
-
-  
-
-
-  <script type="text/javascript">
-
-      let valmin_poids_value = "";
-      let valtimbre_poids_value = "";
-
-      function getValueValmin_poids() {
-          valmin_poids_value = document.getElementById("valmin_poids").value;
-      }
-      //Affectation de la valeur du tarif du poids
-      function getValueValtimbre_poids() {
-          valtimbre_poids_value = document.getElementById("valtimbre_poids").value;
-      }
-
-      //Fonction pour insérer le poids dans la base de données
-      function insertionPoids() {
-          document.location.href="/home/ajoutPoidsVignettes/"+{{Index}}+"_"+valmin_poids_value+"_"+valtimbre_poids_value
-      }
-
-      //Fonction pour annnuler l'insertion du poids dans la base de données
-      function annulerInsertionPoids() {
-          document.getElementById("ajouter_poids_value").innerHTML = "";
-      }
-
-      function champsAjouterPoids() {
-          document.getElementById("ajouter_poids_value").innerHTML = `
-          <p>Saisir les données du nouveau poids :</p>
-          <label for="valmin_poids">Valeur du poids</label>
-          <input type="float" id="valmin_poids" name="valmin_poids" required minlength="1" size="10" onblur="getValueValmin_poids()">
-          <label for="valtimbre_poids">Valeur du timbre</label>
-          <input type="float" id="valtimbre_poids" name="valtimbre_poids" required minlength="1" size="10" onblur="getValueValtimbre_poids()">
-          <div id="ajouter_poids_insertion" onclick="insertionPoids()">Valider l'ajout du poids</div>
-          <div id="annuler_poids_insertion" onclick="annulerInsertionPoids()">Annuler l'ajout du poids</div>
-          `;
-      }
-
-      //Modification
-
-      let valmin_poids_modifier_value = "";
-      let valtimbre_poids_modifier_value = "";
-
-      let ancien_idpoids = "Null";
-
-      function getValueModifierValmin_poids() {
-          valmin_poids_modifier_value = document.getElementById("valmin_poids_modifier").value;
-      }
-
-      function getValueModifierValtimbre_poids() {
-          valtimbre_poids_modifier_value = document.getElementById("valtimbre_poids_modifier").value;
-      }
-
-
-      function champsModifierPoids(idpoids) {
-          if (ancien_idpoids != "Null") {
-              document.getElementById("boutton_modifier_"+ancien_idpoids).innerHTML = "Modifier";
-          }
-          document.getElementById("boutton_modifier_"+idpoids).innerHTML = "En cours de modification";
-          valmin_poids_modifier_value = "";
-          valtimbre_poids_modifier_value = "";
-          document.getElementById("modifier_poids_value").innerHTML = ""
-          document.getElementById("modifier_poids_value").innerHTML += `
-          <p>Saisir les nouvelles données du poids `+idpoids+` :</p>
-          <label>Valeur</label>
-          <input type="float" id="valmin_poids_modifier" name="valmin_poids_modifier" required minlength="1" onblur="getValueModifierValmin_poids()">
-          <label>Valeur du timbre</label>
-          <input type="float" id="valtimbre_poids_modifier" name="valtimbre_poids_modifier" required minlength="1" onblur="getValueModifierValtimbre_poids()">
-          <div id="modifier_poids_insertion" onclick="modifierPoids(`+idpoids+`)">Valider la modification du poids</div>
-          <div onclick="supprimerChampsModifierPoids(`+idpoids+`)">Annuler la modification du poids</div>
-          `;
-          ancien_idpoids = idpoids;
-      }
-
-      function supprimerChampsModifierPoids(idpoids) {
-          document.getElementById("boutton_modifier_"+idpoids).innerHTML = "Modifier";
-          document.getElementById("modifier_poids_value").innerHTML = "";
-      }
-
-      function modifierPoids(idpoids) {
-          getValueModifierValmin_poids()
-          getValueModifierValtimbre_poids()
-          document.location.href="/home/modifierPoidsVignettes/"+{{Index}}+"_"+idpoids+"_"+valmin_poids_modifier_value+"_"+valtimbre_poids_modifier_value
-      }
-
-      function pageSuivante(index) {
-          if (index != {{Index_max}}) {
-            document.location.href="/home/pagePoidsVignettes/"+(index+1);
-          }
-        }
-    
-        function pagePrecendente(index) {
-          if (index != 1) {
-            document.location.href="/home/pagePoidsVignettes/"+(index-1);
-          }
-        }
-
-  </script>
-
-<script>
-    function Impression() {
-    var a = window.open('Gestion des poids des vignettes', 'Gestion des poids des vignettes', '');
-    a.document.write('<html><body>');
-    impression = `
-    <h1>Gestion des poids des vignettes</h1>
-    </br>
-    <h2>Table des poids des vignettes de la page {{Index}} :</h2>
-    <table class="w-fit" style="border: 5 px solid black;">
-        <tbody>
-            <tr style="border: 5px solid black;">
-                <td style="border: 3px solid black;">ID</td>
-                <td style="border: 3px solid black;">Valeur</td>
-                <td style="border: 3px solid black;">Valeur timbre</td>
-            </tr>
-            {% for poids in Poids %}
-            <tr style="border: 5px solid black;">
-                <td style="border: 2px solid black;">{{poids.idpoids}}</td>
-                <td style="border: 2px solid black;">{{poids.valmin}}</td>
-                <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    `
-    a.document.write(impression);
-    a.document.write('</body></html>');
-    a.print();
-    a.close();
-    }
-  </script>
-  
-  </br>
-  <div class="flex w-full">
-    <div onclick="Impression()">Imprimer</div>
   </div>
 
-
+  <div class="flex w-full">
+    <script>
+        function Impression() {
+        var a = window.open('Gestion des poids des vignettes', 'Gestion des poids des vignettes', '');
+        a.document.write('<html><body>');
+        impression = `
+        <h1>Gestion des poids des vignettes</h1>
+        </br>
+        <h2>Table des poids des vignettes de la page {{Index}} :</h2>
+        <table class="w-fit" style="border: 5 px solid black;">
+            <tbody>
+                <tr style="border: 5px solid black;">
+                    <td style="border: 3px solid black;">ID</td>
+                    <td style="border: 3px solid black;">Valeur</td>
+                    <td style="border: 3px solid black;">Valeur timbre</td>
+                </tr>
+                {% for poids in Poids %}
+                <tr style="border: 5px solid black;">
+                    <td style="border: 2px solid black;">{{poids.idpoids}}</td>
+                    <td style="border: 2px solid black;">{{poids.valmin}}</td>
+                    <td style="border: 2px solid black;">{{poids.valtimbre}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        `
+        a.document.write(impression);
+        a.document.write('</body></html>');
+        a.print();
+        a.close();
+        }
+    </script>
+    <div onclick="Impression()">Imprimer</div>
+  </div>
 </div>
 {% endblock %}

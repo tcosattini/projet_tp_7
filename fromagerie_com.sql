@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 -- Base de données : `fromagerie_com`
 --
 
+CREATE DATABASE IF NOT EXISTS `fromagerie_com` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `fromagerie_com`;
+
 -- --------------------------------------------------------
 
 --

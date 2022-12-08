@@ -3,34 +3,14 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 
 
+# django managed
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
     class Meta:
         managed = False
         db_table = 'auth_group'
-
-
-class TClient(models.Model):
-    codcli = models.AutoField(primary_key=True)
-    genrecli = models.CharField(max_length=8, blank=True, null=True)
-    nomcli = models.CharField(max_length=40)
-    prenomcli = models.CharField(max_length=30, blank=True, null=True)
-    adresse1cli = models.CharField(max_length=50, blank=True, null=True)
-    adresse2cli = models.CharField(max_length=50, blank=True, null=True)
-    adresse3cli = models.CharField(max_length=255, blank=True, null=True)
-    cpcli = models.CharField(max_length=5, blank=True, null=True)
-    villecli = models.CharField(max_length=50, blank=True, null=True)
-    telcli = models.CharField(max_length=10, blank=True, null=True)
-    emailcli = models.TextField(blank=True, null=True)
-    portcli = models.CharField(max_length=10, blank=True, null=True)
-    newsletter = models.IntegerField(blank=True, null=True)
-    id_commune = models.ForeignKey(
-        'TCommunes', models.DO_NOTHING, db_column='id_commune', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 't_client'
 
 
 class AuthGroupPermissions(models.Model):
@@ -86,6 +66,30 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+# app's models
+
+class TClient(models.Model):
+    codcli = models.AutoField(primary_key=True)
+    genrecli = models.CharField(max_length=8, blank=True, null=True)
+    nomcli = models.CharField(max_length=40)
+    prenomcli = models.CharField(max_length=30, blank=True, null=True)
+    adresse1cli = models.CharField(max_length=50, blank=True, null=True)
+    adresse2cli = models.CharField(max_length=50, blank=True, null=True)
+    adresse3cli = models.CharField(max_length=255, blank=True, null=True)
+    cpcli = models.CharField(max_length=5, blank=True, null=True)
+    villecli = models.CharField(max_length=50, blank=True, null=True)
+    telcli = models.CharField(max_length=10, blank=True, null=True)
+    emailcli = models.TextField(blank=True, null=True)
+    portcli = models.CharField(max_length=10, blank=True, null=True)
+    newsletter = models.IntegerField(blank=True, null=True)
+    id_commune = models.ForeignKey(
+        'TCommunes', models.DO_NOTHING, db_column='id_commune', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 't_client'
+
+
 class TCommunes(models.Model):
     id_commune = models.AutoField(primary_key=True)
     # Field name made lowercase.
@@ -122,31 +126,6 @@ class TDept(models.Model):
     class Meta:
         managed = False
         db_table = 't_dept'
-
-
-class TObjet(models.Model):
-    codobj = models.AutoField(primary_key=True)
-    libobj = models.CharField(max_length=50, blank=True, null=True)
-    # Field name made lowercase.
-    tailleobj = models.CharField(
-        db_column='Tailleobj', max_length=50, blank=True, null=True)
-    puobj = models.DecimalField(
-        max_digits=19, decimal_places=4, blank=True, null=True)
-    # Field name made lowercase.
-    poidsobj = models.DecimalField(
-        db_column='Poidsobj', max_digits=19, decimal_places=4, blank=True, null=True)
-    indispobj = models.IntegerField(blank=True, null=True)
-    o_imp = models.IntegerField(blank=True, null=True)
-    o_aff = models.IntegerField(blank=True, null=True)
-    o_cartp = models.IntegerField(blank=True, null=True)
-    idcondit = models.IntegerField(blank=True, null=True)
-    points = models.IntegerField(blank=True, null=True)
-    o_ordre_aff = models.IntegerField(blank=True, null=True)
-    is_active = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 't_objet'
 
 
 class TDtlcode(models.Model):
@@ -201,8 +180,34 @@ class TEntcde(models.Model):
         db_table = 't_entcde'
 
 
+class TObjet(models.Model):
+    codobj = models.AutoField(primary_key=True)
+    libobj = models.CharField(max_length=50, blank=True, null=True)
+    # Field name made lowercase.
+    tailleobj = models.CharField(
+        db_column='Tailleobj', max_length=50, blank=True, null=True)
+    puobj = models.DecimalField(
+        max_digits=19, decimal_places=4, blank=True, null=True)
+    # Field name made lowercase.
+    poidsobj = models.DecimalField(
+        db_column='Poidsobj', max_digits=19, decimal_places=4, blank=True, null=True)
+    indispobj = models.IntegerField(blank=True, null=True)
+    o_imp = models.IntegerField(blank=True, null=True)
+    o_aff = models.IntegerField(blank=True, null=True)
+    o_cartp = models.IntegerField(blank=True, null=True)
+    idcondit = models.IntegerField(blank=True, null=True)
+    points = models.IntegerField(blank=True, null=True)
+    o_ordre_aff = models.IntegerField(blank=True, null=True)
+    is_active = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 't_objet'
+
+
 class TPoids(models.Model):
-    valmin = models.FloatField(primary_key=True)
+    idpoids = models.AutoField(primary_key=True)
+    valmin = models.FloatField()
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -211,7 +216,8 @@ class TPoids(models.Model):
 
 
 class TPoidsv(models.Model):
-    valmin = models.FloatField(primary_key=True)
+    idpoids = models.AutoField(primary_key=True)
+    valmin = models.FloatField()
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -262,6 +268,9 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     class Meta:
         managed = False
         db_table = 't_utilisateur'
+
+
+# django managed with app's models requirement
 
 
 class AuthUserGroups(models.Model):
