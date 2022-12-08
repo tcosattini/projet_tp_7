@@ -55432,7 +55432,7 @@ CREATE TABLE `t_utilisateur` (
   `username` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `is_active` int(11) NOT NULL DEFAULT 1
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
