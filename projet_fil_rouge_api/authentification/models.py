@@ -252,7 +252,8 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(unique=True, max_length=150)
     password = models.CharField(max_length=128)
-    is_superuser = models.IntegerField()
+    is_superuser = models.BooleanField(blank=True, null=True, default=False)
+    is_active = models.BooleanField(blank=True, null=True, default=True)
     last_login = models.DateField()
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

@@ -3,20 +3,24 @@
 {% block title %}<title>Gestion des Emballages</title>{% endblock %}
 
 {% block onglet %}
-<div class="w-full">
-  <!-- Bouton pour ajouter un conditionnement -->
-  <div id="ajouter_conditionnement" class="w-full" onclick="champsAjouterConditionnement()">Ajouter un emballage</div>
+<div class="flex flex-col w-full">
+  <div id="ajouter_conditionnement" class="flex justify-end w-full" onclick="champsAjouterConditionnement()">Ajouter un emballage</div>
+<div class="flex flex-col items-center w-full">
 
-  <!-- Champs et bouton de validation pour ajouter un conditionnement -->
-  <div id="ajouter_conditionnement_value" class="w-full"></div>
+<!-- Bouton pour ajouter un conditionnement -->
 
-  <!-- Champs et bouton de validation/annulation pour modifier un conditionnement -->
-  <div id="modifier_conditionnement_value" class="w-full"></div>
+<!-- Champs et bouton de validation pour ajouter un conditionnement -->
+<div id="ajouter_conditionnement_value">
+</div>
 
-  <script>
+<!-- Champs et bouton de validation/annulation pour modifier un conditionnement -->
+<div id="modifier_conditionnement_value">
+</div>
+
+<script>
     //Fonction pour faire apparaître les champs et le bouton de validation
     function champsAjouterConditionnement() {
-      document.getElementById("ajouter_conditionnement_value").innerHTML = `
+        document.getElementById("ajouter_conditionnement_value").innerHTML = `
         <p>Saisir les données du nouveau emballage :</p>
         <label for="nom_conditionnement">Nom de l'emballage</label>
         <input type="text" id="nom_conditionnement" name="nom_conditionnement" required minlength="1" size="10" onblur="getValueNom_conditionnement()">
@@ -26,7 +30,7 @@
         <input type="number" step=".0001" id="tarif_conditionnement" name="tarif_conditionnement" required minlength="1" size="10" onblur="getValueTarif_conditionnement()">
         <div id="ajouter_conditionnement_insertion" onclick="insertionConditionnement()">Valider l'ajout de l'emballage</div>
         <div id="annuler_conditionnement_insertion" onclick="annulerInsertionConditionnement()">Annuler l'ajout de l'emballage</div>
-      `;
+        `;
     }
 
     //Déclaration des variables hors des fonctions
@@ -36,25 +40,25 @@
 
     //Affectation de la valeur du nom du conditionnement
     function getValueNom_conditionnement() {
-      nom_conditionnement_value = document.getElementById("nom_conditionnement").value;
+        nom_conditionnement_value = document.getElementById("nom_conditionnement").value;
     }
     //Affection de la valeur du poids du conditionnement
     function getValuePoids_conditionnement() {
-      poids_conditionnement_value = document.getElementById("poids_conditionnement").value;
+        poids_conditionnement_value = document.getElementById("poids_conditionnement").value;
     }
     //Affectation de la valeur du tarif du conditionnement
     function getValueTarif_conditionnement() {
-      tarif_conditionnement_value = document.getElementById("tarif_conditionnement").value;
+        tarif_conditionnement_value = document.getElementById("tarif_conditionnement").value;
     }
 
     //Fonction pour insérer le conditionnement dans la base de données
     function insertionConditionnement() {
-      document.location.href="/home/ajoutConditionnement/"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
+        document.location.href="/home/ajoutConditionnement/"+{{Index}}+"_"+nom_conditionnement_value+"_"+poids_conditionnement_value+"_"+tarif_conditionnement_value
     }
 
     //Fonction pour annnuler l'insertion du conditionnement dans la base de données
     function annulerInsertionConditionnement() {
-      document.getElementById("ajouter_conditionnement_value").innerHTML = "";
+        document.getElementById("ajouter_conditionnement_value").innerHTML = "";
     }
 
     //Déclaration des variables hors des fonctions
@@ -66,15 +70,15 @@
 
     //Fonction pour faire apparaître les champs pour modifier un conditionnement
     function champsModifierLigneConditionnement(id_conditionnement) {
-      if (ancienne_id_conditionnement != "Null") {
-        document.getElementById("boutton_modifier_"+ancienne_id_conditionnement).innerHTML = "Modifier cette ligne";
-      }
-      document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "En cours de modification";
-      nom_conditionnement_modifier_value = "";
-      poids_conditionnement_modifier_value = "";
-      tarif_conditionnement_modifier_value = "";
-      document.getElementById("modifier_conditionnement_value").innerHTML = ""
-      document.getElementById("modifier_conditionnement_value").innerHTML += `
+        if (ancienne_id_conditionnement != "Null") {
+            document.getElementById("boutton_modifier_"+ancienne_id_conditionnement).innerHTML = "Modifier cette ligne";
+        }
+        document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "En cours de modification";
+        nom_conditionnement_modifier_value = "";
+        poids_conditionnement_modifier_value = "";
+        tarif_conditionnement_modifier_value = "";
+        document.getElementById("modifier_conditionnement_value").innerHTML = ""
+        document.getElementById("modifier_conditionnement_value").innerHTML += `
         <p>Saisir les nouvelles données de l'emballage `+id_conditionnement+` :</p>
         <label>Nom de l'emballage</label>
         <input type="text" id="nom_conditionnement_modifier" name="nom_conditionnement_modifier" required minlength="1" size="10" onblur="getValueModifierNom_conditionnement()">
@@ -84,56 +88,113 @@
         <input type="number" step=".0001" id="tarif_conditionnement_modifier" name="tarif_conditionnement_modifier" required minlength="1" size="10" onblur="getValueModifierTarif_conditionnement()"></div>
         <div id="modifier_conditionnement_insertion" onclick="modifierLigneConditionnement(`+id_conditionnement+`)">Valider la modification de l'emballage</div>
         <div onclick="supprimerChampsModifierLigneConditionnement(`+id_conditionnement+`)">Annuler la modification de l'emballage</div>
-      `;
-      ancienne_id_conditionnement = id_conditionnement;
+        `;
+        ancienne_id_conditionnement = id_conditionnement;
     }
 
     function supprimerChampsModifierLigneConditionnement(id_conditionnement) {
-      document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "Modifier cette ligne";
-      document.getElementById("modifier_conditionnement_value").innerHTML = "";
+        document.getElementById("boutton_modifier_"+id_conditionnement).innerHTML = "Modifier cette ligne";
+        document.getElementById("modifier_conditionnement_value").innerHTML = "";
     }
 
     //Affectation de la valeur du nom du conditionnement
     function getValueModifierNom_conditionnement() {
-      nom_conditionnement_modifier_value = document.getElementById("nom_conditionnement_modifier").value;
+        nom_conditionnement_modifier_value = document.getElementById("nom_conditionnement_modifier").value;
     }
     //Affection de la valeur du poids du conditionnement
     function getValueModifierPoids_conditionnement() {
-      poids_conditionnement_modifier_value = document.getElementById("poids_conditionnement_modifier").value;
+        poids_conditionnement_modifier_value = document.getElementById("poids_conditionnement_modifier").value;
     }
     //Affectation de la valeur du tarif du conditionnement
     function getValueModifierTarif_conditionnement() {
-      tarif_conditionnement_modifier_value = document.getElementById("tarif_conditionnement_modifier").value;
+        tarif_conditionnement_modifier_value = document.getElementById("tarif_conditionnement_modifier").value;
     }
 
     //Fonction pour modifier la ligne d'un conditionnement
     function modifierLigneConditionnement(id_conditionnement) {
-        document.location.href="/home/modificationConditionnement/"+id_conditionnement+"_"+nom_conditionnement_modifier_value+"_"+poids_conditionnement_modifier_value+"_"+tarif_conditionnement_modifier_value
+        document.location.href="/home/modificationConditionnement/"+{{Index}}+"_"+id_conditionnement+"_"+nom_conditionnement_modifier_value+"_"+poids_conditionnement_modifier_value+"_"+tarif_conditionnement_modifier_value
+    }
+
+    //Passer à la page suivante
+    function pageSuivante(index) {
+      if (index != {{Index_max}}) {
+        document.location.href="/home/ongletEmballages/"+(index+1);
+      }
+    }
+
+    //Passer à la page précedente
+    function pagePrecendente(index) {
+      if (index != 1) {
+        document.location.href="/home/ongletEmballages/"+(index-1);
+      }
+    }
+
+</script>
+
+<table class="w-fit" style="border: 5px solid black;">
+    <tbody>
+        <tr style="border: 5px solid black;">
+            <td style="border: 3px solid black;">Nom</td>
+            <td style="border: 3px solid black;">Poids</td>
+            <td style="border: 3px solid black;">Tarif</td>
+            <td style="border: 3px solid black;">ID</td>
+        </tr>
+        {% for conditionnement in Conditionnements %}
+        <tr style="border: 5px solid black;">
+            <td style="border: 2px solid black;">{{conditionnement.libcondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.poidscondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.prixcond}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.idcondit}}</td>
+            <td style="border: 2px solid black;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+</table>
+
+<div class="flex justify-center w-full">
+  <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+  <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+</div>
+
+<script>
+    function Impression() {
+    var a = window.open('Gestion des emballages', 'Gestion des emballages', '');
+    a.document.write('<html><body>');
+    impression = `
+    <h1>Gestion des emballages</h1>
+    </br>
+    <h2>Table des emballages de la page {{Index}} :</h2>
+    <table class="w-fit" style="border: 5px solid black;">
+    <tbody>
+        <tr style="border: 5px solid black;">
+            <td style="border: 3px solid black;">Nom</td>
+            <td style="border: 3px solid black;">Poids</td>
+            <td style="border: 3px solid black;">Tarif</td>
+            <td style="border: 3px solid black;">ID</td>
+        </tr>
+        {% for conditionnement in Conditionnements %}
+        <tr style="border: 5px solid black;">
+            <td style="border: 2px solid black;">{{conditionnement.libcondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.poidscondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.prixcond}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.idcondit}}</td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+    </table>
+    `
+    a.document.write(impression);
+    a.document.write('</body></html>');
+    a.document.close();
+    a.print();
     }
   </script>
+  
+  </br>
+  <div class="flex w-full">
+    <div onclick="Impression()">Imprimer</div>
+  </div>
 
-  <table class="w-full" style="border: 5px solid purple;">
-    <tbody class="w-full">
-      <tr class="w-full" style="border: 5px solid purple;">
-        <td style="border: 3px solid purple;">Nom</td>
-        <td style="border: 3px solid purple;">Poids</td>
-        <td style="border: 3px solid purple;">Tarif</td>
-        <td style="border: 3px solid purple;">ID</td>
-      </tr>
-      {% for conditionnement in Conditionnements %}
-      <tr class="w-full" style="border: 5px solid purple;">
-        <td style="border: 2px solid green;">{{conditionnement.libcondit}}</td>
-        <td style="border: 2px solid green;">{{conditionnement.poidscondit}}</td>
-        <td style="border: 2px solid green;">{{conditionnement.prixcond}}</td>
-        <td style="border: 2px solid green;">{{conditionnement.idcondit}}</td>
-        <td style="border: 2px solid green;">
-          <div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">
-            Modifier cette ligne
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+
 </div>
 {% endblock %}

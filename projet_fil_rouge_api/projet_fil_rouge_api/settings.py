@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
-    'gestionUtilisateurs',
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -73,12 +72,7 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'gestionUtilisateurs/templates',
-            BASE_DIR / 'authentification/templates',
-            BASE_DIR / 'administration/templates',
-
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,6 +132,9 @@ TIME_ZONE = 'UTC'
 
 TAILWIND_APP_NAME = 'theme'
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
