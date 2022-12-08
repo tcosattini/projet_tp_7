@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
-    'gestionUtilisateurs',
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -73,9 +72,7 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
