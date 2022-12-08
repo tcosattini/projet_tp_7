@@ -148,14 +148,54 @@
             <td style="border: 2px solid black;">{{conditionnement.idcondit}}</td>
             <td style="border: 2px solid black;"><div id="boutton_modifier_{{conditionnement.idcondit}}" onclick="champsModifierLigneConditionnement({{conditionnement.idcondit}})">Modifier cette ligne</div></td>
         </tr>
-        {% endfor %}
-        
+        {% endfor %} 
     </tbody>
-
 </table>
+
 <div class="flex justify-center w-full">
   <div onclick="pagePrecendente({{Index}})">Page précédente</div>
   <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
 </div>
+
+<script>
+    function Impression() {
+    var a = window.open('Gestion des emballages', 'Gestion des emballages', '');
+    a.document.write('<html><body>');
+    impression = `
+    <h1>Gestion des emballages</h1>
+    </br>
+    <h2>Table des emballages de la page {{Index}} :</h2>
+    <table class="w-fit" style="border: 5px solid black;">
+    <tbody>
+        <tr style="border: 5px solid black;">
+            <td style="border: 3px solid black;">Nom</td>
+            <td style="border: 3px solid black;">Poids</td>
+            <td style="border: 3px solid black;">Tarif</td>
+            <td style="border: 3px solid black;">ID</td>
+        </tr>
+        {% for conditionnement in Conditionnements %}
+        <tr style="border: 5px solid black;">
+            <td style="border: 2px solid black;">{{conditionnement.libcondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.poidscondit}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.prixcond}}</td>
+            <td style="border: 2px solid black;">{{conditionnement.idcondit}}</td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+    </table>
+    `
+    a.document.write(impression);
+    a.document.write('</body></html>');
+    a.document.close();
+    a.print();
+    }
+  </script>
+  
+  </br>
+  <div class="flex w-full">
+    <div onclick="Impression()">Imprimer</div>
+  </div>
+
+
 </div>
 {% endblock %}
