@@ -4,15 +4,15 @@
 
 {% block onglet %} 
 <div class="flex flex-col items-center w-full h-full min-h-full p-2">
-  <div class="flex justify-end w-full" ><a href={% url 'utilisateur.add' %}>Ajouter un Utilisateur</a></div>
+  <div class="flex justify-end w-full" ><a href={% url 'utilisateur.add' %}>Ajouter un utilisateur</a></div>
   <div class="flex justify-center p-2 my-auto w-fit">
     <div class="flex flex-col h-full min-h-full m-2 w-fit">
       <table class="w-fit" style="border: 5px solid black;">
         <tbody class="w-full" style="border: 5px solid black;">
           <tr class="w-full" style="border: 5px solid black;">
             <td style="border: 5px solid black;">ID</td>
-            <td style="border: 5px solid black;">Nom Complet</td>
-            <td style="border: 5px solid black;">Nom de Famille</td>
+            <td style="border: 5px solid black;">Nom complet</td>
+            <td style="border: 5px solid black;">Nom de famille</td>
             <td style="border: 5px solid black;">Rôles</td>
             <td style="border: 5px solid black;">Actions</td>
           </tr>
@@ -27,10 +27,10 @@
             </td>
             <td style="border: 5px solid black;">
               <a href={% url 'utilisateur.change' utilisateur.code_utilisateur %}>
-                <button>modifier</button>
+                <button>Modifier</button>
               </a>
               <form class="flex" action={% url 'utilisateur.toggle' utilisateur.code_utilisateur %} method="POST"> {% csrf_token %}
-                <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}desactiver{% else %}activer{% endif %}</button>
+                <button id="toggle_active" type="submit" name="toggle_active">{% if utilisateur.is_active %}Désactiver{% else %}Activer{% endif %}</button>
               </form>
             </td>
           </tr>

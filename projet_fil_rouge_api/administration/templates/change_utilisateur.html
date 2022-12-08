@@ -9,9 +9,9 @@
     <form action={% url 'utilisateur.change' id %} method="POST">
       {% csrf_token %}{{form.as_p}}
       <p class="flex justify-between actions">
-        <button type="submit">valider</button>
-        <button type="reset">reinitaliser</button>
-        <button type="cancel"><a href={% url 'utilisateur.list' %}>annuler</a></button>
+        <button type="submit">Valider</button>
+        <button type="reset">Réinitaliser</button>
+        <button type="cancel"><a href={% url 'utilisateur.list' %}>Annuler</a></button>
       </p>
     </form>
   </div>
