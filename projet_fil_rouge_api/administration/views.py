@@ -199,10 +199,6 @@ def modifierPoidsVignettes(request, idx, id, valmin, valtimbre):
     return HttpResponseRedirect("/pagePoidsVignettes/"+idx)
 
 
-def add(request):
-    return render(request, template_name='ajout_utilisateur.html')
-
-
 def list(request):
     return render(
         request,
@@ -220,18 +216,29 @@ def toggle_active(request, id: int):
     return list(request)
 
 
+def add(request):
+
+    if request.POST:
+        TUtilisateurForm(request.POST).save()
+        return list(request)
+    else:
+        form = TUtilisateurForm()
+
+    return render(
+        request,
+        template_name='ajout_utilisateur.html',
+        context={'form': form})
+
+
 def change(request, id: int):
 
-    utilisateur = TUtilisateur.objects.get(pk=id)
-
-    form = TUtilisateurForm(instance=utilisateur)
+    if request.POST:
+        TUtilisateurForm(request.POST, TUtilisateur.objects.get(pk=id)).save()
+        return list(request)
+    else:
+        form = TUtilisateurForm(TUtilisateur.objects.get(pk=id))
 
     return render(
         request,
         template_name='change_utilisateur.html',
-        context={'form': form})
-
-
-def save(request):
-
-    return list(request)
+        context={'form': form, 'id': id})

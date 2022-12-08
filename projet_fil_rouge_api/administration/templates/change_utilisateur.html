@@ -4,7 +4,7 @@
 {% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<form action={% url 'utilisateur.save' %} method="POST">
+<form action={% url 'utilisateur.change' id %} method="POST">
   {% csrf_token %}{{form.as_p}}
 </form>
 {% endblock %}
