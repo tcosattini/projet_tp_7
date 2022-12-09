@@ -1,3 +1,7 @@
 td {
   padding: 0 8px;
 }
+
+.fixed a {
+  margin-right: 24px;
+}

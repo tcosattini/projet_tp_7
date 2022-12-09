@@ -11,7 +11,11 @@ def home(request):
     return render(request, template_name='home.html')
 
 
+def wip(request):
+    return render(request, template_name='WIP.html')
+
 # Onglet "Objets" --- Madani ---
+
 
 def ongletObjets(request, idx):
     idx = int(idx)

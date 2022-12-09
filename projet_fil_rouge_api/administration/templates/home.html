@@ -1,12 +1,10 @@
 {% extends 'base.html' %}{% load static %}
 
 {% block title %}<title>Administration</title>{% endblock %}
+{% block styles %}<link rel="stylesheet" type="text/css" href={% static 'css/home.css' %}>{% endblock styles %}
 
 {% block content %}
-<div class="fixed z-10 flex justify-between w-screen p-5 bg-amber-50">
-  <a href="{% url 'home' %}">Acceuil</a>
-  <a href="{% url 'logout' %}">Déconnexion</a>
-</div>
+{% include 'includes/navigation.html' %}
 
 <!--
   

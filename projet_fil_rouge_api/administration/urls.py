@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
 
+    path('wip', views.wip, name='WIP'),
+
     # Onglet Utilisateurs
     path('add/', views.add, name='utilisateur.add'),
     path('list/', views.list, name='utilisateur.list'),
