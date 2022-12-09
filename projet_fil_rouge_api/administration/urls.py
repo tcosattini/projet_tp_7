@@ -20,8 +20,7 @@ urlpatterns = [
     re_path(r'^ajoutCommune/(?P<idx>[0-9]+)_(?P<communesValue>[a-zA-Z ]+)_(?P<depValue>[0-9]+)_(?P<cpValue>[a-zA-Z0-9 ]+)$', views.ajoutCommune, name='ajoutCommune'),
     re_path(r'^modificationCommune/(?P<idx>[0-9]+)_(?P<idCommuneValue>[0-9]+)_(?P<communesValue>[a-zA-Z ]*)_(?P<depValue>[0-9]*)_(?P<cpValue>[a-zA-Z0-9 ]*)$', views.modificationCommune, name='modificationCommune'),
 
-
-    #path('', views.index, name='index'),    
+   
     re_path(r'^pagePoids/(?P<idx>[0-9]+)$', views.pagePoids, name='pagePoids'),
     re_path(r'^ajoutPoids/(?P<idx>[0-9]+)_(?P<valmin>[0-9.]+)_(?P<valtimbre>[0-9.]+)', views.ajoutPoids, name='ajoutPoids'),
     re_path(r'^modifierPoids/(?P<idx>[0-9]+)_(?P<id>[0-9.]+)_(?P<valmin>[0-9.]+)_(?P<valtimbre>[0-9.]+)',views.modifierPoids, name='modifierPoids'),
