@@ -3,69 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 
 
-# django managed
-
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-
 # app's models
 
 class TClient(models.Model):
@@ -86,7 +23,7 @@ class TClient(models.Model):
         'TCommunes', models.DO_NOTHING, db_column='id_commune', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_client'
 
 
@@ -101,7 +38,7 @@ class TCommunes(models.Model):
         db_column='COMMUNES', max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_communes'
 
 
@@ -114,7 +51,7 @@ class TConditionnement(models.Model):
     ordreimp = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_conditionnement'
 
 
@@ -124,7 +61,7 @@ class TDept(models.Model):
     ordre_aff_dept = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_dept'
 
 
@@ -141,7 +78,7 @@ class TDtlcode(models.Model):
     id_dtl_commande = models.AutoField(primary_key=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_dtlcode'
 
 
@@ -152,7 +89,7 @@ class TEnseigne(models.Model):
     dept_enseigne = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_enseigne'
 
 
@@ -160,7 +97,7 @@ class TEntcde(models.Model):
     codcde = models.AutoField(primary_key=True)
     datcde = models.DateTimeField(blank=True, null=True)
     codcli = models.ForeignKey(
-        TClient, models.DO_NOTHING, db_column='codcli', blank=True, null=True)
+        'TClient', models.DO_NOTHING, db_column='codcli', blank=True, null=True)
     timbrecli = models.FloatField(blank=True, null=True)
     timbrecde = models.FloatField(blank=True, null=True)
     # Field name made lowercase.
@@ -173,10 +110,10 @@ class TEntcde(models.Model):
     barchive = models.IntegerField(blank=True, null=True)
     bstock = models.IntegerField(blank=True, null=True)
     id_dtl_commande = models.ForeignKey(
-        TDtlcode, models.DO_NOTHING, db_column='id_dtl_commande', blank=True, null=True)
+        'TDtlcode', models.DO_NOTHING, db_column='id_dtl_commande', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_entcde'
 
 
@@ -201,7 +138,7 @@ class TObjet(models.Model):
     is_active = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_objet'
 
 
@@ -211,7 +148,7 @@ class TPoids(models.Model):
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_poids'
 
 
@@ -221,7 +158,7 @@ class TPoidsv(models.Model):
     valtimbre = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_poidsv'
 
 
@@ -232,10 +169,10 @@ class TRelCond(models.Model):
     qteobjdeb = models.IntegerField(blank=True, null=True)
     qteobjfin = models.IntegerField(blank=True, null=True)
     codcond = models.ForeignKey(
-        TConditionnement, models.DO_NOTHING, db_column='codcond', blank=True, null=True)
+        'TConditionnement', models.DO_NOTHING, db_column='codcond', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_rel_cond'
 
 
@@ -244,7 +181,7 @@ class TRole(models.Model):
     lib_role = models.CharField(max_length=50)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_role'
 
 
@@ -255,7 +192,7 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     couleur_fond_utilisateur = models.IntegerField(blank=True, null=True)
     date_cde_utilisateur = models.DateTimeField(blank=True, null=True)
     code_role = models.ForeignKey(
-        TRole, models.DO_NOTHING, db_column='code_role', blank=True, null=True)
+        'TRole', models.DO_NOTHING, db_column='code_role', blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(unique=True, max_length=150)
     password = models.CharField(max_length=128)
@@ -266,45 +203,5 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     objects = UserManager()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 't_utilisateur'
-
-
-# django managed with app's models requirement
-
-
-class AuthUserGroups(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(TUtilisateur, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(TUtilisateur, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey(
-        'DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(TUtilisateur, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'

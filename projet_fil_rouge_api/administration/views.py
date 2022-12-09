@@ -212,7 +212,7 @@ def toggle_active(request, id: int):
 def add(request):
 
     if request.POST:
-        TUtilisateurForm(request.POST).save()
+        TUtilisateurForm(data=request.POST).save()
         return list(request)
     else:
         form = TUtilisateurForm()
@@ -226,7 +226,7 @@ def add(request):
 def change(request, id: int):
 
     if request.POST:
-        TUtilisateurForm(request.POST, instance=TUtilisateur.objects.get(
+        TUtilisateurForm(data=request.POST, instance=TUtilisateur.objects.get(
             pk=id)).save(commit=True)
         return list(request)
     else:
