@@ -19,8 +19,10 @@ class Migration(migrations.Migration):
                 ("genrecli", models.CharField(blank=True, max_length=8, null=True)),
                 ("nomcli", models.CharField(max_length=40)),
                 ("prenomcli", models.CharField(blank=True, max_length=30, null=True)),
-                ("adresse1cli", models.CharField(blank=True, max_length=50, null=True)),
-                ("adresse2cli", models.CharField(blank=True, max_length=50, null=True)),
+                ("adresse1cli", models.CharField(
+                    blank=True, max_length=50, null=True)),
+                ("adresse2cli", models.CharField(
+                    blank=True, max_length=50, null=True)),
                 (
                     "adresse3cli",
                     models.CharField(blank=True, max_length=255, null=True),
@@ -43,7 +45,8 @@ class Migration(migrations.Migration):
                 ("id_commune", models.AutoField(primary_key=True, serialize=False)),
                 (
                     "dep",
-                    models.PositiveIntegerField(blank=True, db_column="DEP", null=True),
+                    models.PositiveIntegerField(
+                        blank=True, db_column="DEP", null=True),
                 ),
                 (
                     "cp",
@@ -87,7 +90,8 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "code_dept",
-                    models.CharField(max_length=2, primary_key=True, serialize=False),
+                    models.CharField(
+                        max_length=2, primary_key=True, serialize=False),
                 ),
                 ("nom_dept", models.CharField(blank=True, max_length=50, null=True)),
                 ("ordre_aff_dept", models.IntegerField(blank=True, null=True)),
@@ -104,7 +108,8 @@ class Migration(migrations.Migration):
                 ("qte", models.IntegerField(blank=True, null=True)),
                 (
                     "colis",
-                    models.IntegerField(blank=True, db_column="Colis", null=True),
+                    models.IntegerField(
+                        blank=True, db_column="Colis", null=True),
                 ),
                 (
                     "commentaire",
@@ -125,8 +130,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="TEnseigne",
             fields=[
-                ("id_enseigne", models.AutoField(primary_key=True, serialize=False)),
-                ("lb_enseigne", models.CharField(blank=True, max_length=50, null=True)),
+                ("id_enseigne", models.AutoField(
+                    primary_key=True, serialize=False)),
+                ("lb_enseigne", models.CharField(
+                    blank=True, max_length=50, null=True)),
                 (
                     "ville_enseigne",
                     models.CharField(blank=True, max_length=50, null=True),
@@ -263,7 +270,8 @@ class Migration(migrations.Migration):
                 ("idcondit", models.IntegerField(blank=True, null=True)),
                 (
                     "cdecomt",
-                    models.TextField(blank=True, db_column="cdeComt", null=True),
+                    models.TextField(
+                        blank=True, db_column="cdeComt", null=True),
                 ),
                 ("barchive", models.IntegerField(blank=True, null=True)),
                 ("bstock", models.IntegerField(blank=True, null=True)),
