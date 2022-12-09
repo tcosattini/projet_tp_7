@@ -1,0 +1,13 @@
+form label,
+form input,
+form select {
+  width: 100%;
+}
+
+form > p {
+  margin-bottom: 5px;
+}
+
+.actions {
+  margin-top: 5px;
+}

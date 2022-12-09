@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from . import forms
 
+
 def logout_user(request):
     logout(request)
     return redirect('/')
@@ -10,7 +11,7 @@ def logout_user(request):
 def login_page(request):
     form = forms.LoginForm()
     message = ''
-    if request.method == 'POST':
+    if request.POST:
         form = forms.LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(
@@ -19,7 +20,7 @@ def login_page(request):
             )
             if user is not None:
                 login(request, user)
-                message = f'Bonjour, {user.username}! Vous êtes connecté.'
+                message = f'Bonjour, {user.get_username()}! Vous êtes connecté.'
                 return redirect('/home')
             else:
                 message = 'Identifiants invalides.'

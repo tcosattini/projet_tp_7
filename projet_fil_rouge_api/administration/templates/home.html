@@ -1,0 +1,90 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block title %}<title>Administration</title>{% endblock %}
+
+{% block content %}
+<div class="fixed z-10 flex justify-between w-screen p-5 bg-amber-50">
+  <a href="{% url 'home' %}">Acceuil</a>
+  <a href="{% url 'logout' %}">Déconnexion</a>
+</div>
+
+<!--
+  
+  bg-amber-50 : couleur ambre à 5% pour le fond
+  h-screen : passe la hauteur de la fenêtre à l'élement
+  xl: : permet d'attribuer un style si la largeur de l'écran est supérieur à 1280 pixels
+  md: : permet d'attribuer un style si la largeur de l'écran est supérieur à 768 pixels
+  py-52 : met un padding (l'écrase) de 52 pixels sur sa position y (son dessus et son bas)
+  px-72 : met un padding (l'écrase) de 72 pixels sur sa position x (sa gauche et sa droite)
+-->
+<div class="grid w-screen h-full min-h-screen p-24 bg-amber-50 xl:p-52 md:p-32">
+  
+  <!--
+    relative : donne un point d'ancrage aux balises enfant
+    bg-amber-100 : couleur ambre à 10% pour le fond
+    grid : transforme l'intérieur de l'élement en grille
+    w-full : prend la largeur entière du parent (width full)
+    h-full : prend la hauteur entière du parent (height full)
+    place-items-center : place les élements enfant au centre
+    border-4 : épaisseur de bordures à 4 pixels
+    border-black : bordures couleur noir
+    rounded : bordures arrondis
+  -->
+  <div class="relative w-full h-full min-h-full border-4 border-black rounded bg-amber-100">
+    
+    <!--
+      absolute : place l'élement sur une position absolue (détacher des autres enfants)
+      h-5 : donne une hauteur de 5 pixels à l'élement (height 5 pixels)
+      grid-cols-10 : découpe l'élément en 10 grillles
+      fixed : fixe l'élement sur sur le parent
+      -top-7 : espace l'élement à -7 pixels de son dessus
+      inset-x-5: espace l'élement à 5 pixels de sa position x (sa gauche et sa droite)
+      min-w-fit : adapte sa largeur au contenu
+      min-[370px]: permet d'attribuer un style si la largeur de l'écran est supérieur à 370 pixels
+      block : élement visible
+      hidden : élement cacher
+    -->
+    <div class="absolute hidden h-fit w-fit -top-7 md:inset-x-5 min-w-fit min-[720px]:block">
+      
+      <!-- 
+      border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+      -->
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+        <a href={% url 'utilisateur.list' %}>Utilisateurs</a>
+      </div>
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+        <a href={% url 'ongletObjets' 1 %}>Objets</a>
+      </div>
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+        <a href={% url 'pagePoids' 1 %}>Poids</a>
+      </div>
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+        <a href={% url 'ongletEmballages' 1 %}>Emballages</a>
+      </div>
+      <div class="float-left px-2 border-4 border-b-0 border-black rounded bg-amber-100 w-fit">
+        <a href={% url 'ongletCommunes' 1 %}>Communes</a>
+      </div>
+    </div>
+    <div class="absolute block h-fit w-fit -top-7 md:inset-x-5 min-w-fit min-[720px]:hidden">
+
+      <!-- 
+      border-b-0 : épaisseur de bordure bas (-b- pour bottom) à 0 pixel
+      -->
+      <div class="text-center border-4 border-b-0 border-black rounded h-fit w-fit bg-amber-100">
+        <a href="">écran trop petit</a>
+      </div>
+    </div>
+
+    <!--*
+      TODO: fix ignored height 
+    -->
+    <div class="w-full h-full min-h-full">
+
+      <!--
+        À toi de jouer 👍
+      -->
+      {% block onglet %}<div class="flex items-center justify-center w-full h-full min-h-full">Bonjour ! <br> Selectionnez un onglet pour commencer.</div>{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

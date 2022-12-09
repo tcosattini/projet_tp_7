@@ -1,8 +1,0 @@
-{% extends 'base.html' %} {% block content %}
-
-<form action={% url 'utilisateur.save' %} method="PÖST">
-  {% csrf_token %} {{utilisateur}}
-  <button type="submit">submit</button>
-</form>
-
-{% endblock %}

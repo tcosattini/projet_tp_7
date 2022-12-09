@@ -47,11 +47,10 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
-    'gestionUtilisateurs',
     'tailwind',
     'theme',
-    'django_browser_reload',    
-    ]
+    'django_browser_reload',
+]
 
 
 AUTH_USER_MODEL = 'authentification.TUtilisateur'
@@ -73,9 +72,7 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,11 +83,6 @@ TEMPLATES = [
             ],
         },
     },
-]
-
-
-STATICFILES_DIRS = [
-os.path.join(BASE_DIR, 'authentification/static')
 ]
 
 
@@ -110,8 +102,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-
 
 
 # Password validation
@@ -142,16 +132,24 @@ TIME_ZONE = 'UTC'
 
 TAILWIND_APP_NAME = 'theme'
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'theme/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'authentification/static',
+    BASE_DIR / 'administration/static',
+]
+
 LOGIN_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
