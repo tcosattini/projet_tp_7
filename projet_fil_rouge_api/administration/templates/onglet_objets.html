@@ -1,299 +1,293 @@
 {% extends 'home.html' %}{% load static %}
 
 {% block title %}<title>Gestion des Objets</title>{% endblock %}
-{% block scripts %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %}
 
 {% block onglet %}
-<div class="flex flex-col w-full">
-  <div id="ajouter_conditionnement" class="flex justify-end w-full" onclick="champsAjouterObjet()">Ajouter un objet</div>
-<div class="flex flex-col items-center w-full">
+<div class="flex flex-col items-center w-full h-full min-h-full p-2">
+  <div class="flex justify-end w-full" onclick="champsAjouterObjet()">Ajouter un objet</div>
+  <div class="flex justify-center p-2 my-auto w-fit">
 
-          <!-- Champs et bouton de validation pour ajouter un objet -->
-          <div id="ajouter_objet_value">
-          </div>
-          
-          <!-- Champs et bouton de validation/annulation pour modifier un objet -->
-          <div id="modifier_objet_value">
-          </div>
-          
-          <script>
-              //Fonction pour faire apparaître les champs et le bouton de validation
-              function champsAjouterObjet() {
-                  document.getElementById("ajouter_objet_value").innerHTML = `
-                  <p>Saisir les données du nouveau objet :</p>
-                  <label>Nom de l'objet</label>
-                  <input type="text" id="designation_objet" required minlength="1" size="10" onblur="getValueDesignation_objet()">
-                  <label>Poids de l'objet</label>
-                  <input type="number" step=".0001" id="poids_objet" required minlength="1" size="10" onblur="getValuePoids_objet()">
-                  <label>Ordre IMP de l'objet</label>
-                  <input type="number" id="imp_objet" required minlength="1" size="10" onblur="getValueIMP_objet()">
-                  <label>Publicitaire de l'objet</label>
-                  <input type="number" step=".0001" id="publicitaire_objet" required minlength="1" size="10" onblur="getValuePublicitaire_objet()">
-                  <label>Conditionnement de l'objet</label>
-                  <input type="number" id="conditionnement_objet" required minlength="1" size="10" onblur="getValueConditionnement_objet()">
-                  <label>Points de l'objet</label>
-                  <input type="number" id="points_objet" required minlength="1" size="10" onblur="getValuePoints_objet()">
-                  <div id="ajouter_objet_insertion" onclick="insertionObjet()">Valider l'ajout de l'objet</div>
-                  <div id="annuler_objet_insertion" onclick="annulerInsertionObjet()">Annuler l'ajout de l'objet</div>
+    <!-- Champs et bouton de validation pour ajouter un objet -->
+    <div class="sticky flex flex-col h-fit w-fit" id="ajouter_objet_value"></div>
+    
+    <!-- Champs et bouton de validation/annulation pour modifier un objet -->
+    <div class="sticky flex flex-col h-fit w-fit" id="modifier_objet_value"></div>
+    
+    <div class="flex flex-col h-full min-h-full m-2 w-fit">
+      <script>
+          //Fonction pour faire apparaître les champs et le bouton de validation
+          function champsAjouterObjet() {
+              document.getElementById("ajouter_objet_value").innerHTML = `
+              <p>Saisir les données du nouveau objet :</p>
+              <label>Nom de l'objet</label>
+              <input type="text" id="designation_objet" required minlength="1" size="10" onblur="getValueDesignation_objet()">
+              <label>Poids de l'objet</label>
+              <input type="number" step=".0001" id="poids_objet" required minlength="1" size="10" onblur="getValuePoids_objet()">
+              <label>Ordre IMP de l'objet</label>
+              <input type="number" id="imp_objet" required minlength="1" size="10" onblur="getValueIMP_objet()">
+              <label>Publicitaire de l'objet</label>
+              <input type="number" step=".0001" id="publicitaire_objet" required minlength="1" size="10" onblur="getValuePublicitaire_objet()">
+              <label>Conditionnement de l'objet</label>
+              <input type="number" id="conditionnement_objet" required minlength="1" size="10" onblur="getValueConditionnement_objet()">
+              <label>Points de l'objet</label>
+              <input type="number" id="points_objet" required minlength="1" size="10" onblur="getValuePoints_objet()">
+              <div id="ajouter_objet_insertion" onclick="insertionObjet()">Valider l'ajout de l'objet</div>
+              <div id="annuler_objet_insertion" onclick="annulerInsertionObjet()">Annuler l'ajout de l'objet</div>
+              `;
+          }
+      
+          //Déclaration des variables hors des fonctions
+          let designation_objet_value = "";
+          let poids_objet_value = "";
+          let imp_objet_value = "";
+          let publicitaire_objet_value = "";
+          let conditionnement_objet_value = "";
+          let points_objet_value = "";
+      
+          //Affectation de la valeur de la désignation de l'objet
+          function getValueDesignation_objet() {
+              designation_objet_value = document.getElementById("designation_objet").value;
+          }
+          //Affection de la valeur du poids de l'objet
+          function getValuePoids_objet() {
+              poids_objet_value = document.getElementById("poids_objet").value;
+          }
+          //Affectation de la valeur de l'importance IMP de l'objet
+          function getValueIMP_objet() {
+              imp_objet_value = document.getElementById("imp_objet").value;
+          }
+          //Affectation de la valeur du publicitaire de l'objet
+          function getValuePublicitaire_objet() {
+              publicitaire_objet_value = document.getElementById("publicitaire_objet").value;
+          }
+          //Affectation de la valeur du conditionnement de l'objet
+          function getValueConditionnement_objet() {
+              conditionnement_objet_value = document.getElementById("conditionnement_objet").value;
+          }
+          //Affectation de la valeur des points de l'objet
+          function getValuePoints_objet() {
+              points_objet_value = document.getElementById("points_objet").value;
+          }
+      
+          //Fonction pour insérer le objet dans la base de données
+          function insertionObjet() {
+              document.location.href="/home/ajoutObjet/"+{{Index}}+"_"+designation_objet_value+"_"+poids_objet_value+"_"+imp_objet_value+"_"+publicitaire_objet_value+"_"+conditionnement_objet_value+"_"+points_objet_value
+          }
+      
+          //Fonction pour insérer le objet dans la base de données
+          function annulerInsertionObjet() {
+              document.getElementById("ajouter_objet_value").innerHTML = "";
+          }
+      
+          //Déclaration des variables hors des fonctions
+          let designation_objet_modifier_value = "";
+          let poids_objet_modifier_value = "";
+          let imp_objet_modifier_value = "";
+          let publicitaire_objet_modifier_value = "";
+          let conditionnement_objet_modifier_value = "";
+          let points_objet_modifier_value = "";
+      
+          let ancienne_id_objet = "Null";
+      
+          //Fonction pour faire apparaître les champs pour modifier un objet
+          function champsModifierLigneObjet(id_objet) {
+              if (ancienne_id_objet != "Null") {
+                  document.getElementById("boutton_modifier_"+ancienne_id_objet).innerHTML = "Modifier cette ligne";
+              }
+              document.getElementById("boutton_modifier_"+id_objet).innerHTML = "En cours de modification";
+              designation_objet_modifier_value = "";
+              poids_objet_modifier_value = "";
+              imp_objet_modifier_value = "";
+              publicitaire_objet_modifier_value = "";
+              conditionnement_objet_modifier_value = "";
+              points_objet_modifier_value = "";
+              document.getElementById("modifier_objet_value").innerHTML = ""
+              document.getElementById("modifier_objet_value").innerHTML += `
+              <p>Saisir les nouvelles données de l'objet `+id_objet+` :</p>
+      
+              <label>Nom de l'objet</label>
+              <input type="text" id="designation_objet_modifier" required minlength="1" size="10" onblur="getValueModifierDesignation_objet()">
+              <label>Poids de l'objet</label>
+              <input type="number" step=".0001" id="poids_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPoids_objet()">
+              <label>Ordre IMP de l'objet</label>
+              <input type="number" id="imp_objet_modifier" required minlength="1" size="10" onblur="getValueModifierIMP_objet()">
+              <label>Publicitaire de l'objet</label>
+              <input type="number" step=".0001" id="publicitaire_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPublicitaire_objet()">
+              <label>Conditionnement de l'objet</label>
+              <input type="number" id="conditionnement_objet_modifier" required minlength="1" size="10" onblur="getValueModifierConditionnement_objet()">
+              <label>Points de l'objet</label>
+              <input type="number" id="points_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPoints_objet()">
+              
+              <div id="modifier_objet_insertion" onclick="modifierLigneObjet(`+id_objet+`)">Valider la modification de l'objet</div>
+              <div onclick="supprimerChampsModifierLigneObjet(`+id_objet+`)">Annuler la modification de l'objet</div>
+              `;
+              ancienne_id_objet = id_objet;
+          }
+      
+          function supprimerChampsModifierLigneObjet(id_objet) {
+              document.getElementById("boutton_modifier_"+id_objet).innerHTML = "Modifier cette ligne";
+              document.getElementById("modifier_objet_value").innerHTML = "";
+          }
+      
+          //Affectation de la valeur de la désignation de l'objet
+          function getValueModifierDesignation_objet() {
+              designation_objet_modifier_value = document.getElementById("designation_objet_modifier").value;
+          }
+          //Affection de la valeur du poids de l'objet
+          function getValueModifierPoids_objet() {
+              poids_objet_modifier_value = document.getElementById("poids_objet_modifier").value;
+          }
+          //Affectation de la valeur de l'importance IMP de l'objet
+          function getValueModifierIMP_objet() {
+              imp_objet_modifier_value = document.getElementById("imp_objet_modifier").value;
+          }
+          //Affectation de la valeur du publicitaire de l'objet
+          function getValueModifierPublicitaire_objet() {
+              publicitaire_objet_modifier_value = document.getElementById("publicitaire_objet_modifier").value;
+          }
+          //Affectation de la valeur du conditionnement de l'objet
+          function getValueModifierConditionnement_objet() {
+              conditionnement_objet_modifier_value = document.getElementById("conditionnement_objet_modifier").value;
+          }
+          //Affectation de la valeur des points de l'objet
+          function getValueModifierPoints_objet() {
+              points_objet_modifier_value = document.getElementById("points_objet_modifier").value;
+          }
+      
+          //Fonction pour modifier la ligne d'un objet
+          function modifierLigneObjet(id_objet) {
+              document.location.href="/home/modificationObjet/"+{{Index}}+"_"+id_objet+"_"+designation_objet_modifier_value+"_"+poids_objet_modifier_value+"_"+imp_objet_modifier_value+"_"+publicitaire_objet_modifier_value+"_"+conditionnement_objet_modifier_value+"_"+points_objet_modifier_value
+          }
+      
+          //Fonction pour vérifier le status de l'objet
+          function verifierStatus(id_objet, statusValue) {
+              if (statusValue == 1) {
+                  document.getElementById("action_active_"+id_objet).innerHTML = `
+                  <div id="boutton_desactiver_`+id_objet+`" onclick="DesactiverObjet(`+id_objet+`)">Désactiver</div>
                   `;
               }
-          
-              //Déclaration des variables hors des fonctions
-              let designation_objet_value = "";
-              let poids_objet_value = "";
-              let imp_objet_value = "";
-              let publicitaire_objet_value = "";
-              let conditionnement_objet_value = "";
-              let points_objet_value = "";
-          
-              //Affectation de la valeur de la désignation de l'objet
-              function getValueDesignation_objet() {
-                  designation_objet_value = document.getElementById("designation_objet").value;
-              }
-              //Affection de la valeur du poids de l'objet
-              function getValuePoids_objet() {
-                  poids_objet_value = document.getElementById("poids_objet").value;
-              }
-              //Affectation de la valeur de l'importance IMP de l'objet
-              function getValueIMP_objet() {
-                  imp_objet_value = document.getElementById("imp_objet").value;
-              }
-              //Affectation de la valeur du publicitaire de l'objet
-              function getValuePublicitaire_objet() {
-                  publicitaire_objet_value = document.getElementById("publicitaire_objet").value;
-              }
-              //Affectation de la valeur du conditionnement de l'objet
-              function getValueConditionnement_objet() {
-                  conditionnement_objet_value = document.getElementById("conditionnement_objet").value;
-              }
-              //Affectation de la valeur des points de l'objet
-              function getValuePoints_objet() {
-                  points_objet_value = document.getElementById("points_objet").value;
-              }
-          
-              //Fonction pour insérer le objet dans la base de données
-              function insertionObjet() {
-                  document.location.href="/home/ajoutObjet/"+{{Index}}+"_"+designation_objet_value+"_"+poids_objet_value+"_"+imp_objet_value+"_"+publicitaire_objet_value+"_"+conditionnement_objet_value+"_"+points_objet_value
-              }
-          
-              //Fonction pour insérer le objet dans la base de données
-              function annulerInsertionObjet() {
-                  document.getElementById("ajouter_objet_value").innerHTML = "";
-              }
-          
-              //Déclaration des variables hors des fonctions
-              let designation_objet_modifier_value = "";
-              let poids_objet_modifier_value = "";
-              let imp_objet_modifier_value = "";
-              let publicitaire_objet_modifier_value = "";
-              let conditionnement_objet_modifier_value = "";
-              let points_objet_modifier_value = "";
-          
-              let ancienne_id_objet = "Null";
-          
-              //Fonction pour faire apparaître les champs pour modifier un objet
-              function champsModifierLigneObjet(id_objet) {
-                  if (ancienne_id_objet != "Null") {
-                      document.getElementById("boutton_modifier_"+ancienne_id_objet).innerHTML = "Modifier cette ligne";
-                  }
-                  document.getElementById("boutton_modifier_"+id_objet).innerHTML = "En cours de modification";
-                  designation_objet_modifier_value = "";
-                  poids_objet_modifier_value = "";
-                  imp_objet_modifier_value = "";
-                  publicitaire_objet_modifier_value = "";
-                  conditionnement_objet_modifier_value = "";
-                  points_objet_modifier_value = "";
-                  document.getElementById("modifier_objet_value").innerHTML = ""
-                  document.getElementById("modifier_objet_value").innerHTML += `
-                  <p>Saisir les nouvelles données de l'objet `+id_objet+` :</p>
-          
-                  <label>Nom de l'objet</label>
-                  <input type="text" id="designation_objet_modifier" required minlength="1" size="10" onblur="getValueModifierDesignation_objet()">
-                  <label>Poids de l'objet</label>
-                  <input type="number" step=".0001" id="poids_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPoids_objet()">
-                  <label>Ordre IMP de l'objet</label>
-                  <input type="number" id="imp_objet_modifier" required minlength="1" size="10" onblur="getValueModifierIMP_objet()">
-                  <label>Publicitaire de l'objet</label>
-                  <input type="number" step=".0001" id="publicitaire_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPublicitaire_objet()">
-                  <label>Conditionnement de l'objet</label>
-                  <input type="number" id="conditionnement_objet_modifier" required minlength="1" size="10" onblur="getValueModifierConditionnement_objet()">
-                  <label>Points de l'objet</label>
-                  <input type="number" id="points_objet_modifier" required minlength="1" size="10" onblur="getValueModifierPoints_objet()">
-                  
-                  <div id="modifier_objet_insertion" onclick="modifierLigneObjet(`+id_objet+`)">Valider la modification de l'objet</div>
-                  <div onclick="supprimerChampsModifierLigneObjet(`+id_objet+`)">Annuler la modification de l'objet</div>
+              else if (statusValue == 0) {
+                  document.getElementById("action_active_"+id_objet).innerHTML = `
+                  <div id="boutton_activer_`+id_objet+`" onclick="ActiverObjet(`+id_objet+`)">Activer</div>
                   `;
-                  ancienne_id_objet = id_objet;
               }
-          
-              function supprimerChampsModifierLigneObjet(id_objet) {
-                  document.getElementById("boutton_modifier_"+id_objet).innerHTML = "Modifier cette ligne";
-                  document.getElementById("modifier_objet_value").innerHTML = "";
-              }
-          
-              //Affectation de la valeur de la désignation de l'objet
-              function getValueModifierDesignation_objet() {
-                  designation_objet_modifier_value = document.getElementById("designation_objet_modifier").value;
-              }
-              //Affection de la valeur du poids de l'objet
-              function getValueModifierPoids_objet() {
-                  poids_objet_modifier_value = document.getElementById("poids_objet_modifier").value;
-              }
-              //Affectation de la valeur de l'importance IMP de l'objet
-              function getValueModifierIMP_objet() {
-                  imp_objet_modifier_value = document.getElementById("imp_objet_modifier").value;
-              }
-              //Affectation de la valeur du publicitaire de l'objet
-              function getValueModifierPublicitaire_objet() {
-                  publicitaire_objet_modifier_value = document.getElementById("publicitaire_objet_modifier").value;
-              }
-              //Affectation de la valeur du conditionnement de l'objet
-              function getValueModifierConditionnement_objet() {
-                  conditionnement_objet_modifier_value = document.getElementById("conditionnement_objet_modifier").value;
-              }
-              //Affectation de la valeur des points de l'objet
-              function getValueModifierPoints_objet() {
-                  points_objet_modifier_value = document.getElementById("points_objet_modifier").value;
-              }
-          
-              //Fonction pour modifier la ligne d'un objet
-              function modifierLigneObjet(id_objet) {
-                  document.location.href="/home/modificationObjet/"+{{Index}}+"_"+id_objet+"_"+designation_objet_modifier_value+"_"+poids_objet_modifier_value+"_"+imp_objet_modifier_value+"_"+publicitaire_objet_modifier_value+"_"+conditionnement_objet_modifier_value+"_"+points_objet_modifier_value
-              }
-          
-              //Fonction pour vérifier le status de l'objet
-              function verifierStatus(id_objet, statusValue) {
-                  if (statusValue == 1) {
-                      document.getElementById("action_active_"+id_objet).innerHTML = `
-                      <div id="boutton_desactiver_`+id_objet+`" onclick="DesactiverObjet(`+id_objet+`)">Désactiver</div>
-                      `;
-                  }
-                  else if (statusValue == 0) {
-                      document.getElementById("action_active_"+id_objet).innerHTML = `
-                      <div id="boutton_activer_`+id_objet+`" onclick="ActiverObjet(`+id_objet+`)">Activer</div>
-                      `;
-                  }
-              }
-          
-              //Fonction pour activer un objet
-              function ActiverObjet(id_objet) {
-                  document.location.href="/home/statusObjet/"+{{Index}}+"_"+id_objet+"_"+"1";
-              }
-          
-              //Fonction pour désactiver un objet
-              function DesactiverObjet(id_objet) {
-                  document.location.href="/home/statusObjet/"+{{Index}}+"_"+id_objet+"_"+"0";
-              }
-          
-              //Passer à la page suivante
-              function pageSuivante(index) {
-                if (index != {{Index_max}}) {
-                  document.location.href="/home/ongletObjets/"+(index+1);
-                }
-              }
-          
-              //Passer à la page précedente
-              function pagePrecendente(index) {
-                if (index != 1) {
-                  document.location.href="/home/ongletObjets/"+(index-1);
-                }
-              }
-          
-          </script>
-          
-          <table style="border: 5px solid black;">
-              <tbody>
-                  <tr style="border: 5px solid black;">
-                      <td style="border: 3px solid black;">ID</td>
-                      <td style="border: 3px solid black;">Désignation</td>
-                      <td style="border: 3px solid black;">Modèle</td>
-                      <td style="border: 3px solid black;">Prix Unitaire</td>
-                      <td style="border: 3px solid black;">Poids</td>
-                      <td style="border: 3px solid black;">Ordre IMP</td>
-                      <td style="border: 3px solid black;">Publicitaire</td>
-                      <td style="border: 3px solid black;">Conditionnement</td>
-                      <td style="border: 3px solid black;">Etat</td>
-                      <td style="border: 3px solid black;">Points</td>
-                      <td style="border: 3px solid black;">Action</td>
-                  </tr>
-                  {% for objet in Objets %}
-                  <tr style="border: 5px solid black;">
-                      <td style="border: 2px solid black;">{{objet.codobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.libobj}}</td>
-                      <td style="border: 2px solid black;">?</td>
-                      <td style="border: 2px solid black;">?</td>
-                      <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.o_imp}}</td>
-                      <td style="border: 2px solid black;">{{objet.puobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.idcondit}}</td>
-                      <td style="border: 2px solid black;">{{objet.is_active}}</td>
-                      <td style="border: 2px solid black;">{{objet.points}}</td>
-                      <td style="border: 2px solid black;">
-                          <div id="boutton_modifier_{{objet.codobj}}" onclick="champsModifierLigneObjet({{objet.codobj}})">Modifier cette ligne</div>
-                          <div id="action_active_{{objet.codobj}}"></div>
-                          <script>
-                              verifierStatus({{objet.codobj}},{{objet.is_active}})
-                          </script>
-                      </td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-
-          <div class="flex justify-center w-full">
-            <div onclick="pagePrecendente({{Index}})">Page précédente</div>
-            <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
-          </div>
-          
-          <script>
-            function Impression() {
-            var a = window.open('Gestion des objets', 'Gestion des objets', '');
-            a.document.write('<html><body>');
-            impression = `
-            <h1>Gestion des objets</h1>
-            </br>
-            <h2>Table des objets de la page {{Index}} :</h2>
-            <table style="border: 5px solid black;">
-              <tbody>
-                  <tr style="border: 5px solid black;">
-                      <td style="border: 3px solid black;">ID</td>
-                      <td style="border: 3px solid black;">Désignation</td>
-                      <td style="border: 3px solid black;">Modèle</td>
-                      <td style="border: 3px solid black;">Prix Unitaire</td>
-                      <td style="border: 3px solid black;">Poids</td>
-                      <td style="border: 3px solid black;">Ordre IMP</td>
-                      <td style="border: 3px solid black;">Publicitaire</td>
-                      <td style="border: 3px solid black;">Conditionnement</td>
-                      <td style="border: 3px solid black;">Etat</td>
-                      <td style="border: 3px solid black;">Points</td>
-                  </tr>
-                  {% for objet in Objets %}
-                  <tr style="border: 5px solid black;">
-                      <td style="border: 2px solid black;">{{objet.codobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.libobj}}</td>
-                      <td style="border: 2px solid black;">?</td>
-                      <td style="border: 2px solid black;">?</td>
-                      <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.o_imp}}</td>
-                      <td style="border: 2px solid black;">{{objet.puobj}}</td>
-                      <td style="border: 2px solid black;">{{objet.idcondit}}</td>
-                      <td style="border: 2px solid black;">{{objet.is_active}}</td>
-                      <td style="border: 2px solid black;">{{objet.points}}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-            </table>
-            `
-            a.document.write(impression);
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
+          }
+      
+          //Fonction pour activer un objet
+          function ActiverObjet(id_objet) {
+              document.location.href="/home/statusObjet/"+{{Index}}+"_"+id_objet+"_"+"1";
+          }
+      
+          //Fonction pour désactiver un objet
+          function DesactiverObjet(id_objet) {
+              document.location.href="/home/statusObjet/"+{{Index}}+"_"+id_objet+"_"+"0";
+          }
+      
+          //Passer à la page suivante
+          function pageSuivante(index) {
+            if (index != {{Index_max}}) {
+              document.location.href="/home/ongletObjets/"+(index+1);
             }
-          </script>
-          
-          </br>
-          <div class="flex w-full">
-            <div onclick="Impression()">Imprimer</div>
-          </div>  
-
+          }
+      
+          //Passer à la page précedente
+          function pagePrecendente(index) {
+            if (index != 1) {
+              document.location.href="/home/ongletObjets/"+(index-1);
+            }
+          }
+      
+      </script>
+      <table class="w-full" style="border: 5px solid black;">
+          <tbody>
+              <tr style="border: 5px solid black;">
+                  <td style="border: 3px solid black;">ID</td>
+                  <td style="border: 3px solid black;">Désignation</td>
+                  <td style="border: 3px solid black;">Modèle</td>
+                  <td style="border: 3px solid black;">Prix Unitaire</td>
+                  <td style="border: 3px solid black;">Poids</td>
+                  <td style="border: 3px solid black;">Ordre IMP</td>
+                  <td style="border: 3px solid black;">Publicitaire</td>
+                  <td style="border: 3px solid black;">Conditionnement</td>
+                  <td style="border: 3px solid black;">Etat</td>
+                  <td style="border: 3px solid black;">Points</td>
+                  <td style="border: 3px solid black;">Actions</td>
+              </tr>
+              {% for objet in Objets %}
+              <tr style="border: 5px solid black;">
+                  <td style="border: 2px solid black;">{{objet.codobj}}</td>
+                  <td style="border: 2px solid black;">{{objet.libobj}}</td>
+                  <td style="border: 2px solid black;">?</td>
+                  <td style="border: 2px solid black;">?</td>
+                  <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
+                  <td style="border: 2px solid black;">{{objet.o_imp}}</td>
+                  <td style="border: 2px solid black;">{{objet.puobj}}</td>
+                  <td style="border: 2px solid black;">{{objet.idcondit}}</td>
+                  <td style="border: 2px solid black;">{{objet.is_active}}</td>
+                  <td style="border: 2px solid black;">{{objet.points}}</td>
+                  <td style="border: 2px solid black;">
+                    <div id="boutton_modifier_{{objet.codobj}}" onclick="champsModifierLigneObjet({{objet.codobj}})">Modifier cette ligne</div>
+                    <div id="action_active_{{objet.codobj}}"></div>
+                    <script>verifierStatus({{objet.codobj}},{{objet.is_active}})</script>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <div class="flex w-full">
+        <div onclick="pagePrecendente({{Index}})">Page précédente</div>
+        <div class="ml-auto" onclick="pageSuivante({{Index}})">Page suivante</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="flex w-full">
+    <script>
+      function Impression() {
+      var a = window.open('Gestion des objets', 'Gestion des objets', '');
+      a.document.write('<html><body>');
+      impression = `
+      <h1>Gestion des objets</h1>
+      </br>
+      <h2>Table des objets de la page {{Index}} :</h2>
+      <table style="border: 5px solid black;">
+        <tbody>
+            <tr style="border: 5px solid black;">
+                <td style="border: 3px solid black;">ID</td>
+                <td style="border: 3px solid black;">Désignation</td>
+                <td style="border: 3px solid black;">Modèle</td>
+                <td style="border: 3px solid black;">Prix Unitaire</td>
+                <td style="border: 3px solid black;">Poids</td>
+                <td style="border: 3px solid black;">Ordre IMP</td>
+                <td style="border: 3px solid black;">Publicitaire</td>
+                <td style="border: 3px solid black;">Conditionnement</td>
+                <td style="border: 3px solid black;">Etat</td>
+                <td style="border: 3px solid black;">Points</td>
+            </tr>
+            {% for objet in Objets %}
+            <tr style="border: 5px solid black;">
+                <td style="border: 2px solid black;">{{objet.codobj}}</td>
+                <td style="border: 2px solid black;">{{objet.libobj}}</td>
+                <td style="border: 2px solid black;">?</td>
+                <td style="border: 2px solid black;">?</td>
+                <td style="border: 2px solid black;">{{objet.poidsobj}}</td>
+                <td style="border: 2px solid black;">{{objet.o_imp}}</td>
+                <td style="border: 2px solid black;">{{objet.puobj}}</td>
+                <td style="border: 2px solid black;">{{objet.idcondit}}</td>
+                <td style="border: 2px solid black;">{{objet.is_active}}</td>
+                <td style="border: 2px solid black;">{{objet.points}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      `
+      a.document.write(impression);
+      a.document.write('</body></html>');
+      a.print();
+      a.close();
+      }
+    </script>
+    <div onclick="Impression()">Imprimer</div>
+  </div>  
+</div>
 {% endblock %}

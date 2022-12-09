@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'administration',
     'gestionStock',
     'gestionColis',
-    'gestionUtilisateurs',
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -73,9 +72,7 @@ ROOT_URLCONF = 'projet_fil_rouge_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # PROJECT_DIR / '/projet_fil_rouge_api/gestionUtilisateur/templates'
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,8 +141,10 @@ ALLOWED_HOSTS = ["127.0.0.1", "locahost"]
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'theme/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'authentification/static'
+    BASE_DIR / 'authentification/static',
+    BASE_DIR / 'administration/static',
 ]
 
 LOGIN_URL = '/'

@@ -15,3 +15,4 @@ class Produit(BaseModel):
     idcondit: int
     points: int
     o_ordre_aff: int
+    # is_active: bool
