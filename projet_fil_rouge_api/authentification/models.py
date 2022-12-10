@@ -2,29 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 
-
-# app's models
-
-class TClient(models.Model):
-    codcli = models.AutoField(primary_key=True)
-    genrecli = models.CharField(max_length=8, blank=True, null=True)
-    nomcli = models.CharField(max_length=40)
-    prenomcli = models.CharField(max_length=30, blank=True, null=True)
-    adresse1cli = models.CharField(max_length=50, blank=True, null=True)
-    adresse2cli = models.CharField(max_length=50, blank=True, null=True)
-    adresse3cli = models.CharField(max_length=255, blank=True, null=True)
-    cpcli = models.CharField(max_length=5, blank=True, null=True)
-    villecli = models.CharField(max_length=50, blank=True, null=True)
-    telcli = models.CharField(max_length=10, blank=True, null=True)
-    emailcli = models.TextField(blank=True, null=True)
-    portcli = models.CharField(max_length=10, blank=True, null=True)
-    newsletter = models.IntegerField(blank=True, null=True)
-    id_commune = models.ForeignKey(
-        'TCommunes', models.DO_NOTHING, db_column='id_commune', blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 't_client'
+# leafs (tables without dependencies, used by nodes in foreign keys)
 
 
 class TCommunes(models.Model):
@@ -65,58 +43,6 @@ class TDept(models.Model):
         db_table = 't_dept'
 
 
-class TDtlcode(models.Model):
-    codcde = models.IntegerField(blank=True, null=True)
-    codobj = models.ForeignKey(
-        'TObjet', models.DO_NOTHING, db_column='codobj', blank=True, null=True)
-    qte = models.IntegerField(blank=True, null=True)
-    # Field name made lowercase.
-    colis = models.IntegerField(db_column='Colis', blank=True, null=True)
-    # Field name made lowercase.
-    commentaire = models.CharField(
-        db_column='Commentaire', max_length=100, blank=True, null=True)
-    id_dtl_commande = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = True
-        db_table = 't_dtlcode'
-
-
-class TEnseigne(models.Model):
-    id_enseigne = models.AutoField(primary_key=True)
-    lb_enseigne = models.CharField(max_length=50, blank=True, null=True)
-    ville_enseigne = models.CharField(max_length=50, blank=True, null=True)
-    dept_enseigne = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 't_enseigne'
-
-
-class TEntcde(models.Model):
-    codcde = models.AutoField(primary_key=True)
-    datcde = models.DateTimeField(blank=True, null=True)
-    codcli = models.ForeignKey(
-        'TClient', models.DO_NOTHING, db_column='codcli', blank=True, null=True)
-    timbrecli = models.FloatField(blank=True, null=True)
-    timbrecde = models.FloatField(blank=True, null=True)
-    # Field name made lowercase.
-    nbcolis = models.PositiveIntegerField(
-        db_column='Nbcolis', blank=True, null=True)
-    cheqcli = models.FloatField(blank=True, null=True)
-    idcondit = models.IntegerField(blank=True, null=True)
-    # Field name made lowercase.
-    cdecomt = models.TextField(db_column='cdeComt', blank=True, null=True)
-    barchive = models.IntegerField(blank=True, null=True)
-    bstock = models.IntegerField(blank=True, null=True)
-    id_dtl_commande = models.ForeignKey(
-        'TDtlcode', models.DO_NOTHING, db_column='id_dtl_commande', blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 't_entcde'
-
-
 class TObjet(models.Model):
     codobj = models.AutoField(primary_key=True)
     libobj = models.CharField(max_length=50, blank=True, null=True)
@@ -142,6 +68,26 @@ class TObjet(models.Model):
         db_table = 't_objet'
 
 
+class TEnseigne(models.Model):
+    id_enseigne = models.AutoField(primary_key=True)
+    lb_enseigne = models.CharField(max_length=50, blank=True, null=True)
+    ville_enseigne = models.CharField(max_length=50, blank=True, null=True)
+    dept_enseigne = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 't_enseigne'
+
+
+class TRole(models.Model):
+    code_role = models.AutoField(primary_key=True)
+    lib_role = models.CharField(max_length=50)
+
+    class Meta:
+        managed = True
+        db_table = 't_role'
+
+
 class TPoids(models.Model):
     idpoids = models.AutoField(primary_key=True)
     valmin = models.FloatField()
@@ -162,6 +108,71 @@ class TPoidsv(models.Model):
         db_table = 't_poidsv'
 
 
+# nodes (tables with dependencies, using leafs or nodes in foreign keys, /!\ mind the order)
+
+class TClient(models.Model):
+    codcli = models.AutoField(primary_key=True)
+    genrecli = models.CharField(max_length=8, blank=True, null=True)
+    nomcli = models.CharField(max_length=40)
+    prenomcli = models.CharField(max_length=30, blank=True, null=True)
+    adresse1cli = models.CharField(max_length=50, blank=True, null=True)
+    adresse2cli = models.CharField(max_length=50, blank=True, null=True)
+    adresse3cli = models.CharField(max_length=255, blank=True, null=True)
+    cpcli = models.CharField(max_length=5, blank=True, null=True)
+    villecli = models.CharField(max_length=50, blank=True, null=True)
+    telcli = models.CharField(max_length=10, blank=True, null=True)
+    emailcli = models.TextField(blank=True, null=True)
+    portcli = models.CharField(max_length=10, blank=True, null=True)
+    newsletter = models.IntegerField(blank=True, null=True)
+    id_commune = models.ForeignKey(
+        TCommunes, models.DO_NOTHING, db_column='id_commune', blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 't_client'
+
+
+class TDtlcode(models.Model):
+    codcde = models.IntegerField(blank=True, null=True)
+    codobj = models.ForeignKey(
+        TObjet, models.DO_NOTHING, db_column='codobj', blank=True, null=True)
+    qte = models.IntegerField(blank=True, null=True)
+    # Field name made lowercase.
+    colis = models.IntegerField(db_column='Colis', blank=True, null=True)
+    # Field name made lowercase.
+    commentaire = models.CharField(
+        db_column='Commentaire', max_length=100, blank=True, null=True)
+    id_dtl_commande = models.AutoField(primary_key=True)
+
+    class Meta:
+        managed = True
+        db_table = 't_dtlcode'
+
+
+class TEntcde(models.Model):
+    codcde = models.AutoField(primary_key=True)
+    datcde = models.DateTimeField(blank=True, null=True)
+    codcli = models.ForeignKey(
+        TClient, models.DO_NOTHING, db_column='codcli', blank=True, null=True)
+    timbrecli = models.FloatField(blank=True, null=True)
+    timbrecde = models.FloatField(blank=True, null=True)
+    # Field name made lowercase.
+    nbcolis = models.PositiveIntegerField(
+        db_column='Nbcolis', blank=True, null=True)
+    cheqcli = models.FloatField(blank=True, null=True)
+    idcondit = models.IntegerField(blank=True, null=True)
+    # Field name made lowercase.
+    cdecomt = models.TextField(db_column='cdeComt', blank=True, null=True)
+    barchive = models.IntegerField(blank=True, null=True)
+    bstock = models.IntegerField(blank=True, null=True)
+    id_dtl_commande = models.ForeignKey(
+        TDtlcode, models.DO_NOTHING, db_column='id_dtl_commande', blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 't_entcde'
+
+
 class TRelCond(models.Model):
     idrelcond = models.AutoField(primary_key=True)
     codobj = models.ForeignKey(
@@ -169,20 +180,11 @@ class TRelCond(models.Model):
     qteobjdeb = models.IntegerField(blank=True, null=True)
     qteobjfin = models.IntegerField(blank=True, null=True)
     codcond = models.ForeignKey(
-        'TConditionnement', models.DO_NOTHING, db_column='codcond', blank=True, null=True)
+        TConditionnement, models.DO_NOTHING, db_column='codcond', blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 't_rel_cond'
-
-
-class TRole(models.Model):
-    code_role = models.AutoField(primary_key=True)
-    lib_role = models.CharField(max_length=50)
-
-    class Meta:
-        managed = True
-        db_table = 't_role'
 
 
 class TUtilisateur(AbstractBaseUser, models.Model):
@@ -192,7 +194,7 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     couleur_fond_utilisateur = models.IntegerField(blank=True, null=True)
     date_cde_utilisateur = models.DateTimeField(blank=True, null=True)
     code_role = models.ForeignKey(
-        'TRole', models.DO_NOTHING, db_column='code_role', blank=True, null=True)
+        TRole, models.DO_NOTHING, db_column='code_role', blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(unique=True, max_length=150)
     password = models.CharField(max_length=128)

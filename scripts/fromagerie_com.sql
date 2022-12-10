@@ -45,7 +45,7 @@ CREATE TABLE `t_client` (
   `portcli` varchar(10) DEFAULT NULL,
   `newsletter` tinyint(1) DEFAULT 0,
   `id_commune` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_client`
@@ -5693,7 +5693,7 @@ CREATE TABLE `t_communes` (
   `DEP` tinyint(3) UNSIGNED DEFAULT NULL,
   `CP` varchar(5) DEFAULT NULL,
   `COMMUNES` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_communes`
@@ -27562,7 +27562,7 @@ CREATE TABLE `t_conditionnement` (
   `poidscondit` int(11) DEFAULT 0,
   `prixcond` decimal(19,4) DEFAULT 0.0000,
   `ordreimp` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_conditionnement`
@@ -27624,7 +27624,7 @@ CREATE TABLE `t_dept` (
   `code_dept` varchar(2) NOT NULL,
   `nom_dept` varchar(50) DEFAULT NULL,
   `ordre_aff_dept` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_dept`
@@ -27741,7 +27741,7 @@ CREATE TABLE `t_dtlcode` (
   `Colis` int(11) DEFAULT 1,
   `Commentaire` varchar(100) DEFAULT NULL,
   `id_dtl_commande` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_dtlcode`
@@ -49547,7 +49547,7 @@ CREATE TABLE `t_enseigne` (
   `lb_enseigne` varchar(50) DEFAULT NULL,
   `ville_enseigne` varchar(50) DEFAULT NULL,
   `dept_enseigne` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_enseigne`
@@ -50050,7 +50050,7 @@ CREATE TABLE `t_entcde` (
   `barchive` tinyint(1) DEFAULT NULL,
   `bstock` tinyint(1) DEFAULT 0,
   `id_dtl_commande` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_entcde`
@@ -54973,7 +54973,7 @@ CREATE TABLE `t_objet` (
   `points` int(11) DEFAULT 0,
   `o_ordre_aff` int(11) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_objet`
@@ -55118,7 +55118,7 @@ CREATE TABLE `t_poids` (
   `idpoids` int(11) NOT NULL,
   `valmin` float NOT NULL,
   `valtimbre` float DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_poids`
@@ -55156,7 +55156,7 @@ CREATE TABLE `t_poidsv` (
   `idpoids` int(11) NOT NULL,
   `valmin` float NOT NULL,
   `valtimbre` float DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_poidsv`
@@ -55196,7 +55196,7 @@ CREATE TABLE `t_rel_cond` (
   `qteobjdeb` int(11) DEFAULT 0,
   `qteobjfin` int(11) DEFAULT 0,
   `codcond` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_rel_cond`
@@ -55433,7 +55433,7 @@ CREATE TABLE `t_utilisateur` (
   `password` varchar(255) NOT NULL,
   `is_superuser` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `t_utilisateur`

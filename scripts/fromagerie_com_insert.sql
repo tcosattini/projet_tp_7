@@ -1,26 +1,34 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
 --
--- Hôte : 127.0.0.1
--- Généré le : jeu. 08 déc. 2022 à 12:02
--- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.1.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: fromagerie_com
+-- ------------------------------------------------------
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Base de données : `fromagerie_com`
+--
+
+USE `fromagerie_com`;
+
+-- --------------------------------------------------------
 
 --
 -- Déchargement des données de la table `t_client`
 --
 
+LOCK TABLES `t_client` WRITE;
+ALTER TABLE `t_client` AUTO_INCREMENT=5751;
 INSERT INTO `t_client` (`codcli`, `genrecli`, `nomcli`, `prenomcli`, `adresse1cli`, `adresse2cli`, `adresse3cli`, `cpcli`, `villecli`, `telcli`, `emailcli`, `portcli`, `newsletter`, `id_commune`) VALUES
 (26, 'Mme', 'cge', 'cge', 'c', 'c', 'c', '53370', 'SAINT PIERRE DES NIDS', '0', 'c', '0', 0, NULL),
 (27, 'Mme', 'cge', 'cge', 'c', 'c', 'c', '61210', 'MÉNIL HERMEI', '0', 'c', '0', 0, NULL),
@@ -5651,6 +5659,7 @@ INSERT INTO `t_client` (`codcli`, `genrecli`, `nomcli`, `prenomcli`, `adresse1cl
 (5748, 'Mme', 'cge', 'cge', 'c', 'c', 'c', NULL, 'SAINT PIERRE DES NIDS', NULL, 'c', '0', 0, NULL),
 (5749, 'Mme', 'cge', 'cge', 'c', 'c', 'c', NULL, 'SAINT PIERRE DES NIDS', NULL, 'c', '0', 0, NULL),
 (5750, 'Mme', 'cge', 'cge', 'c', 'c', 'c', NULL, 'SAINT PIERRE DES NIDS', NULL, 'c', '0', 0, NULL);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -5658,6 +5667,8 @@ INSERT INTO `t_client` (`codcli`, `genrecli`, `nomcli`, `prenomcli`, `adresse1cl
 -- Déchargement des données de la table `t_communes`
 --
 
+LOCK TABLES `t_communes` WRITE;
+ALTER TABLE `t_communes` AUTO_INCREMENT=21836;
 INSERT INTO `t_communes` (`id_commune`, `DEP`, `CP`, `COMMUNES`) VALUES
 (21835, 0, '0', 'AAAA'),
 (21834, 0, '0', 'GTest'),
@@ -27508,6 +27519,7 @@ INSERT INTO `t_communes` (`id_commune`, `DEP`, `CP`, `COMMUNES`) VALUES
 (10306, 86, '86580', 'VOUNEUIL SOUS BIARD'),
 (15759, 86, '86580', 'VOUNEUIL SOUS BIARD'),
 (21212, 86, '86580', 'VOUNEUIL SOUS BIARD');
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -27515,6 +27527,8 @@ INSERT INTO `t_communes` (`id_commune`, `DEP`, `CP`, `COMMUNES`) VALUES
 -- Déchargement des données de la table `t_conditionnement`
 --
 
+LOCK TABLES `t_conditionnement` WRITE;
+ALTER TABLE `t_conditionnement` AUTO_INCREMENT=45;
 INSERT INTO `t_conditionnement` (`idcondit`, `libcondit`, `poidscondit`, `prixcond`, `ordreimp`) VALUES
 (1, 'Carton Ballon', 220, '0.0000', 21),
 (2, 'Carton Tête de ménagère', 390, '0.0000', 20),
@@ -27560,6 +27574,7 @@ INSERT INTO `t_conditionnement` (`idcondit`, `libcondit`, `poidscondit`, `prixco
 (42, 'Test Hye', 1, '26.0000', NULL),
 (43, 'Asddz', 1, '1.0000', NULL),
 (44, 'Hye E', 1, '2.0000', NULL);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -27567,6 +27582,7 @@ INSERT INTO `t_conditionnement` (`idcondit`, `libcondit`, `poidscondit`, `prixco
 -- Déchargement des données de la table `t_dept`
 --
 
+LOCK TABLES `t_dept` WRITE;
 INSERT INTO `t_dept` (`code_dept`, `nom_dept`, `ordre_aff_dept`) VALUES
 ('01', 'Ain', NULL),
 ('02', 'Aisne', NULL),
@@ -27664,6 +27680,7 @@ INSERT INTO `t_dept` (`code_dept`, `nom_dept`, `ordre_aff_dept`) VALUES
 ('93', 'Seine-Saint-Denis', NULL),
 ('94', 'Val-de-Marne', NULL),
 ('95', 'Val-d\'Oise', NULL);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -27671,6 +27688,8 @@ INSERT INTO `t_dept` (`code_dept`, `nom_dept`, `ordre_aff_dept`) VALUES
 -- Déchargement des données de la table `t_dtlcode`
 --
 
+LOCK TABLES `t_dtlcode` WRITE;
+ALTER TABLE `t_dtlcode` AUTO_INCREMENT=23228;
 INSERT INTO `t_dtlcode` (`codcde`, `codobj`, `qte`, `Colis`, `Commentaire`, `id_dtl_commande`) VALUES
 (1462, 48, 1, 1, NULL, 1),
 (1465, 42, 1, 1, NULL, 4),
@@ -49459,6 +49478,7 @@ INSERT INTO `t_dtlcode` (`codcde`, `codobj`, `qte`, `Colis`, `Commentaire`, `id_
 (1462, 48, 1, 1, NULL, 23225),
 (1462, 48, 1, 1, NULL, 23226),
 (1462, 48, 1, 1, NULL, 23227);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -49466,6 +49486,8 @@ INSERT INTO `t_dtlcode` (`codcde`, `codobj`, `qte`, `Colis`, `Commentaire`, `id_
 -- Déchargement des données de la table `t_enseigne`
 --
 
+LOCK TABLES `t_enseigne` WRITE;
+ALTER TABLE `t_enseigne` AUTO_INCREMENT=483;
 INSERT INTO `t_enseigne` (`id_enseigne`, `lb_enseigne`, `ville_enseigne`, `dept_enseigne`) VALUES
 (1, 'LECLERC', 'LES PIEUX', 50),
 (2, 'SUPER U', 'THURY HARCOURT', 50),
@@ -49943,6 +49965,7 @@ INSERT INTO `t_enseigne` (`id_enseigne`, `lb_enseigne`, `ville_enseigne`, `dept_
 (480, 'LECLERC', 'FALAISE', 14),
 (481, 'LECLERC', 'FALAISE', 14),
 (482, 'LECLERC', 'VOUVRAY SUR LOIR', 72);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -49950,6 +49973,8 @@ INSERT INTO `t_enseigne` (`id_enseigne`, `lb_enseigne`, `ville_enseigne`, `dept_
 -- Déchargement des données de la table `t_entcde`
 --
 
+LOCK TABLES `t_entcde` WRITE;
+ALTER TABLE `t_entcde` AUTO_INCREMENT=9305;
 INSERT INTO `t_entcde` (`codcde`, `datcde`, `codcli`, `timbrecli`, `timbrecde`, `Nbcolis`, `cheqcli`, `idcondit`, `cdeComt`, `barchive`, `bstock`, `id_dtl_commande`) VALUES
 (41, '2002-06-25 00:00:00', 28, 0, 1.4, 1, 0, NULL, NULL, 1, 1, 808),
 (42, '2004-03-02 00:00:00', 29, 4, 0.7, 1, 0, NULL, NULL, 1, 1, 809),
@@ -54846,6 +54871,7 @@ INSERT INTO `t_entcde` (`codcde`, `datcde`, `codcli`, `timbrecli`, `timbrecde`, 
 (9302, '2002-06-25 00:00:00', 28, 0, 1, 1, 0, NULL, NULL, 1, 1, 808),
 (9303, '2002-06-25 00:00:00', 28, 0, 1, 1, 0, NULL, NULL, 1, 1, 808),
 (9304, '2002-06-25 00:00:00', 28, 0, 1, 1, 0, NULL, NULL, 1, 1, 808);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -54853,6 +54879,8 @@ INSERT INTO `t_entcde` (`codcde`, `datcde`, `codcli`, `timbrecli`, `timbrecde`, 
 -- Déchargement des données de la table `t_objet`
 --
 
+LOCK TABLES `t_objet` WRITE;
+ALTER TABLE `t_objet` AUTO_INCREMENT=176;
 INSERT INTO `t_objet` (`codobj`, `libobj`, `Tailleobj`, `puobj`, `Poidsobj`, `indispobj`, `o_imp`, `o_aff`, `o_cartp`, `idcondit`, `points`, `o_ordre_aff`, `is_active`) VALUES
 (22, 'Couteau gris', 'Confidence', '0.0000', '65.0000', 0, 6, NULL, 0, 14, 40, 9, 1),
 (23, 'Convertisseur', NULL, '0.0000', '50.0000', 0, 5, NULL, 0, 13, 50, 9, 1),
@@ -54981,6 +55009,7 @@ INSERT INTO `t_objet` (`codobj`, `libobj`, `Tailleobj`, `puobj`, `Poidsobj`, `in
 (173, 'Test', NULL, '1.0000', '1.0000', NULL, 1, NULL, NULL, 1, 1, NULL, 1),
 (174, 'Test 2', NULL, '1.0000', '1.0000', NULL, 1, NULL, NULL, 1, 1, NULL, 1),
 (175, 'Test 3', NULL, '3000.0000', '1.0000', NULL, 1, NULL, NULL, 1, 1, NULL, 1);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -54988,6 +55017,8 @@ INSERT INTO `t_objet` (`codobj`, `libobj`, `Tailleobj`, `puobj`, `Poidsobj`, `in
 -- Déchargement des données de la table `t_poids`
 --
 
+LOCK TABLES `t_poids` WRITE;
+ALTER TABLE `t_poids` AUTO_INCREMENT=28;
 INSERT INTO `t_poids` (`idpoids`, `valmin`, `valtimbre`) VALUES
 (1, 0, 1.9),
 (2, 0, 2.1),
@@ -55009,6 +55040,7 @@ INSERT INTO `t_poids` (`idpoids`, `valmin`, `valtimbre`) VALUES
 (18, 0, 18.1),
 (19, 0, 18.95),
 (20, 0, 19.8);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -55016,6 +55048,8 @@ INSERT INTO `t_poids` (`idpoids`, `valmin`, `valtimbre`) VALUES
 -- Déchargement des données de la table `t_poidsv`
 --
 
+LOCK TABLES `t_poidsv` WRITE;
+ALTER TABLE `t_poidsv` AUTO_INCREMENT=21;
 INSERT INTO `t_poidsv` (`idpoids`, `valmin`, `valtimbre`) VALUES
 (1, 0, 1.9),
 (2, 0, 2.1),
@@ -55037,6 +55071,7 @@ INSERT INTO `t_poidsv` (`idpoids`, `valmin`, `valtimbre`) VALUES
 (18, 0, 18.1),
 (19, 0, 18.95),
 (20, 0, 19.8);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -55044,6 +55079,8 @@ INSERT INTO `t_poidsv` (`idpoids`, `valmin`, `valtimbre`) VALUES
 -- Déchargement des données de la table `t_rel_cond`
 --
 
+LOCK TABLES `t_rel_cond` WRITE;
+ALTER TABLE `t_rel_cond` AUTO_INCREMENT=213;
 INSERT INTO `t_rel_cond` (`idrelcond`, `codobj`, `qteobjdeb`, `qteobjfin`, `codcond`) VALUES
 (1, 41, 2, 2, 9),
 (3, 42, 4, 7, 18),
@@ -55238,26 +55275,39 @@ INSERT INTO `t_rel_cond` (`idrelcond`, `codobj`, `qteobjdeb`, `qteobjfin`, `codc
 (210, 159, 3, 5, 27),
 (211, 154, 3, 3, 6),
 (212, 154, 4, 6, 18);
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
+
 --
 -- Déchargement des données de la table `t_role`
 --
 
+LOCK TABLES `t_role` WRITE;
+ALTER TABLE `t_role` AUTO_INCREMENT=2;
 INSERT INTO `t_role` (`code_role`, `lib_role`) VALUES
 (1, 'toto');
-
+UNLOCK TABLES;
 -- --------------------------------------------------------
 
 --
 -- Déchargement des données de la table `t_utilisateur`
 --
-
+LOCK TABLES `t_utilisateur` WRITE;
+ALTER TABLE `t_utilisateur` AUTO_INCREMENT=2;
 INSERT INTO `t_utilisateur` (`code_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `couleur_fond_utilisateur`, `date_cde_utilisateur`, `code_role`, `last_login`, `username`, `password`, `is_superuser`, `is_active`) VALUES
 (1, 'None E', NULL, NULL, NULL, NULL, '2022-12-07', 'toto', 'pbkdf2_sha256$390000$s1l11vMwd8jF9V0YZkMOrj$neq5cnGjApgFGsB+NwiQnEoG4uZ88V2kZSRztAdxtH4=', 0, 1);
+UNLOCK TABLES;
 
-COMMIT;
 
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-12-09 17:52:44
