@@ -1,3 +1,64 @@
 {
-  "python.analysis.typeCheckingMode": "basic"
+  "emmet.includeLanguages": {
+    "django-html": "html",
+    "jinja-html": "html"
+  },
+  "emmet.showAbbreviationSuggestions": false,
+  "auto-close-tag.activationOnLanguage": [
+    "django-html",
+    "xml",
+    "php",
+    "blade",
+    "ejs",
+    "jinja",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "plaintext",
+    "markdown",
+    "vue",
+    "liquid",
+    "erb",
+    "lang-cfml",
+    "cfml",
+    "HTML (EEx)",
+    "HTML (Eex)",
+    "plist"
+  ],
+  "html-css-class-completion.HTMLLanguages": [
+    "django-html",
+    "html",
+    "vue",
+    "razor",
+    "blade",
+    "handlebars",
+    "twig",
+    "django-html",
+    "php",
+    "markdown",
+    "erb",
+    "ejs",
+    "svelte"
+  ],
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "django-html": "html"
+  },
+  "[django-html]": {
+    "editor.quickSuggestions": {
+      "comments": true,
+      "other": true,
+      "strings": true
+    },
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.autopep8Args": ["--indent-size=2"],
+  "files.trimTrailingWhitespace": true
 }
