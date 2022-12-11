@@ -18,6 +18,9 @@ class TCommunes(models.Model):
     class Meta:
         managed = True
         db_table = 't_communes'
+    
+    def __str__(self):
+        return self.communes
 
 
 class TConditionnement(models.Model):
@@ -198,7 +201,7 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(unique=True, max_length=150)
     password = models.CharField(max_length=128)
-    is_superuser = models.BooleanField()
+    is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
@@ -207,3 +210,21 @@ class TUtilisateur(AbstractBaseUser, models.Model):
     class Meta:
         managed = True
         db_table = 't_utilisateur'
+    
+    def code(self):
+        return self.code_utilisateur
+    
+    def nom(self):
+        return self.nom_utilisateur
+    
+    def prenom(self):
+        return self.prenom_utilisateur
+    
+    def coderole(self):
+        return self.code_role
+    
+    def superuser(self):
+        return self.is_superuser
+    
+    def active(self):
+        return self.is_active
