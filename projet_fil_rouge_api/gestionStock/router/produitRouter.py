@@ -9,18 +9,56 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+
 @router.get("/")
 def getAllProduit():
-   return produit.getAll()
+  """_summary_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return produit.getAll()
+
 
 @router.post("/")
 def createProduit(validateObject: Produit):
-    return produit.create(validateObject)
-            
+  """_summary_
+
+  Args:
+      validateObject (Produit): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return produit.create(validateObject)
+
+
 @router.put("/{codobj}")
-def updateProduit(validateObject: Produit,codobj):
-    return produit.update(codobj,validateObject)
+def updateProduit(validateObject: Produit, codobj):
+  """_summary_
+
+  Args:
+      validateObject (Produit): _description_
+      codobj (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return produit.update(codobj, validateObject)
+
 
 @router.delete("/{codobj}")
 def deleteProduit(codobj):
-    return produit.delete(codobj)
+  """_summary_
+
+  Args:
+      codobj (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return produit.delete(codobj)

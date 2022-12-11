@@ -11,19 +11,53 @@ router = APIRouter(
 
 @router.get("/")
 def getAllCommande():
-    return commande.getAll()
+  """_summary_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return commande.getAll()
 
 
 @router.post("/", status_code=201)
 def createCommande(validateObject: Commande):
-    return commande.create(validateObject)
+  """_summary_
+
+  Args:
+      validateObject (Commande): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return commande.create(validateObject)
 
 
 @router.put("/{codcde}")
 def updateCommande(validateObject: Commande, codcde):
-    return commande.update(codcde, validateObject)
+  """_summary_
+
+  Args:
+      validateObject (Commande): _description_
+      codcde (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return commande.update(codcde, validateObject)
 
 
 @router.delete("/{codcde}")
 def deleteCommande(codcde):
-    return commande.delete(codcde)
+  """_summary_
+
+  Args:
+      codcde (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  return commande.delete(codcde)

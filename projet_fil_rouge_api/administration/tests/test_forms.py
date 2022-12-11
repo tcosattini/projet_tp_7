@@ -4,8 +4,16 @@ from authentification.models import TUtilisateur
 
 
 class TestForms(SimpleTestCase):
+  """_summary_
 
-    def test_tUtilisateur_form_invalid_(self):
-        form = TUtilisateurForm(data={
+  Args:
+      SimpleTestCase (_type_): _description_
+  """
 
-        })
+  def test_tUtilisateur_form_invalid_(self):
+    """_summary_
+    """
+
+    form = TUtilisateurForm(data={
+
+    })
