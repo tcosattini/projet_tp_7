@@ -5,7 +5,7 @@ Projet de gestion des cadeau d'une fromagerie
 
 ## Installer les dependences
 
-- Prerequis:
+- Prerequis (a la racine du repository):
 ```bash
 pip3 install -r requirements.txt
 ```
