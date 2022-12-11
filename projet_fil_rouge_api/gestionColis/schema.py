@@ -2,6 +2,12 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Client(BaseModel):
+  """_summary_
+
+  Args:
+      BaseModel (_type_): _description_
+  """  
+  
   genrecli: str
   nomcli: str
   prenomcli : str
@@ -15,6 +21,12 @@ class Client(BaseModel):
   id_commune_id : Optional[int] = None
 
 class Commande(BaseModel):
+  """_summary_
+
+  Args:
+      BaseModel (_type_): _description_
+  """  
+  
   datcde: str
   codcli_id: int
   timbrecli : int
@@ -28,6 +40,12 @@ class Commande(BaseModel):
   id_dtl_commande_id : int
 
 class DetailCommande(BaseModel):
+  """_summary_
+
+  Args:
+      BaseModel (_type_): _description_
+  """  
+  
   codcde: int
   codobj_id: int
   qte: int
