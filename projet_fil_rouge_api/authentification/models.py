@@ -21,6 +21,9 @@ class TCommunes(models.Model):
   communes = models.CharField(
       db_column='COMMUNES', max_length=50, blank=True, null=True)
 
+  def __str__(self):
+    return self.communes
+
   class Meta:
     managed = True
     db_table = 't_communes'
@@ -260,6 +263,16 @@ class TRelCond(models.Model):
 
 
 class TUtilisateur(AbstractBaseUser, models.Model):
+  """_summary_
+
+  Args:
+      AbstractBaseUser (_type_): _description_
+      models (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
   code_utilisateur = models.AutoField(primary_key=True)
   nom_utilisateur = models.CharField(max_length=50, blank=True, null=True)
   prenom_utilisateur = models.CharField(max_length=50, blank=True, null=True)
@@ -270,11 +283,65 @@ class TUtilisateur(AbstractBaseUser, models.Model):
   last_login = models.DateTimeField(blank=True, null=True)
   username = models.CharField(unique=True, max_length=150)
   password = models.CharField(max_length=128)
-  is_superuser = models.BooleanField()
+  is_superuser = models.BooleanField(default=False)
   is_active = models.BooleanField(default=True)
   USERNAME_FIELD = 'username'
   REQUIRED_FIELDS = []
   objects = UserManager()
+
+  def code(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.code_utilisateur
+
+  def nom(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.nom_utilisateur
+
+  def prenom(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.prenom_utilisateur
+
+  def coderole(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.code_role
+
+  def superuser(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.is_superuser
+
+  def active(self):
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+
+    return self.is_active
 
   class Meta:
     managed = True
