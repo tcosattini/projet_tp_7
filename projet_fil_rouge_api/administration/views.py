@@ -8,7 +8,7 @@ import math
 
 @login_required
 def home(request):
-  """_summary_
+  """ Page d'acceuil
 
   Args:
       request (_type_): _description_

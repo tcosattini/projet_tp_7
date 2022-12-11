@@ -21,21 +21,17 @@ python3 manage.py tailwind start
 
 ## Generer la documentation
 
-1. installer les dependances
+1. installer les prerequis
 
-2. Se deplacer a la racine du projet Django (projet_fil_rouge_api)
+2. generer la documentation
 
-Dans le terminal:
-```bash
-mkdir docs && cd docs
-```
-
-3. generer la documentation
-
-Dans le terminal:
+Dans le terminal (a la racine du dossier docs):
 ```bash
 make html
 ```
+99. References
+
+https://www.freecodecamp.org/news/sphinx-for-django-documentation-2454e924b3bc/
 
 ## Configurer le projet
 
