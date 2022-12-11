@@ -34,7 +34,6 @@
     "blade",
     "handlebars",
     "twig",
-    "django-html",
     "php",
     "markdown",
     "erb",
