@@ -15,9 +15,9 @@ sys.path.insert(0, os.path.abspath('..'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'projet_fil_rouge_api.settings'
 django.setup()
 
-project = 'fromagerie'
-copyright = '2022, Thibault, Amin, Maxime, Brice, Madani'
-author = 'Thibault, Amin, Maxime, Brice, Madani'
+project = 'Fromagerie'
+copyright = '2022, Thibault, Madani, Maxime, Brice, Amin'
+author = 'Thibault, Madani, Maxime, Brice, Amin'
 release = '0.9.0'
 
 # -- General configuration ---------------------------------------------------
@@ -28,6 +28,7 @@ extensions = ['sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc']
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+language = 'fr'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

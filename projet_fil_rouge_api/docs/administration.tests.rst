@@ -12,6 +12,14 @@ administration.tests.test\_forms module
    :undoc-members:
    :show-inheritance:
 
+administration.tests.test\_models module
+----------------------------------------
+
+.. automodule:: administration.tests.test_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 administration.tests.test\_urls module
 --------------------------------------
 
